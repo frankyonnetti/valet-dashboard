@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/modern-normalize.css">
   <link rel="stylesheet" href="assets/font-awesome-5/css/fontawesome.min.css">
   <link rel="stylesheet" href="assets/font-awesome-5/css/brands.min.css">
+  <link rel="stylesheet" href="assets/font-awesome-5/css/solid.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
@@ -22,6 +23,7 @@
     <img src="assets/img/laravel-logo.svg" alt="">
     <!-- <img src="assets/img/laravel-word-logo.svg" alt=""> -->
     <img src="assets/img/laravel-valet.svg" style="width: auto; height: 32px;" alt="">
+    <a href="https://github.com/laravel/valet/releases">v.2.10.3</a>
   </div>
 
   <p class="menu">
@@ -33,9 +35,9 @@
     </span>
   </p>
 
-  <input id="filterInput" type="text" placeholder="Filter List">
+  <!-- <input id="filterInput" type="text" placeholder="Filter List"> -->
 
-  <ul id="host-list"></ul>
+  <table class="valetlinks"></table>
 
   <?php
     require_once 'vendor/erusev/parsedown/Parsedown.php';
