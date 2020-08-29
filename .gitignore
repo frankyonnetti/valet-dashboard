@@ -1,5 +1,6 @@
 *.DS_Store
 /node_modules
 /vendor
-/valet_links.md
 /valet.sh
+/valet_links.md
+/valet_version.md
