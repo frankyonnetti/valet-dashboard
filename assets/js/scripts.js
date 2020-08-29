@@ -1,9 +1,12 @@
 function ready () {
-  // hide markdown table
-  document.getElementById('md-table').style.display = 'none'
+  // server version
+  const valetVersion = document.querySelector('.server-version')
+  // remove "Laravel Valet" from out-put
+  const version = valetVersion.innerHTML
+    .replace('<p>', '').replace('</p>', '')
+    .replace('Laravel Valet ', '')
 
-  // Bring search filed to focus on page load
-  // document.querySelector('#filterInput').focus()
+  valetVersion.innerHTML = version
 
   // select terminal output table
   const selectValetLinks = document.querySelector('#md-table')
@@ -25,24 +28,43 @@ function ready () {
   // build new table data
   newValetLinks.innerHTML = valetLinks
 
-  // Filter
-  // https://www.tutorialspoint.com/how-to-create-a-filter-list-with-javascript
-  function filterFunction () {
-    const input = document.querySelector('#filterInput')
-    const filter = input.value.toUpperCase()
-    const ul = document.querySelector('#md-table')
-    const li = ul.getElementsByTagName('li')
+  // hide markdown table
+  document.getElementById('md-table').style.display = 'none'
 
-    for (let i = 0; i < li.length; i++) {
-      const a = li[i].getElementsByTagName('a')[0]
-      const value = a.textContent || a.innerText
-      if (value.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = ''
-      } else {
-        li[i].style.display = 'none'
-      }
-    }
+  // Hover state to show loacl path
+  const localPathSpan = document.querySelectorAll('.valetlinks td:nth-child(4)')
+
+  function changeOnOver () {
+    this.parentNode.classList.add('show-path')
   }
-  document.addEventListener('keyup', filterFunction)
+  function changeOnOut () {
+    this.parentNode.classList.remove('show-path')
+  }
+
+  localPathSpan.forEach(item => item.addEventListener('mouseover', changeOnOver))
+  localPathSpan.forEach(item => item.addEventListener('mouseout', changeOnOut))
+
+  // // Bring search filed to focus on page load
+  // document.querySelector('#filterInput').focus()
+  //
+  // // Filter
+  // // https://www.tutorialspoint.com/how-to-create-a-filter-list-with-javascript
+  // function filterFunction () {
+  //   const input = document.querySelector('#filterInput')
+  //   const filter = input.value.toUpperCase()
+  //   const ul = document.querySelector('#md-table')
+  //   const li = ul.getElementsByTagName('li')
+
+  //   for (let i = 0; i < li.length; i++) {
+  //     const a = li[i].getElementsByTagName('a')[0]
+  //     const value = a.textContent || a.innerText
+  //     if (value.toUpperCase().indexOf(filter) > -1) {
+  //       li[i].style.display = ''
+  //     } else {
+  //       li[i].style.display = 'none'
+  //     }
+  //   }
+  // }
+  // document.addEventListener('keyup', filterFunction)
 }
 document.addEventListener('DOMContentLoaded', ready)
