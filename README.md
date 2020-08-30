@@ -9,9 +9,10 @@
 
 ## MariaDB
 
-location: /usr/local/var/mysql
+location: `/usr/local/var/mysql`
 
 
 ## phpMyAdmin
 
-location: /usr/local/share/phpmyadmin
+location: `/usr/local/share/phpmyadmin`
+

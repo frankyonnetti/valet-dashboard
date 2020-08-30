@@ -16,9 +16,7 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
   <link rel="stylesheet" href="assets/css/modern-normalize.css">
-  <link rel="stylesheet" href="assets/font-awesome-5/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/font-awesome-5/css/brands.min.css">
-  <link rel="stylesheet" href="assets/font-awesome-5/css/solid.min.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>

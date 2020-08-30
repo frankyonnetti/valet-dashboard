@@ -17,10 +17,10 @@ function ready () {
   // https://javascript.info/regexp-quantifiers
   const valetLinks = selectValetLinks.innerHTML
     .replace('<p>', '').replace('</p>', '')
-    .replace(/X/g, '<i class="fas fa-shield-check"></i>')
+    .replace(/X/g, '<i class="fas fa-lock"></i>')
     .replace(/\+(.+)\+/g, '') // replace +--...--+
-    .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</span</td></tr>') // replace every
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</td><td><span>')
+    .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></td></tr>')
+    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</td><td><span><em>')
     .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<tr><td>')
@@ -32,13 +32,20 @@ function ready () {
   document.getElementById('md-table').style.display = 'none'
 
   // Hover state to show loacl path
-  const localPathSpan = document.querySelectorAll('.valetlinks td:nth-child(4)')
+  const localPathSpan = document.querySelectorAll('.valetlinks td span')
+  console.log(localPathSpan)
 
   function changeOnOver () {
-    this.parentNode.classList.add('show-path')
+    this.classList.add('show-path')
   }
+
   function changeOnOut () {
-    this.parentNode.classList.remove('show-path')
+    const tooltip = this
+    tooltip.classList.remove('show-path')
+    tooltip.classList.add('fade')
+    setTimeout(function () {
+      tooltip.classList.remove('fade')
+    }, 300);
   }
 
   localPathSpan.forEach(item => item.addEventListener('mouseover', changeOnOver))
