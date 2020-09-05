@@ -1,5 +1,23 @@
 {
-  "dependencies": {
-    "standard": "^14.3.4"
+  "name": "Valet-Dashboard",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankyonnetti/valet-dashboard"
+  },
+  "author": "Frank Yonnetti",
+  "license": "GPL-2.0 AND MIT",
+  "homepage": "https://yonnetti.net",
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "fibers": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-notify": "^3.2.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "standard": "^14.3.4",
+    "stylelint": "^13.7.0",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0"
   }
 }

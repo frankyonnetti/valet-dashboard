@@ -11,7 +11,7 @@ function ready () {
   // select terminal output table
   const selectValetLinks = document.querySelector('#md-table')
   // select table element
-  const newValetLinks = document.querySelector('.valetlinks')
+  const newValetLinks = document.querySelector('.table--valetlinks')
 
   // replace pipes "|" with table rows and columns
   // https://javascript.info/regexp-quantifiers
@@ -32,8 +32,7 @@ function ready () {
   document.getElementById('md-table').style.display = 'none'
 
   // Hover state to show loacl path
-  const localPathSpan = document.querySelectorAll('.valetlinks td span')
-  console.log(localPathSpan)
+  const localPathSpan = document.querySelectorAll('.table--valetlinks td span')
 
   function changeOnOver () {
     this.classList.add('show-path')
@@ -45,7 +44,7 @@ function ready () {
     tooltip.classList.add('fade')
     setTimeout(function () {
       tooltip.classList.remove('fade')
-    }, 300);
+    }, 300)
   }
 
   localPathSpan.forEach(item => item.addEventListener('mouseover', changeOnOver))

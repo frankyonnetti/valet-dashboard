@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <title>Laravel Valet WebServer</title>
   <meta charset="utf-8">
   <meta name="color-scheme" content="dark light">
@@ -18,6 +19,8 @@
   <link rel="stylesheet" href="assets/css/modern-normalize.css">
   <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script src="assets/js/scripts.js"></script>
 
 </head>
 <body>
@@ -42,15 +45,13 @@
 
   <!-- <input id="filterInput" type="text" placeholder="Filter List"> -->
 
-  <table class="valetlinks"></table>
+  <table class="table--valetlinks"></table>
 
   <?php
     echo '<pre id="md-table">';
     echo $Parsedown->text( $valet_links = file_get_contents('valet_links.md') );
     echo '</pre>';
   ?>
-
-  <script src="assets/js/scripts.js"></script>
 
 </body>
 </html>

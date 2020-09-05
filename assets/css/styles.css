@@ -1,6 +1,6 @@
+@charset "UTF-8";
 :root {
-  /* purple: #ba68c8 */
-  --active-color: #ff2d20;
+  --active-color: #ba68c8;
   --bg-color: #171717;
 }
 
@@ -16,7 +16,6 @@ a {
   text-decoration: none;
   transition: color 0.2s ease-out;
 }
-
 a:hover {
   color: #fff;
   transition: color 0.05s ease-out;
@@ -30,84 +29,53 @@ img {
   vertical-align: bottom;
 }
 
-/* ! menu */
 .menu {
+  border-radius: 9px;
+  background-color: #222;
+  box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.15);
   display: flex;
   margin-right: auto;
   margin-left: auto;
+  padding: 0.5rem;
   width: 100%;
   max-width: 700px;
 }
-
 .menu span {
   flex: 0 1 25%;
 }
-
 .menu a {
   color: #ccc;
   border-radius: 2px;
   display: inline-block;
   padding: 10px;
 }
-
 .menu a:hover {
   color: #fff;
 }
-
 .menu a i {
   font-size: 18px;
 }
 
-/* ! logo */
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 50px;
 }
-
 .logo img:nth-child(1) {
   padding-right: 10px;
   max-width: 70px;
 }
-
 .logo img:nth-child(2) {
   padding-left: 10px;
   max-height: 35px;
 }
-
 .logo a {
   display: inline-block;
   padding-left: 1rem;
 }
 
-/*
-input#filterInput {
-  color: #fff;
-  font-size: 16px;
-  border: 2px solid #35363a;
-  background-color: #222;
-  box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.25);
-  margin: 1rem 0;
-  padding: 8px;
-  width: 100%;
-  max-width: 300px;
-  height: 38px;
-}
-
-input#filterInput:focus {
-  outline-color: #757575;
-  outline-style: solid;
-  outline-width: 0;
-}
-
-::-webkit-input-placeholder {
-  color: #35363a;
-}
-*/
-
-/* ! table */
-table.valetlinks {
+.table--valetlinks {
   color: #ccc;
   font-size: 14px;
   text-align: center;
@@ -116,69 +84,55 @@ table.valetlinks {
   width: 100%;
   max-width: 800px;
 }
-
-table.valetlinks tbody {
+.table--valetlinks tbody {
   display: block;
   width: 100%;
 }
-
-table.valetlinks tr {
+.table--valetlinks tr {
   border-radius: 4px 0 3px 3px;
   display: flex;
   width: 100%;
 }
-
-table.valetlinks tr:nth-child(1) {
+.table--valetlinks tr:nth-child(1) {
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
 }
-
-table.valetlinks td {
+.table--valetlinks tr:nth-child(1) td {
+  border-top-style: none;
+  border-bottom: 1px solid #282828;
+}
+.table--valetlinks td {
   text-align: left;
   border-top: 1px solid #282828;
   padding: 5px 8px;
 }
-
-table.valetlinks tr:nth-child(1) td {
-  border-top-style: none;
-  border-bottom: 1px solid #282828;
-}
-
-/* Site column */
-table.valetlinks td:nth-child(1) {
+.table--valetlinks td:nth-child(1) {
   flex: 0 1 40%;
   order: 3;
   min-width: 40%;
 }
-
-/* SSL column */
-table.valetlinks td:nth-child(2) {
-  flex: 0 1 10%;
+.table--valetlinks td:nth-child(2) {
   text-align: right;
+  flex: 0 1 10%;
   order: 2;
   padding-right: 10px;
   min-width: 10%;
 }
-
-table.valetlinks td:nth-child(2) .fas {
+.table--valetlinks td:nth-child(2) .fas {
   color: #999;
   font-size: 14px;
   margin-top: 2px;
   margin-right: 6px;
 }
-
-/* URL column */
-table.valetlinks td:nth-child(3) {
+.table--valetlinks td:nth-child(3) {
   flex: 0 1 40%;
   order: 1;
   min-width: 40%;
 }
-
-/* PATH column */
-table.valetlinks td:nth-child(4) {
-  flex: 0 1 10%;
+.table--valetlinks td:nth-child(4) {
   text-align: right;
+  flex: 0 1 10%;
   order: 4;
   position: relative;
   padding: 0;
@@ -186,18 +140,16 @@ table.valetlinks td:nth-child(4) {
   cursor: default;
 }
 
-/* ! path tooltip */
-table.valetlinks td span {
+.table--valetlinks span {
   display: block;
   position: relative;
   margin: 0 0 0 auto;
   width: 32px;
   height: 100%;
 }
-
-table.valetlinks span::before {
-  content: "\f07b";
+.table--valetlinks span::before {
   color: #999;
+  content: "";
   font-weight: 900;
   font-family: "Font Awesome 5 Free";
   position: absolute;
@@ -205,12 +157,10 @@ table.valetlinks span::before {
   right: 10px;
   cursor: default;
 }
-
-table.valetlinks span:hover::before {
+.table--valetlinks span:hover::before {
   color: #fff;
 }
-
-table.valetlinks td em {
+.table--valetlinks span em {
   color: #fff;
   font-style: normal;
   white-space: nowrap;
@@ -227,27 +177,8 @@ table.valetlinks td em {
   cursor: default;
   pointer-events: none;
 }
-
-/* dev */
-/*table.valetlinks tr:nth-child(2) td em {
-  opacity: 1;
-  top: -28px;
-}*/
-
-table.valetlinks td span.show-path em {
-  box-shadow: 0 1px 7px 3px rgba(0, 0, 0, 0.15);
-  opacity: 1;
-  top: -28px;
-  transition: opacity 0.3s ease-out 0.15s;
-}
-
-table.valetlinks td em::after {
+.table--valetlinks span em::after {
   content: "";
-  /*
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 8px solid var(--active-color);
-  */
   border-top: 8px solid var(--active-color);
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
@@ -259,24 +190,26 @@ table.valetlinks td em::after {
   height: 0;
 }
 
-/* ! fade tooltip */
-table.valetlinks td span.fade em {
+.table--valetlinks span.show-path em {
+  box-shadow: 0 1px 7px 3px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  top: -28px;
+  transition: opacity 0.3s ease-out 0.15s;
+}
+.table--valetlinks span.fade em {
   opacity: 0;
   top: -28px;
   transition: opacity 0.2s ease-out;
 }
 
-/* ! table head */
-table.valetlinks tr:nth-child(1) td {
+.table--valetlinks tr:nth-child(1) td {
   color: #999;
 }
-
-table.valetlinks tr:nth-child(1) span {
+.table--valetlinks tr:nth-child(1) td span {
   width: 100%;
 }
-
-table.valetlinks tr:nth-child(1) span em,
-table.valetlinks tr:nth-child(1) span.show-path em {
+.table--valetlinks tr:nth-child(1) td span em,
+.table--valetlinks tr:nth-child(1) td span.show-path em {
   color: #999;
   background-color: transparent;
   box-shadow: none;
@@ -285,13 +218,12 @@ table.valetlinks tr:nth-child(1) span.show-path em {
   margin-right: 0;
   padding: 5px 10px 0 0;
 }
-
-table.valetlinks tr:nth-child(1) span::before,
-table.valetlinks tr:nth-child(1) em::after {
+.table--valetlinks tr:nth-child(1) td span::before,
+.table--valetlinks tr:nth-child(1) td em::after {
   content: none;
 }
 
-/* ! markdown import */
 pre#md-table {
   opacity: 0;
 }
+/*# sourceMappingURL=styles.css.map */
