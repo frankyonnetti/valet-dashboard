@@ -1,0 +1,19 @@
+// Convert px to rem
+// https://css-tricks.com/snippets/sass/px-to-em-functions
+@function rem($pixels, $context: 16) {
+  @return #{$pixels/$context}rem;
+}
+
+// container box
+@mixin container-box($themeMode: light) {
+  border-radius: 9px;
+  background-color: #fff;
+  box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  transition: all 1s ease;
+  @if $themeMode == "dark" {
+    background-color: #222;
+    box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.15);
+  }
+}

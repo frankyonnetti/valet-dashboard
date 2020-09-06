@@ -19,6 +19,11 @@ location: `/usr/local/var/mysql`
 location: `/usr/local/share/phpmyadmin`
 
 
+## Icons
+
+See readme in fonts directory `assets/fonts/README.md`.
+
+
 # Dashboard Development
 
 

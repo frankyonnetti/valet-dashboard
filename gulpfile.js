@@ -9,9 +9,9 @@ const sourceMaps = require('gulp-sourcemaps')
 // paths
 const path = {
   styles: {
-    src: ['./assets/scss/styles.scss'],
+    src: './assets/scss/styles.scss',
     dest: './assets/css/',
-    watch: './assets/scss/styles.scss'
+    watch: './assets/scss/**/*.scss'
   }
 }
 

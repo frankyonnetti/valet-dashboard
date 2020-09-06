@@ -1,17 +1,20 @@
 function ready () {
   // server version
+  // --------------------------------------------------------------------------
   const valetVersion = document.querySelector('.server-version')
-  // remove "Laravel Valet" from out-put
+  // remove "Laravel Valet" from server version output
   const version = valetVersion.innerHTML
     .replace('<p>', '').replace('</p>', '')
     .replace('Laravel Valet ', '')
-
+  // set new ouput
   valetVersion.innerHTML = version
 
+  // terminal output table
+  // --------------------------------------------------------------------------
   // select terminal output table
   const selectValetLinks = document.querySelector('#md-table')
   // select table element
-  const newValetLinks = document.querySelector('.table--valetlinks')
+  const newValetLinks = document.querySelector('.valetlinks-container')
 
   // replace pipes "|" with table rows and columns
   // https://javascript.info/regexp-quantifiers
@@ -25,14 +28,16 @@ function ready () {
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<tr><td>')
 
-  // build new table data
+  // build new table output
   newValetLinks.innerHTML = valetLinks
 
   // hide markdown table
   document.getElementById('md-table').style.display = 'none'
 
-  // Hover state to show loacl path
-  const localPathSpan = document.querySelectorAll('.table--valetlinks td span')
+  // show local path on hover
+  // --------------------------------------------------------------------------
+  // hover to show local path
+  const localPathSpan = document.querySelectorAll('.valetlinks-container td span')
 
   function changeOnOver () {
     this.classList.add('show-path')
@@ -50,27 +55,36 @@ function ready () {
   localPathSpan.forEach(item => item.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(item => item.addEventListener('mouseout', changeOnOut))
 
-  // // Bring search filed to focus on page load
-  // document.querySelector('#filterInput').focus()
-  //
-  // // Filter
-  // // https://www.tutorialspoint.com/how-to-create-a-filter-list-with-javascript
-  // function filterFunction () {
-  //   const input = document.querySelector('#filterInput')
-  //   const filter = input.value.toUpperCase()
-  //   const ul = document.querySelector('#md-table')
-  //   const li = ul.getElementsByTagName('li')
+  // light or dark mode
+  // --------------------------------------------------------------------------
+  const localStorage = window.localStorage
+  const bodyTag = document.getElementById('valet-server')
+  const modeSwitch = document.getElementById('mode-switch')
 
-  //   for (let i = 0; i < li.length; i++) {
-  //     const a = li[i].getElementsByTagName('a')[0]
-  //     const value = a.textContent || a.innerText
-  //     if (value.toUpperCase().indexOf(filter) > -1) {
-  //       li[i].style.display = ''
-  //     } else {
-  //       li[i].style.display = 'none'
-  //     }
-  //   }
-  // }
-  // document.addEventListener('keyup', filterFunction)
+  // set initail localStorage and body class if none
+  if (localStorage.getItem('themeMode') === null) {
+    localStorage.setItem('themeMode', 'light')
+    bodyTag.classList.add('light-mode')
+  } else
+  if (localStorage.getItem('themeMode') === 'light') {
+    bodyTag.classList.add('light-mode')
+  } else {
+    bodyTag.classList.add('dark-mode')
+  }
+
+  // switch between light and dark mode
+  modeSwitch.addEventListener('click', event => {
+    if (localStorage.getItem('themeMode') !== null) {
+      if (localStorage.getItem('themeMode') === 'light') {
+        localStorage.setItem('themeMode', 'dark')
+        bodyTag.classList.remove('light-mode')
+        bodyTag.classList.add('dark-mode')
+      } else {
+        localStorage.setItem('themeMode', 'light')
+        bodyTag.classList.remove('dark-mode')
+        bodyTag.classList.add('light-mode')
+      }
+    }
+  })
 }
 document.addEventListener('DOMContentLoaded', ready)

@@ -20,38 +20,57 @@
   <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
-  <script src="assets/js/scripts.js"></script>
-
 </head>
-<body>
+<body id="valet-server">
 
-  <div class="logo">
-    <img src="assets/img/laravel-logo.svg" alt="">
-    <!-- <img src="assets/img/laravel-word-logo.svg" alt=""> -->
-    <img src="assets/img/laravel-valet.svg" style="width: auto; height: 32px;" alt="">
-    <?php
-      echo '<a class="server-version" href="https://github.com/laravel/valet/releases">';
-      echo $Parsedown->text( file_get_contents('valet_version.md') );
-      echo '</a>';
-    ?>
+  <div class="container">
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        <span class="logo-img">Laravel Valet</span>
+        <?php
+          echo '<a class="server-version" href="https://github.com/laravel/valet/releases">';
+          echo $Parsedown->text( file_get_contents('valet_version.md') );
+          echo '</a>';
+        ?>
+      </div>
+
+      <ul class="menu">
+        <li class="sidebar-label">Docs</li>
+        <li><a href="https://laravel.com/docs/valet"><i class="fab fa-laravel"></i> Valet Docs</a></li>
+        <li><a href="https://github.com/laravel/valet"><i class="fab fa-github"></i> Valet GitHub</a></li>
+        <!-- <li class="sidebar-label">PHP</li> -->
+        <li><a href="info.php"><i class="fab fa-php"></i> PHP info v.<?php echo phpversion(); ?></a></li>
+        <li><a href="https://phpmyadmin.test"><i class="fab fa-php"></i> phpMyAdmin</a></li>
+      </ul>
+
+      <div class="settings">
+        <div class="mode-switch-container">
+          <div class="mode-label">Light</div>
+          <div id="mode-switch"></div>
+          <div class="mode-label">Dark</div>
+        </div>
+        <!-- <div class="color-picker">
+          <input type="color">
+        </div> -->
+      </div>
+
+    </aside>
+
+    <div class="content">
+      <table class="valetlinks-container"></table>
+    </div>
+
   </div>
-
-  <p class="menu">
-    <span><a href="https://laravel.com/docs/valet"><i class="fab fa-laravel"></i> Valet Docs</a></span>
-    <span><a href="https://github.com/laravel/valet"><i class="fab fa-github"></i> Valet GitHub</a></span>
-    <span><a href="info.php"><i class="fab fa-php"></i> PHP info v.<?php echo phpversion(); ?></a></span>
-    <span><a href="https://phpmyadmin.test"><i class="fab fa-php"></i> phpMyAdmin</a></span>
-  </p>
-
-  <!-- <input id="filterInput" type="text" placeholder="Filter List"> -->
-
-  <table class="table--valetlinks"></table>
 
   <?php
     echo '<pre id="md-table">';
     echo $Parsedown->text( $valet_links = file_get_contents('valet_links.md') );
     echo '</pre>';
   ?>
+
+  <script src="assets/js/scripts.js"></script>
 
 </body>
 </html>
