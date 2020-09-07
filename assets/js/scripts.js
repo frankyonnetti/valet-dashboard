@@ -1,4 +1,8 @@
 function ready () {
+  //
+  const htmlTag = document.querySelector('html')
+  htmlTag.classList.add('js-loaded')
+
   // server version
   // --------------------------------------------------------------------------
   const valetVersion = document.querySelector('.server-version')
@@ -86,5 +90,15 @@ function ready () {
       }
     }
   })
+
+  // color picker
+  // --------------------------------------------------------------------------
+  const colorInput = document.getElementById('color-picker')
+
+  function handleColorUpdate () {
+    document.documentElement.style.setProperty(`--${this.name}`, this.value)
+  }
+
+  colorInput.addEventListener('change', handleColorUpdate)
 }
 document.addEventListener('DOMContentLoaded', ready)

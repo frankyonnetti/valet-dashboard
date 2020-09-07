@@ -51,9 +51,12 @@
           <div id="mode-switch"></div>
           <div class="mode-label">Dark</div>
         </div>
-        <!-- <div class="color-picker">
-          <input type="color">
-        </div> -->
+        <div class="color-picker-container">
+          <div class="color-label">Active Color</div>
+          <div class="color-wrap">
+            <input type="color" name="active-color" id="color-picker">
+          </div>
+        </div>
       </div>
 
     </aside>
