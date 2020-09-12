@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
-<body class="valet-server color-mode">
+<body id="valet-server" class="color-mode">
 
   <div class="container color-mode">
 
@@ -78,7 +78,7 @@
         <div class="color-picker-container">
           <div class="color-label">Active Color</div>
           <div class="color-wrap">
-            <input type="color" name="active-color" id="color-picker">
+            <input type="color" name="active-color" id="color-picker" value="#ba68c8">
           </div>
         </div>
       </div>

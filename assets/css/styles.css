@@ -57,9 +57,15 @@ img {
 
 .container {
   display: flex;
+  flex-wrap: wrap;
   opacity: 0;
   padding-top: 0.75rem;
   transition: all 0.7s ease 0.15s;
+}
+@media (min-width: 1201px) {
+  .container {
+    flex-wrap: nowrap;
+  }
 }
 
 .js-loaded .container {
@@ -69,16 +75,39 @@ img {
 }
 
 .sidebar.left {
-  flex: 0 1 235px;
+  flex: 0 1 50%;
+  order: 2;
+  padding-right: 1.25rem;
+}
+@media (min-width: 1201px) {
+  .sidebar.left {
+    flex: 0 1 235px;
+    order: 1;
+    padding-right: 0;
+  }
 }
 
 .sidebar.right {
-  flex: 0 1 200px;
+  flex: 0 1 50%;
+  order: 3;
+  padding-left: 1.25rem;
+}
+@media (min-width: 1201px) {
+  .sidebar.right {
+    flex: 0 1 200px;
+    padding-left: 0;
+  }
 }
 
 .content {
-  flex: 0 1 calc(100% - 435px);
-  padding: 0 2.5rem;
+  flex: 0 1 100%;
+  order: 2;
+}
+@media (min-width: 1201px) {
+  .content {
+    flex: 0 1 calc(100% - 435px);
+    padding: 0 2.5rem;
+  }
 }
 
 pre#md-table {

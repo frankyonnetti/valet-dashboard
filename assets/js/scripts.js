@@ -1,5 +1,5 @@
 function ready () {
-  //
+  // Add class when JS is loaded.
   const htmlTag = document.querySelector('html')
   htmlTag.classList.add('js-loaded')
 
@@ -93,12 +93,28 @@ function ready () {
 
   // color picker
   // --------------------------------------------------------------------------
+  // "active-color" is set on color input field's 'name' attribute
   const colorInput = document.getElementById('color-picker')
 
+  // set initail localStorage for active-color
+  if (localStorage.getItem('activeColor') === null) {
+    localStorage.setItem('activeColor', '#ba68c8')
+    const getActiveColor = localStorage.getItem('activeColor')
+    document.documentElement.setAttribute('style', '--active-color:' + getActiveColor + ';')
+  } else {
+    const getActiveColor = localStorage.getItem('activeColor')
+    document.documentElement.setAttribute('style', '--active-color:' + getActiveColor + ';')
+    colorInput.setAttribute('value', getActiveColor)
+  }
+
+  // change active-color
   function handleColorUpdate () {
+    // console.log(this.value)
     document.documentElement.style.setProperty(`--${this.name}`, this.value)
+    localStorage.setItem('activeColor', colorInput.value)
   }
 
   colorInput.addEventListener('change', handleColorUpdate)
+  colorInput.addEventListener('mousemove', handleColorUpdate)
 }
 document.addEventListener('DOMContentLoaded', ready)
