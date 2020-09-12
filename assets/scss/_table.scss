@@ -1,0 +1,220 @@
+// ! table
+.valetlinks-container {
+  @include container-box();
+  color: #333;
+  font-size: rem(14);
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  padding: 2rem 2.5rem !important;
+  width: 100%;
+
+  tbody {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    border-radius: 4px 0 3px 3px;
+    display: flex;
+    width: 100%;
+  }
+
+  tr:nth-child(1) {
+    font-size: rem(13);
+    font-weight: 500;
+    text-transform: uppercase;
+
+    td {
+      border-top-style: none;
+      border-bottom: 1px solid var(--border-color);
+    }
+  }
+
+  td {
+    text-align: left;
+    border-top: 1px solid var(--border-color);
+    padding: 0.4rem 0.5rem;
+
+    // Site column
+    &:nth-child(1) {
+      flex: 0 1 40%;
+      order: 3;
+      min-width: 40%;
+    }
+
+    // SSL column
+    &:nth-child(2) {
+      text-align: right;
+      flex: 0 1 10%;
+      order: 2;
+      padding-right: 10px;
+      min-width: 10%;
+
+      .fas {
+        color: #999;
+        font-size: 14px;
+        margin-top: 2px;
+        margin-right: 6px;
+      }
+    }
+
+    // URL column
+    &:nth-child(3) {
+      flex: 0 1 40%;
+      order: 1;
+      min-width: 40%;
+    }
+
+    // PATH column
+    &:nth-child(4) {
+      text-align: right;
+      flex: 0 1 10%;
+      order: 4;
+      position: relative;
+      padding: 0;
+      min-width: 10%;
+      cursor: default;
+    }
+  }
+}
+
+.dark-mode {
+
+  .valetlinks-container {
+    @include container-box(dark);
+    color: #ccc;
+
+    tr:nth-child(1) td {
+      border-bottom-color: var(--border-color-dark);
+    }
+
+    td {
+      border-top-color: var(--border-color-dark);
+    }
+  }
+}
+
+// ! path tooltip
+.valetlinks-container {
+
+  span {
+    display: block;
+    position: relative;
+    margin: 0 0 0 auto;
+    width: 32px;
+    height: 100%;
+
+    &::before {
+      color: #999;
+      content: "\f07b";
+      font-weight: 900;
+      font-family: "Font Awesome 5 Free";
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: default;
+    }
+
+    &:hover::before {
+      color: #222;
+    }
+
+    em {
+      color: #fff;
+      font-style: normal;
+      white-space: nowrap;
+      border-radius: 3px;
+      background-color: var(--active-color);
+      display: block;
+      opacity: 0;
+      position: absolute;
+      top: -9999px;
+      right: -5px;
+      z-index: 1;
+      padding: 5px 12px;
+      cursor: default;
+      pointer-events: none;
+
+      &::after {
+        content: "";
+        border-top: 8px solid var(--active-color);
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+        position: absolute;
+        right: 12px;
+        bottom: -6px;
+        z-index: 2;
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+}
+
+.dark-mode {
+
+  .valetlinks-container {
+
+    span:hover::before {
+      color: #fff;
+    }
+  }
+}
+
+// dev
+// .valetlinks-container tr:nth-child(2) td em {
+//   opacity: 1;
+//   top: -28px;
+// }
+
+// ! path tooltip - show/fade
+.valetlinks-container {
+
+  // show tooltip
+  span.show-path em {
+    box-shadow: 0 1px 7px 3px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    top: -28px;
+    transition: opacity 0.3s ease-out 0.15s;
+  }
+
+  // fade tooltip
+  span.fade em {
+    opacity: 0;
+    top: -28px;
+    transition: opacity 0.2s ease-out;
+  }
+}
+
+// ! table head
+.valetlinks-container tr:nth-child(1) td {
+  color: #656565;
+
+  span {
+    width: 100%;
+  }
+
+  span em,
+  span.show-path em {
+    color: #999;
+    background-color: transparent;
+    box-shadow: none;
+    opacity: 1;
+    position: static;
+    margin-right: 0;
+    padding: 5px 10px 0 0;
+  }
+
+  span::before,
+  em::after {
+    content: none;
+  }
+}
+
+.dark-mode {
+
+  .valetlinks-container tr:nth-child(1) td {
+    color: #999;
+  }
+}
