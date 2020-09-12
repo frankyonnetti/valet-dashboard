@@ -3,26 +3,19 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   margin: 3rem;
-  // transition: background-color 1s ease;
   @media (prefers-color-scheme: light) {
     background-color: var(--bg-color);
-    background-image: url("../img/loader-light.gif");
   }
   @media (prefers-color-scheme: dark) {
     background-color: var(--bg-color-dark);
-    background-image: url("../img/loader-dark.gif");
   }
 
   &.light-mode {
     background-color: var(--bg-color);
-    background-image: url("../img/loader-light.gif");
-    // transition: background-color 1s ease;
   }
 
   &.dark-mode {
     background-color: var(--bg-color-dark);
-    background-image: url("../img/loader-dark.gif");
-    // transition: background-color 1s ease;
   }
 }
 
@@ -55,30 +48,32 @@ img {
 .container {
   display: flex;
   opacity: 0;
-  // transition: opacity 0.15s ease 2s;
+  padding-top: 0.75rem;
+  transition: all 0.7s ease 0.15s;
 }
 
 .js-loaded {
 
-  // body {
-  //   background-image: none;
-  // }
-
   .container {
     opacity: 1;
-    // transition: opacity 0.15s ease 2s;
+    padding-top: 0;
+    transition: all 0.7s ease 0.15s;
   }
 }
 
 // ! sidebar
-.sidebar {
+.sidebar.left {
+  flex: 0 1 235px;
+}
+
+.sidebar.right {
   flex: 0 1 200px;
 }
 
 // ! content
 .content {
-  flex: 0 1 calc(100% - 200px);
-  padding-left: 2.5rem;
+  flex: 0 1 calc(100% - 435px);
+  padding: 0 2.5rem;
 }
 
 // ! markdown import

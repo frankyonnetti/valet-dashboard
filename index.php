@@ -21,13 +21,13 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
-<body id="valet-server">
+<body class="valet-server color-mode">
 
-  <div class="container">
+  <div class="container color-mode">
 
-    <aside class="sidebar">
+    <aside class="sidebar left color-mode">
 
-      <div class="logo">
+      <div class="logo color-mode">
         <span class="logo-img">Laravel Valet</span>
         <?php
           echo '<a class="server-version" href="https://github.com/laravel/valet/releases">';
@@ -36,16 +36,40 @@
         ?>
       </div>
 
-      <ul class="menu">
-        <li class="sidebar-label">Docs</li>
-        <li><a href="https://laravel.com/docs/valet"><i class="fab fa-laravel"></i> Valet Docs</a></li>
-        <li><a href="https://github.com/laravel/valet"><i class="fab fa-github"></i> Valet GitHub</a></li>
-        <!-- <li class="sidebar-label">PHP</li> -->
-        <li><a href="info.php"><i class="fab fa-php"></i> PHP info v.<?php echo phpversion(); ?></a></li>
-        <li><a href="https://phpmyadmin.test"><i class="fab fa-php"></i> phpMyAdmin</a></li>
+      <ul class="menu color-mode">
+        <li class="sidebar-label"><i class="fas fa-book"></i> Docs</li>
+        <li>
+          <a href="https://laravel.com/docs/valet">
+            <i class="fab fa-laravel"></i> <span>Valet Docs</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/laravel/valet">
+            <i class="fab fa-github"></i> <span>Valet GitHub</span>
+          </a>
+        </li>
+        <li>
+          <a href="info.php">
+            <i class="fab fa-php"></i> <span>PHP info v.<?php echo phpversion(); ?></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://phpmyadmin.test">
+            <i class="fab fa-php"></i> <span>phpMyAdmin</span>
+          </a>
+        </li>
       </ul>
 
-      <div class="settings">
+    </aside>
+
+    <div class="content color-mode">
+      <table class="valetlinks-container"></table>
+    </div>
+
+    <aside class="sidebar right color-mode">
+
+      <div class="settings color-mode">
+        <div class="sidebar-label"><i class="fas fa-cog"></i> Settings</div>
         <div class="mode-switch-container">
           <div class="mode-label">Light</div>
           <div id="mode-switch"></div>
@@ -60,10 +84,6 @@
       </div>
 
     </aside>
-
-    <div class="content">
-      <table class="valetlinks-container"></table>
-    </div>
 
   </div>
 

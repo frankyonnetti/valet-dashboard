@@ -1,3 +1,10 @@
+// .sidebar.right {
+
+//   .sidebar-label {
+//     text-align: right;
+//   }
+// }
+
 // ! theme switch
 .settings {
   @include container-box;
@@ -68,7 +75,7 @@
 
 // ! color picker
 .color-picker-container {
-  border-top: 1px solid var(--border-color);
+  border-top: 1px dotted var(--border-color);
   display: flex;
   justify-content: center;
   align-items: center;

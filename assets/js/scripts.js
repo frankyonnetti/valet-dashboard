@@ -62,18 +62,18 @@ function ready () {
   // light or dark mode
   // --------------------------------------------------------------------------
   const localStorage = window.localStorage
-  const bodyTag = document.getElementById('valet-server')
+  const conatiners = document.querySelectorAll('.color-mode')
   const modeSwitch = document.getElementById('mode-switch')
 
   // set initail localStorage and body class if none
   if (localStorage.getItem('themeMode') === null) {
     localStorage.setItem('themeMode', 'light')
-    bodyTag.classList.add('light-mode')
+    conatiners.forEach((el) => el.classList.add('light-mode'))
   } else
   if (localStorage.getItem('themeMode') === 'light') {
-    bodyTag.classList.add('light-mode')
+    conatiners.forEach((el) => el.classList.add('light-mode'))
   } else {
-    bodyTag.classList.add('dark-mode')
+    conatiners.forEach((el) => el.classList.add('dark-mode'))
   }
 
   // switch between light and dark mode
@@ -81,12 +81,12 @@ function ready () {
     if (localStorage.getItem('themeMode') !== null) {
       if (localStorage.getItem('themeMode') === 'light') {
         localStorage.setItem('themeMode', 'dark')
-        bodyTag.classList.remove('light-mode')
-        bodyTag.classList.add('dark-mode')
+        conatiners.forEach((el) => el.classList.remove('light-mode'))
+        conatiners.forEach((el) => el.classList.add('dark-mode'))
       } else {
         localStorage.setItem('themeMode', 'light')
-        bodyTag.classList.remove('dark-mode')
-        bodyTag.classList.add('light-mode')
+        conatiners.forEach((el) => el.classList.remove('dark-mode'))
+        conatiners.forEach((el) => el.classList.add('light-mode'))
       }
     }
   })

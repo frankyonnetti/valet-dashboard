@@ -6,7 +6,7 @@
   text-align: center;
   display: block;
   margin: 0 auto;
-  padding: 2rem 2.5rem !important;
+  padding: 1rem 2rem;
   width: 100%;
 
   tbody {
@@ -15,26 +15,18 @@
   }
 
   tr {
-    border-radius: 4px 0 3px 3px;
+    border-radius: 4px;
     display: flex;
     width: 100%;
-  }
 
-  tr:nth-child(1) {
-    font-size: rem(13);
-    font-weight: 500;
-    text-transform: uppercase;
-
-    td {
-      border-top-style: none;
-      border-bottom: 1px solid var(--border-color);
+    &:hover {
+      background-color: #f9f9f9;
     }
   }
 
   td {
     text-align: left;
-    border-top: 1px solid var(--border-color);
-    padding: 0.4rem 0.5rem;
+    padding: 0.65rem 0.5rem;
 
     // Site column
     &:nth-child(1) {
@@ -64,6 +56,11 @@
       flex: 0 1 40%;
       order: 1;
       min-width: 40%;
+
+      a {
+        font-weight: 500;
+        display: block;
+      }
     }
 
     // PATH column
@@ -84,13 +81,10 @@
   .valetlinks-container {
     @include container-box(dark);
     color: #ccc;
+    padding: 1rem 2rem;
 
-    tr:nth-child(1) td {
-      border-bottom-color: var(--border-color-dark);
-    }
-
-    td {
-      border-top-color: var(--border-color-dark);
+    tr:hover {
+      background-color: #282828;
     }
   }
 }
@@ -111,7 +105,7 @@
       font-weight: 900;
       font-family: "Font Awesome 5 Free";
       position: absolute;
-      top: 5px;
+      top: 0.7rem;
       right: 10px;
       cursor: default;
     }
@@ -188,6 +182,20 @@
 }
 
 // ! table head
+.valetlinks-container tr:nth-child(1) {
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  td {
+    border-bottom: 1px dotted var(--border-color);
+    margin-bottom: 1rem;
+  }
+}
+
 .valetlinks-container tr:nth-child(1) td {
   color: #656565;
 
@@ -197,13 +205,13 @@
 
   span em,
   span.show-path em {
-    color: #999;
+    color: #656565;
     background-color: transparent;
     box-shadow: none;
     opacity: 1;
     position: static;
     margin-right: 0;
-    padding: 5px 10px 0 0;
+    padding: 0.6rem 10px 0 0;
   }
 
   span::before,
@@ -214,7 +222,17 @@
 
 .dark-mode {
 
-  .valetlinks-container tr:nth-child(1) td {
-    color: #999;
+  tr:nth-child(1) {
+    font-weight: 500;
+
+    td {
+      color: #999;
+      border-bottom-color: var(--border-color-dark);
+
+      span em,
+      span.show-path em {
+        color: #999;
+      }
+    }
   }
 }
