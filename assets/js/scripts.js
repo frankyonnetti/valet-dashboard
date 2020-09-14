@@ -7,9 +7,7 @@ function ready () {
   // --------------------------------------------------------------------------
   const valetVersion = document.querySelector('.server-version')
   // remove "Laravel Valet" from server version output
-  const version = valetVersion.innerHTML
-    .replace('<p>', '').replace('</p>', '')
-    .replace('Laravel Valet ', '')
+  const version = valetVersion.innerHTML.replace('Laravel Valet ', '')
   // set new ouput
   valetVersion.innerHTML = version
 
@@ -22,10 +20,9 @@ function ready () {
 
   // https://javascript.info/regexp-quantifiers
   const valetLinks = selectValetLinks.innerHTML
-    .replace('<p>', '').replace('</p>', '')
     // replace SSL column "X" with icon
     .replace(/X/g, '<i class="fas fa-lock"></i>')
-    // replace +--...--+
+    // replace pluses "+" and dashes "-"
     .replace(/\+(.+)\+/g, '')
     // replace pipes "|" starting from column 5
     .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></td></tr>')
@@ -33,6 +30,10 @@ function ready () {
     .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<tr><td>')
+    // wrap anchor around URL
+    .replace(/http(.*).test/g, function (localURL) {
+      return '<a href="' + localURL + '">' + localURL + '</a>'
+    })
 
   // build new table
   newValetLinks.innerHTML = valetLinks
@@ -58,8 +59,8 @@ function ready () {
     }, 300)
   }
 
-  localPathSpan.forEach((item) => item.addEventListener('mouseover', changeOnOver))
-  localPathSpan.forEach((item) => item.addEventListener('mouseout', changeOnOut))
+  localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
+  localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
   // light or dark mode
   // --------------------------------------------------------------------------
@@ -70,12 +71,12 @@ function ready () {
   // set initail localStorage and body class if none
   if (localStorage.getItem('themeMode') === null) {
     localStorage.setItem('themeMode', 'light')
-    conatiners.forEach((el) => el.classList.add('light-mode'))
+    conatiners.forEach(mode => mode.classList.add('light-mode'))
   } else
   if (localStorage.getItem('themeMode') === 'light') {
-    conatiners.forEach((el) => el.classList.add('light-mode'))
+    conatiners.forEach(mode => mode.classList.add('light-mode'))
   } else {
-    conatiners.forEach((el) => el.classList.add('dark-mode'))
+    conatiners.forEach(mode => mode.classList.add('dark-mode'))
   }
 
   // switch between light and dark mode
@@ -83,19 +84,19 @@ function ready () {
     if (localStorage.getItem('themeMode') !== null) {
       if (localStorage.getItem('themeMode') === 'light') {
         localStorage.setItem('themeMode', 'dark')
-        conatiners.forEach((el) => el.classList.remove('light-mode'))
-        conatiners.forEach((el) => el.classList.add('dark-mode'))
+        conatiners.forEach(mode => mode.classList.remove('light-mode'))
+        conatiners.forEach(mode => mode.classList.add('dark-mode'))
       } else {
         localStorage.setItem('themeMode', 'light')
-        conatiners.forEach((el) => el.classList.remove('dark-mode'))
-        conatiners.forEach((el) => el.classList.add('light-mode'))
+        conatiners.forEach(mode => mode.classList.remove('dark-mode'))
+        conatiners.forEach(mode => mode.classList.add('light-mode'))
       }
     }
   })
 
   // color picker
   // --------------------------------------------------------------------------
-  // "active-color" is set on color input field's 'name' attribute
+  // "active-color" is set on color input 'name' attribute
   const colorInput = document.getElementById('color-picker')
 
   // set initail localStorage for active-color
