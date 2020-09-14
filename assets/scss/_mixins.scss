@@ -1,3 +1,6 @@
+/* stylelint-disable value-no-vendor-prefix */
+/* stylelint-disable declaration-block-no-duplicate-properties */
+
 // Convert px to rem
 // https://css-tricks.com/snippets/sass/px-to-em-functions
 @function rem($pixels, $context: 16) {
@@ -6,13 +9,28 @@
 
 // container box
 @mixin container-box($themeMode: light) {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
-  box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 14px 5px rgba(#000, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   @if $themeMode == "dark" {
-    background-color: #222;
-    box-shadow: inset 0 0 0 1px rgba(#fff, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
+    background-color: #252525;
+    box-shadow: inset 0 0 0 1px rgba(#fff, 0.07), 0 1px 14px 5px rgba(#000, 0.15);
+  }
+}
+
+// vertical/horizontal gradient
+@mixin gradient($start-color, $end-color, $orientation) {
+  background: $start-color;
+  @if $orientation == "vertical" {
+    background: -webkit-linear-gradient(top, $start-color, $end-color);
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  } @else if $orientation == "horizontal" {
+    background: -webkit-linear-gradient(left, $start-color, $end-color);
+    background: linear-gradient(to right, $start-color, $end-color);
+  } @else {
+    background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
   }
 }

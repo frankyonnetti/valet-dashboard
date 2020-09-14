@@ -1,18 +1,12 @@
-<?php
-  require_once 'vendor/erusev/parsedown/Parsedown.php';
-  $Parsedown = new Parsedown();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-  <title>Laravel Valet WebServer</title>
+  <title>Laravel Valet Dashboard</title>
   <meta charset="utf-8">
   <meta name="color-scheme" content="dark light">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
@@ -25,15 +19,17 @@
 
   <div class="container color-mode">
 
-    <aside class="sidebar left color-mode">
+    <div class="content color-mode">
+      <table class="valetlinks-container"></table>
+    </div>
+
+    <aside class="sidebar color-mode">
 
       <div class="logo color-mode">
         <span class="logo-img">Laravel Valet</span>
-        <?php
-          echo '<a class="server-version" href="https://github.com/laravel/valet/releases">';
-          echo $Parsedown->text( file_get_contents('valet_version.md') );
-          echo '</a>';
-        ?>
+        <a class="server-version" href="https://github.com/laravel/valet/releases">
+          <?php include('valet_version.html'); ?>
+        </a>
       </div>
 
       <ul class="menu color-mode">
@@ -60,20 +56,11 @@
         </li>
       </ul>
 
-    </aside>
-
-    <div class="content color-mode">
-      <table class="valetlinks-container"></table>
-    </div>
-
-    <aside class="sidebar right color-mode">
-
       <div class="settings color-mode">
         <div class="sidebar-label"><i class="fas fa-cog"></i> Settings</div>
         <div class="mode-switch-container">
-          <div class="mode-label">Light</div>
+          <div class="mode-label">Color Mode</div>
           <div id="mode-switch"></div>
-          <div class="mode-label">Dark</div>
         </div>
         <div class="color-picker-container">
           <div class="color-label">Active Color</div>
@@ -87,11 +74,9 @@
 
   </div>
 
-  <?php
-    echo '<pre id="md-table">';
-    echo $Parsedown->text( $valet_links = file_get_contents('valet_links.md') );
-    echo '</pre>';
-  ?>
+  <pre id="md-table">
+    <?php include('valet_links.html'); ?>
+  </pre>
 
   <script src="assets/js/scripts.js"></script>
 

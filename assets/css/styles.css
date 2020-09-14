@@ -3,15 +3,18 @@
   --active-color: #ba68c8;
   --border-color: #e0e0e0;
   --bg-color: #f6f6f6;
-  --border-color-dark: #353535;
+  --border-color-dark: #444;
   --bg-color-dark: #171717;
 }
 
+/* stylelint-disable value-no-vendor-prefix */
+/* stylelint-disable declaration-block-no-duplicate-properties */
 body {
   color: #fff;
   background-repeat: no-repeat;
   background-position: center;
   margin: 3rem;
+  min-width: 672px;
 }
 @media (prefers-color-scheme: light) {
   body {
@@ -59,10 +62,9 @@ img {
   display: flex;
   flex-wrap: wrap;
   opacity: 0;
-  padding-top: 0.75rem;
-  transition: all 0.7s ease 0.15s;
+  transition: opacity 0.7s ease 0.15s;
 }
-@media (min-width: 1201px) {
+@media (min-width: 993px) {
   .container {
     flex-wrap: nowrap;
   }
@@ -70,43 +72,25 @@ img {
 
 .js-loaded .container {
   opacity: 1;
-  padding-top: 0;
-  transition: all 0.7s ease 0.15s;
+  transition: opacity 0.7s ease 0.15s;
 }
 
-.sidebar.left {
-  flex: 0 1 50%;
-  order: 2;
-  padding-right: 1.25rem;
+.sidebar {
+  flex: 0 1 100%;
 }
-@media (min-width: 1201px) {
-  .sidebar.left {
+@media (min-width: 993px) {
+  .sidebar {
     flex: 0 1 235px;
-    order: 1;
-    padding-right: 0;
-  }
-}
-
-.sidebar.right {
-  flex: 0 1 50%;
-  order: 3;
-  padding-left: 1.25rem;
-}
-@media (min-width: 1201px) {
-  .sidebar.right {
-    flex: 0 1 200px;
-    padding-left: 0;
   }
 }
 
 .content {
   flex: 0 1 100%;
-  order: 2;
 }
-@media (min-width: 1201px) {
+@media (min-width: 993px) {
   .content {
-    flex: 0 1 calc(100% - 435px);
-    padding: 0 2.5rem;
+    flex: 0 1 calc(100% - 235px);
+    padding-right: 2.5rem;
   }
 }
 
@@ -121,7 +105,7 @@ pre#md-table {
   text-transform: uppercase;
   border-top: 1px dotted var(--border-color);
   margin-top: 0.5rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
 }
 .sidebar .sidebar-label:first-child {
   border-top-style: none;
@@ -142,41 +126,48 @@ pre#md-table {
 }
 
 .logo {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 0 !important;
-  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 .logo .logo-img {
   text-align: center;
   text-indent: -9999px;
-  border-right: 1px dotted var(--border-color);
-  background: transparent url("../img/laravel-logo.svg") no-repeat 290% center;
-  background-size: auto 70px;
+  background: transparent url("../img/laravel-logo.svg") no-repeat center -60px;
+  background-size: 70px auto;
   flex: 0 1 55%;
   width: 70px;
-  height: 60px;
+  height: 92px;
   transition: background 0.25s ease;
 }
+.logo .logo-img::after {
+  content: "";
+  border-right: 1px solid var(--border-color);
+  display: block;
+  height: calc(100% - 2rem);
+}
 .logo.dark-mode {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
-  background-color: #222;
+  padding: 1.5rem;
+  background-color: #252525;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
 }
 .logo.dark-mode .logo-img {
-  border-right-color: var(--border-color-dark);
-  background-position: -290% center;
+  background-position: center 12px;
   transition: background 0.25s ease;
+}
+.logo.dark-mode .logo-img::after {
+  border-right-color: var(--border-color-dark);
 }
 .logo .server-version {
   text-align: center;
@@ -184,11 +175,11 @@ pre#md-table {
 }
 
 .menu {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   font-size: 0.875rem;
   list-style: none;
   margin-top: 0;
@@ -199,7 +190,7 @@ pre#md-table {
   border-radius: 2px;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
 }
 .menu a:hover {
   color: var(--active-color);
@@ -212,22 +203,26 @@ pre#md-table {
   color: #333;
   font-size: 24px;
   text-align: center;
-  border-radius: 5px;
-  background-color: var(--bg-color);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
   margin-right: 10px;
   padding-top: 8px;
   width: 40px;
   height: 40px;
   transition: color 0.2s ease-out;
 }
+.menu.light-mode a .fab {
+  background: #fff;
+  background: -webkit-linear-gradient(top, #fff, #f9f9f9);
+  background: linear-gradient(to bottom, #fff, #f9f9f9);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
 .menu.dark-mode {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
-  background-color: #222;
+  padding: 1.5rem;
+  background-color: #252525;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
 }
 .menu.dark-mode a {
@@ -240,20 +235,21 @@ pre#md-table {
   color: var(--active-color);
 }
 .menu.dark-mode a .fab {
+  background: #444;
+  background: -webkit-linear-gradient(top, #444, #333);
+  background: linear-gradient(to bottom, #444, #333);
   color: #ccc;
-  background-color: #333;
 }
 
 .settings {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
 }
 .settings .mode-switch-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   cursor: default;
   padding-bottom: 1rem;
@@ -261,21 +257,22 @@ pre#md-table {
 .settings .mode-switch-container .mode-label {
   color: #656565;
   font-size: 0.875rem;
+  padding-right: 0.5rem;
 }
 .settings .mode-switch-container #mode-switch {
   border-radius: 20px;
   display: inline-block;
   position: relative;
-  margin: 0 1rem;
-  width: 50px;
-  height: 24px;
+  margin-left: auto;
+  width: 54px;
+  height: 26px;
 }
 .settings .mode-switch-container #mode-switch::after {
   content: "";
   border-radius: 50%;
   background-color: #fff;
   position: absolute;
-  top: 1px;
+  top: 2px;
   width: 22px;
   height: 22px;
   transition: all 0.3s;
@@ -284,15 +281,15 @@ pre#md-table {
   background-color: #999;
 }
 .settings.light-mode #mode-switch::after {
-  left: 1px;
+  left: 2px;
 }
 .settings.dark-mode {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
-  background-color: #222;
+  padding: 1.5rem;
+  background-color: #252525;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
 }
 .settings.dark-mode .mode-switch-container .mode-label {
@@ -302,13 +299,12 @@ pre#md-table {
   background-color: var(--active-color);
 }
 .settings.dark-mode .mode-switch-container #mode-switch::after {
-  left: 27px;
+  left: 30px;
 }
 
 .color-picker-container {
-  border-top: 1px dotted var(--border-color);
+  border-top: 1px solid var(--border-color);
   display: flex;
-  justify-content: center;
   align-items: center;
   padding-top: 1rem;
 }
@@ -318,7 +314,8 @@ pre#md-table {
   padding-right: 0.5rem;
 }
 .color-picker-container .color-wrap {
-  padding-left: 0.5rem;
+  text-align: right;
+  flex-grow: 2;
 }
 .color-picker-container .color-wrap #color-picker {
   border-width: 0;
@@ -326,6 +323,8 @@ pre#md-table {
   border-image: none;
   background-color: transparent;
   padding: 0;
+  width: 54px;
+  height: 26px;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -338,17 +337,16 @@ pre#md-table {
 }
 
 .valetlinks-container {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   color: #333;
   font-size: 0.875rem;
   text-align: center;
   display: block;
   margin: 0 auto;
-  padding: 1rem 2rem;
   width: 100%;
 }
 .valetlinks-container tbody {
@@ -405,18 +403,17 @@ pre#md-table {
 }
 
 .dark-mode .valetlinks-container {
-  border-radius: 9px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
-  padding: 1.5rem 1rem;
-  background-color: #222;
+  padding: 1.5rem;
+  background-color: #252525;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
   color: #ccc;
-  padding: 1rem 2rem;
 }
 .dark-mode .valetlinks-container tr:hover {
-  background-color: #282828;
+  background-color: #333;
 }
 
 .valetlinks-container span {
@@ -492,7 +489,7 @@ pre#md-table {
   background-color: transparent;
 }
 .valetlinks-container tr:nth-child(1) td {
-  border-bottom: 1px dotted var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 1rem;
 }
 

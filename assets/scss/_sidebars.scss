@@ -8,7 +8,7 @@
     text-transform: uppercase;
     border-top: 1px dotted var(--border-color);
     margin-top: 0.5rem;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0;
 
     &:first-child {
       border-top-style: none;
@@ -38,32 +38,41 @@
 
 // ! logo
 .logo {
-  @include container-box;
+  @include container-box();
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 0 !important;
-  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 
   .logo-img {
     text-align: center;
     text-indent: -9999px;
-    border-right: 1px dotted var(--border-color);
-    background: transparent url("../img/laravel-logo.svg") no-repeat 290% center;
-    background-size: auto 70px;
+    background: transparent url("../img/laravel-logo.svg") no-repeat center -60px;
+    background-size: 70px auto;
     flex: 0 1 55%;
     width: 70px;
-    height: 60px;
+    height: 92px;
     transition: background 0.25s ease;
+
+    &::after {
+      content: "";
+      border-right: 1px solid var(--border-color);
+      display: block;
+      height: calc(100% - 2rem);
+    }
   }
 
   &.dark-mode {
     @include container-box(dark);
 
     .logo-img {
-      border-right-color: var(--border-color-dark);
-      background-position: -290% center;
+      background-position: center 12px;
       transition: background 0.25s ease;
+
+      &::after {
+        border-right-color: var(--border-color-dark);
+      }
     }
   }
 
@@ -86,7 +95,7 @@
     border-radius: 2px;
     display: flex;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 
     &:hover {
       color: var(--active-color);
@@ -101,14 +110,20 @@
       color: #333;
       font-size: 24px;
       text-align: center;
-      border-radius: 5px;
-      background-color: var(--bg-color);
-      box-shadow: inset 0 0 0 1px rgba(#000, 0.05);
+      border-radius: 10px;
       margin-right: 10px;
       padding-top: 8px;
       width: 40px;
       height: 40px;
       transition: color 0.2s ease-out;
+    }
+  }
+
+  &.light-mode {
+
+    a .fab {
+      @include gradient(#fff, #f9f9f9, vertical);
+      box-shadow: inset 0 0 0 1px rgba(#000, 0.1);
     }
   }
 
@@ -127,8 +142,8 @@
       }
 
       .fab {
+        @include gradient(#444, #333, vertical);
         color: #ccc;
-        background-color: #333;
       }
     }
   }
@@ -140,7 +155,7 @@
 
   .mode-switch-container {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     cursor: default;
     padding-bottom: 1rem;
@@ -148,22 +163,23 @@
     .mode-label {
       color: #656565;
       font-size: rem(14);
+      padding-right: 0.5rem;
     }
 
     #mode-switch {
       border-radius: 20px;
       display: inline-block;
       position: relative;
-      margin: 0 1rem;
-      width: 50px;
-      height: 24px;
+      margin-left: auto;
+      width: 54px;
+      height: 26px;
 
       &::after {
         content: "";
         border-radius: 50%;
         background-color: #fff;
         position: absolute;
-        top: 1px;
+        top: 2px;
         width: 22px;
         height: 22px;
         transition: all 0.3s;
@@ -177,7 +193,7 @@
       background-color: #999;
 
       &::after {
-        left: 1px;
+        left: 2px;
       }
     }
   }
@@ -195,7 +211,7 @@
         background-color: var(--active-color);
 
         &::after {
-          left: 27px;
+          left: 30px;
         }
       }
     }
@@ -204,9 +220,9 @@
 
 // ! color picker
 .color-picker-container {
-  border-top: 1px dotted var(--border-color);
+  border-top: 1px solid var(--border-color);
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   padding-top: 1rem;
 
@@ -217,7 +233,8 @@
   }
 
   .color-wrap {
-    padding-left: 0.5rem;
+    text-align: right;
+    flex-grow: 2;
 
     #color-picker {
       border-width: 0;
@@ -225,6 +242,8 @@
       border-image: none;
       background-color: transparent;
       padding: 0;
+      width: 54px;
+      height: 26px;
       -webkit-appearance: none;
       appearance: none;
     }

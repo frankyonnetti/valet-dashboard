@@ -6,7 +6,6 @@
   text-align: center;
   display: block;
   margin: 0 auto;
-  padding: 1rem 2rem;
   width: 100%;
 
   tbody {
@@ -81,10 +80,9 @@
   .valetlinks-container {
     @include container-box(dark);
     color: #ccc;
-    padding: 1rem 2rem;
 
     tr:hover {
-      background-color: #282828;
+      background-color: #333;
     }
   }
 }
@@ -191,7 +189,7 @@
   }
 
   td {
-    border-bottom: 1px dotted var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 1rem;
   }
 }
