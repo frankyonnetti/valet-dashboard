@@ -20,19 +20,21 @@ function ready () {
   // select table element
   const newValetLinks = document.querySelector('.valetlinks-container')
 
-  // replace pipes "|" with table rows and columns
   // https://javascript.info/regexp-quantifiers
   const valetLinks = selectValetLinks.innerHTML
     .replace('<p>', '').replace('</p>', '')
+    // replace SSL column "X" with icon
     .replace(/X/g, '<i class="fas fa-lock"></i>')
-    .replace(/\+(.+)\+/g, '') // replace +--...--+
+    // replace +--...--+
+    .replace(/\+(.+)\+/g, '')
+    // replace pipes "|" starting from column 5
     .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></td></tr>')
     .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</td><td><span><em>')
     .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</td><td>')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<tr><td>')
 
-  // build new table output
+  // build new table
   newValetLinks.innerHTML = valetLinks
 
   // hide markdown table
@@ -56,8 +58,8 @@ function ready () {
     }, 300)
   }
 
-  localPathSpan.forEach(item => item.addEventListener('mouseover', changeOnOver))
-  localPathSpan.forEach(item => item.addEventListener('mouseout', changeOnOut))
+  localPathSpan.forEach((item) => item.addEventListener('mouseover', changeOnOver))
+  localPathSpan.forEach((item) => item.addEventListener('mouseout', changeOnOut))
 
   // light or dark mode
   // --------------------------------------------------------------------------
