@@ -8,7 +8,7 @@
 2. In the directory `assets/fonts`, download [Font Awesome Free](https://fontawesome.com/how-to-use/on-the-web/setup/hosting-font-awesome-yourself) and expand the ZIP file in that directory and rename it "fontawesome-free-5".
 3. Duplicate file `valet.sample.sh` and rename it `valet.sh`. We'll be using this file to easily output the `valet links` table and version number for the dashboard.
 4. Update the paths noted in the `valet.sh` file.
-5. Then, run `valet.sh` in Terminal to populate the dashboard (e.g. $ `./valet.sh`). This step will need to be repeated every time Valet link get updated or changed.
+5. Then, run `valet.sh` in Terminal to populate the dashboard (e.g. $ `./valet.sh`). This step will need to be repeated every time a Valet link gets updated or changed.
 
 
 **phpMyAdmin**
