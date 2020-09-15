@@ -43,22 +43,35 @@
   justify-content: center;
   align-items: center;
   padding-top: 0 !important;
+  padding-right: 1rem !important;
   padding-bottom: 0 !important;
+  padding-left: 1rem !important;
+  height: 88px;
 
   .logo-img {
-    text-align: center;
-    text-indent: -9999px;
-    background: transparent url("../img/laravel-logo.svg") no-repeat center -60px;
-    background-size: 70px auto;
     flex: 0 1 55%;
-    width: 70px;
-    height: 92px;
+    position: relative;
     transition: background 0.25s ease;
+
+    svg {
+      transform: scale(0.57);
+
+      path {
+        fill: #222;
+      }
+
+      rect {
+        stroke: #222;
+      }
+    }
 
     &::after {
       content: "";
       border-right: 1px solid var(--border-color);
       display: block;
+      position: absolute;
+      top: 1rem;
+      right: 0;
       height: calc(100% - 2rem);
     }
   }
@@ -67,11 +80,18 @@
     @include container-box(dark);
 
     .logo-img {
-      background-position: center 12px;
       transition: background 0.25s ease;
 
       &::after {
         border-right-color: var(--border-color-dark);
+      }
+
+      svg path {
+        fill: #eee;
+      }
+
+      svg rect {
+        stroke: #eee;
       }
     }
   }
@@ -91,39 +111,17 @@
 
   a {
     color: #333;
-    font-weight: 500;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
+    display: block;
     padding: 0.5rem 0;
 
     &:hover {
       color: var(--active-color);
-
-      .fab {
-        color: var(--active-color);
-        transition: color 0.2s ease-out;
-      }
     }
 
-    .fab {
-      color: #333;
-      font-size: 24px;
-      text-align: center;
-      border-radius: 10px;
-      margin-right: 10px;
-      padding-top: 8px;
-      width: 40px;
-      height: 40px;
-      transition: color 0.2s ease-out;
-    }
-  }
-
-  &.light-mode {
-
-    a .fab {
-      @include gradient(#fff, #f9f9f9, vertical);
-      box-shadow: inset 0 0 0 1px rgba(#000, 0.1);
+    .fas,
+    span {
+      color: #757575;
+      float: right;
     }
   }
 
@@ -133,17 +131,14 @@
     a {
       color: #ccc;
 
-      &:hover {
+      &:hover,
+      &:hover .fas {
         color: var(--active-color);
-
-        .fab {
-          color: var(--active-color);
-        }
       }
 
-      .fab {
-        @include gradient(#444, #333, vertical);
-        color: #ccc;
+      .fas,
+      span {
+        color: #999;
       }
     }
   }

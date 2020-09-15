@@ -7,7 +7,7 @@ function ready () {
   // --------------------------------------------------------------------------
   const valetVersion = document.querySelector('.server-version')
   // remove "Laravel Valet" from server version output
-  const version = valetVersion.innerHTML.replace('Laravel Valet ', '')
+  const version = valetVersion.innerHTML.replace('Laravel Valet ', 'v')
   // set new ouput
   valetVersion.innerHTML = version
 

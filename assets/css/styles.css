@@ -94,6 +94,26 @@ img {
   }
 }
 
+.footer {
+  font-size: 0.75rem;
+}
+.footer p {
+  color: #c5c5c5;
+  margin-top: 0;
+  padding-left: 1rem;
+}
+.footer a {
+  color: #c5c5c5;
+  text-decoration: underline;
+}
+.footer a:hover {
+  text-decoration: none;
+}
+.footer.dark-mode p,
+.footer.dark-mode a {
+  color: #757575;
+}
+
 pre#md-table {
   opacity: 0;
 }
@@ -135,22 +155,32 @@ pre#md-table {
   justify-content: center;
   align-items: center;
   padding-top: 0 !important;
+  padding-right: 1rem !important;
   padding-bottom: 0 !important;
+  padding-left: 1rem !important;
+  height: 88px;
 }
 .logo .logo-img {
-  text-align: center;
-  text-indent: -9999px;
-  background: transparent url("../img/laravel-logo.svg") no-repeat center -60px;
-  background-size: 70px auto;
   flex: 0 1 55%;
-  width: 70px;
-  height: 92px;
+  position: relative;
   transition: background 0.25s ease;
+}
+.logo .logo-img svg {
+  transform: scale(0.57);
+}
+.logo .logo-img svg path {
+  fill: #222;
+}
+.logo .logo-img svg rect {
+  stroke: #222;
 }
 .logo .logo-img::after {
   content: "";
   border-right: 1px solid var(--border-color);
   display: block;
+  position: absolute;
+  top: 1rem;
+  right: 0;
   height: calc(100% - 2rem);
 }
 .logo.dark-mode {
@@ -163,11 +193,16 @@ pre#md-table {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
 }
 .logo.dark-mode .logo-img {
-  background-position: center 12px;
   transition: background 0.25s ease;
 }
 .logo.dark-mode .logo-img::after {
   border-right-color: var(--border-color-dark);
+}
+.logo.dark-mode .logo-img svg path {
+  fill: #eee;
+}
+.logo.dark-mode .logo-img svg rect {
+  stroke: #eee;
 }
 .logo .server-version {
   text-align: center;
@@ -186,35 +221,16 @@ pre#md-table {
 }
 .menu a {
   color: #333;
-  font-weight: 500;
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
+  display: block;
   padding: 0.5rem 0;
 }
 .menu a:hover {
   color: var(--active-color);
 }
-.menu a:hover .fab {
-  color: var(--active-color);
-  transition: color 0.2s ease-out;
-}
-.menu a .fab {
-  color: #333;
-  font-size: 24px;
-  text-align: center;
-  border-radius: 10px;
-  margin-right: 10px;
-  padding-top: 8px;
-  width: 40px;
-  height: 40px;
-  transition: color 0.2s ease-out;
-}
-.menu.light-mode a .fab {
-  background: #fff;
-  background: -webkit-linear-gradient(top, #fff, #f9f9f9);
-  background: linear-gradient(to bottom, #fff, #f9f9f9);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+.menu a .fas,
+.menu a span {
+  color: #757575;
+  float: right;
 }
 .menu.dark-mode {
   border-radius: 14px;
@@ -228,17 +244,12 @@ pre#md-table {
 .menu.dark-mode a {
   color: #ccc;
 }
-.menu.dark-mode a:hover {
+.menu.dark-mode a:hover, .menu.dark-mode a:hover .fas {
   color: var(--active-color);
 }
-.menu.dark-mode a:hover .fab {
-  color: var(--active-color);
-}
-.menu.dark-mode a .fab {
-  background: #444;
-  background: -webkit-linear-gradient(top, #444, #333);
-  background: linear-gradient(to bottom, #444, #333);
-  color: #ccc;
+.menu.dark-mode a .fas,
+.menu.dark-mode a span {
+  color: #999;
 }
 
 .settings {

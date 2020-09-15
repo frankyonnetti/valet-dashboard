@@ -81,6 +81,34 @@ img {
   }
 }
 
+// ! footer
+.footer {
+  font-size: rem(12);
+
+  p {
+    color: #c5c5c5;
+    margin-top: 0;
+    padding-left: 1rem;
+  }
+
+  a {
+    color: #c5c5c5;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &.dark-mode {
+
+    p,
+    a {
+      color: #757575;
+    }
+  }
+}
+
 // ! markdown import
 pre#md-table {
   opacity: 0;
