@@ -80,7 +80,7 @@
     <p>Valet Dashoard v0.1.0 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
   </footer>
 
-  <pre id="md-table">
+  <pre id="links-table">
     <?php include('valet_links.html'); ?>
   </pre>
 

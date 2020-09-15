@@ -1,8 +1,8 @@
 #! /bin/bash
 
 # Duplicate this file and rename it 'valet.sh'.
-# Change paths to the HTML files so it matched your local environment.
-# Set permissions: `chmod u+x valet.sh`
+# Change the output paths below to match your local environment. Be sure to keep the HTML file name the same.
+# Set permissions on this file: `chmod u+x valet.sh`
 
 # Get the links table output from "valet links" and create an HTML file from it.
 valet_links="valet links 2>&1 | tee /local/path/to/valet/dashboard/valet_links.html"

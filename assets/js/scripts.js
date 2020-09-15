@@ -14,7 +14,7 @@ function ready () {
   // terminal output table
   // --------------------------------------------------------------------------
   // select terminal output table
-  const selectValetLinks = document.querySelector('#md-table')
+  const selectValetLinks = document.querySelector('#links-table')
   // select table element
   const newValetLinks = document.querySelector('.valetlinks-container')
 
@@ -38,12 +38,11 @@ function ready () {
   // build new table
   newValetLinks.innerHTML = valetLinks
 
-  // hide markdown table
-  document.getElementById('md-table').style.display = 'none'
+  // hide imported links table
+  document.getElementById('links-table').style.display = 'none'
 
   // show local path on hover
   // --------------------------------------------------------------------------
-  // hover to show local path
   const localPathSpan = document.querySelectorAll('.valetlinks-container td span')
 
   function changeOnOver () {
@@ -68,7 +67,8 @@ function ready () {
   const conatiners = document.querySelectorAll('.color-mode')
   const modeSwitch = document.getElementById('mode-switch')
 
-  // set initail localStorage and body class if none
+  // set initial localStorage and body class if none found,
+  // or load class if found in localStorage
   if (localStorage.getItem('themeMode') === null) {
     localStorage.setItem('themeMode', 'light')
     conatiners.forEach(mode => mode.classList.add('light-mode'))
@@ -99,7 +99,8 @@ function ready () {
   // "active-color" is set on color input 'name' attribute
   const colorInput = document.getElementById('color-picker')
 
-  // set initail localStorage for active-color
+  // set initial localStorage for active-color,
+  // or load active-color found in localStorage
   if (localStorage.getItem('activeColor') === null) {
     localStorage.setItem('activeColor', '#ba68c8')
     const getActiveColor = localStorage.getItem('activeColor')
