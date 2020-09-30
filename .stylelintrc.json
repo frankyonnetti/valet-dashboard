@@ -7,7 +7,7 @@
     "function-max-empty-lines": 1,
     "indentation": [
     	2,{
-    		"baseIndentLevel": "tab"
+    		"baseIndentLevel": 1
     	}
     ],
     "max-nesting-depth": 8,

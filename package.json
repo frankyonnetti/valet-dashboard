@@ -8,6 +8,9 @@
   "author": "Frank Yonnetti",
   "license": "GPL-2.0 AND MIT",
   "homepage": "https://yonnetti.net",
+  "scripts": {
+    "watch": "gulp watch"
+  },
   "devDependencies": {
     "browser-sync": "^2.26.12",
     "fibers": "^5.0.0",

@@ -80,6 +80,7 @@
   .valetlinks-container {
     @include container-box(dark);
     color: #ccc;
+    margin: 0 auto;
 
     tr:hover {
       background-color: #333;

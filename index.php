@@ -67,7 +67,7 @@
         <div class="color-picker-container">
           <div class="color-label">Active Color</div>
           <div class="color-wrap">
-            <input type="color" name="active-color" id="color-picker" value="#ba68c8">
+            <input type="color" name="active-color" id="color-picker" value="">
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@
   </div>
 
   <footer class="footer color-mode">
-    <p>Valet Dashoard v0.1.0 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
+    <p>Valet Dashoard v0.1.1 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
   </footer>
 
   <pre id="links-table">

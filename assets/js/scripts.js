@@ -105,6 +105,7 @@ function ready () {
     localStorage.setItem('activeColor', '#ba68c8')
     const getActiveColor = localStorage.getItem('activeColor')
     document.documentElement.setAttribute('style', '--active-color:' + getActiveColor + ';')
+    colorInput.setAttribute('value', getActiveColor)
   } else {
     const getActiveColor = localStorage.getItem('activeColor')
     document.documentElement.setAttribute('style', '--active-color:' + getActiveColor + ';')

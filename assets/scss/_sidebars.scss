@@ -241,6 +241,10 @@
       height: 26px;
       -webkit-appearance: none;
       appearance: none;
+
+      &::-webkit-color-swatch {
+        background-color: var(--active-color);
+      }
     }
   }
 }
