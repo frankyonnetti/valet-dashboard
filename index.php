@@ -20,7 +20,15 @@
   <div class="container color-mode">
 
     <div class="content color-mode">
-      <table class="valetlinks-container"></table>
+      <div class="valetlinks-wrap">
+        <div class="header">
+          <div class="col">Site</div>
+          <div class="col">SSL</div>
+          <div class="col">URL</div>
+          <div class="col">Path</div>
+        </div>
+        <div id="valetSort" class="valetlinks-container"></div>
+      </div>
     </div>
 
     <aside class="sidebar color-mode">
@@ -84,6 +92,7 @@
     <?php include('valet_links.html'); ?>
   </pre>
 
+  <script src="assets/js/Sortable.min.js"></script>
   <script src="assets/js/scripts.js"></script>
 
 </body>

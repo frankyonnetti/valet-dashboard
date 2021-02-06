@@ -349,7 +349,7 @@ pre#links-table {
   color: #ccc;
 }
 
-.valetlinks-container {
+.valetlinks-wrap {
   border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
@@ -358,54 +358,65 @@ pre#links-table {
   color: #333;
   font-size: 0.875rem;
   text-align: center;
-  display: block;
-  margin: 0 auto;
   width: 100%;
 }
-.valetlinks-container tbody {
-  display: block;
-  width: 100%;
+.valetlinks-wrap .header {
+  display: flex;
 }
-.valetlinks-container tr {
+.valetlinks-wrap .header .col {
+  color: #656565;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+  padding: 0.6rem 10px 0 0;
+}
+.valetlinks-wrap .valetlinks-container .row {
   border-radius: 4px;
   display: flex;
-  width: 100%;
 }
-.valetlinks-container tr:hover {
+.valetlinks-wrap .valetlinks-container .row:hover {
   background-color: #f9f9f9;
 }
-.valetlinks-container td {
+.valetlinks-wrap .header .col,
+.valetlinks-wrap .valetlinks-container .col {
   text-align: left;
   padding: 0.65rem 0.5rem;
 }
-.valetlinks-container td:nth-child(1) {
+.valetlinks-wrap .header .col:nth-child(1),
+.valetlinks-wrap .valetlinks-container .col:nth-child(1) {
   flex: 0 1 40%;
   order: 3;
   min-width: 40%;
 }
-.valetlinks-container td:nth-child(2) {
+.valetlinks-wrap .header .col:nth-child(2),
+.valetlinks-wrap .valetlinks-container .col:nth-child(2) {
   text-align: right;
   flex: 0 1 10%;
   order: 2;
   padding-right: 10px;
   min-width: 10%;
 }
-.valetlinks-container td:nth-child(2) .fas {
+.valetlinks-wrap .header .col:nth-child(2) .fas,
+.valetlinks-wrap .valetlinks-container .col:nth-child(2) .fas {
   color: #999;
   font-size: 14px;
   margin-top: 2px;
   margin-right: 6px;
 }
-.valetlinks-container td:nth-child(3) {
+.valetlinks-wrap .header .col:nth-child(3),
+.valetlinks-wrap .valetlinks-container .col:nth-child(3) {
   flex: 0 1 40%;
   order: 1;
   min-width: 40%;
 }
-.valetlinks-container td:nth-child(3) a {
+.valetlinks-wrap .header .col:nth-child(3) a,
+.valetlinks-wrap .valetlinks-container .col:nth-child(3) a {
   font-weight: 500;
   display: block;
 }
-.valetlinks-container td:nth-child(4) {
+.valetlinks-wrap .header .col:nth-child(4),
+.valetlinks-wrap .valetlinks-container .col:nth-child(4) {
   text-align: right;
   flex: 0 1 10%;
   order: 4;
@@ -415,7 +426,7 @@ pre#links-table {
   cursor: default;
 }
 
-.dark-mode .valetlinks-container {
+.dark-mode .valetlinks-wrap {
   border-radius: 14px;
   background-color: #fff;
   box-shadow: 0 1px 14px 5px rgba(0, 0, 0, 0.05);
@@ -423,10 +434,15 @@ pre#links-table {
   padding: 1.5rem;
   background-color: #252525;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 14px 5px rgba(0, 0, 0, 0.15);
-  color: #ccc;
-  margin: 0 auto;
 }
-.dark-mode .valetlinks-container tr:hover {
+.dark-mode .valetlinks-wrap .header .col {
+  color: #999;
+  border-color: var(--border-color-dark);
+}
+.dark-mode .valetlinks-wrap .valetlinks-container {
+  color: #ccc;
+}
+.dark-mode .valetlinks-wrap .valetlinks-container .row:hover {
   background-color: #333;
 }
 
@@ -495,48 +511,15 @@ pre#links-table {
   transition: opacity 0.2s ease-out;
 }
 
-.valetlinks-container tr:nth-child(1) {
-  font-weight: 600;
-  text-transform: uppercase;
-}
-.valetlinks-container tr:nth-child(1):hover {
-  background-color: transparent;
-}
-.valetlinks-container tr:nth-child(1) td {
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 1rem;
-}
-
-.valetlinks-container tr:nth-child(1) td {
-  color: #656565;
-}
-.valetlinks-container tr:nth-child(1) td span {
-  width: 100%;
-}
-.valetlinks-container tr:nth-child(1) td span em,
-.valetlinks-container tr:nth-child(1) td span.show-path em {
-  color: #656565;
-  background-color: transparent;
-  box-shadow: none;
-  opacity: 1;
-  position: static;
-  margin-right: 0;
-  padding: 0.6rem 10px 0 0;
-}
-.valetlinks-container tr:nth-child(1) td span::before,
-.valetlinks-container tr:nth-child(1) td em::after {
-  content: none;
-}
-
-.dark-mode tr:nth-child(1) {
+.dark-mode .row:nth-child(1) {
   font-weight: 500;
 }
-.dark-mode tr:nth-child(1) td {
+.dark-mode .row:nth-child(1) .col {
   color: #999;
   border-bottom-color: var(--border-color-dark);
 }
-.dark-mode tr:nth-child(1) td span em,
-.dark-mode tr:nth-child(1) td span.show-path em {
+.dark-mode .row:nth-child(1) .col span em,
+.dark-mode .row:nth-child(1) .col span.show-path em {
   color: #999;
 }
 /*# sourceMappingURL=styles.css.map */

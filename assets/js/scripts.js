@@ -15,7 +15,7 @@ function ready () {
   // --------------------------------------------------------------------------
   // select terminal output table
   const selectValetLinks = document.querySelector('#links-table')
-  // select table element
+  // select container element
   const newValetLinks = document.querySelector('.valetlinks-container')
 
   // https://javascript.info/regexp-quantifiers
@@ -25,25 +25,28 @@ function ready () {
     // replace pluses "+" and dashes "-"
     .replace(/\+(.+)\+/g, '')
     // replace pipes "|" starting from column 5
-    .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></td></tr>')
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</td><td><span><em>')
-    .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</td><td>')
-    .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</td><td>')
-    .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<tr><td>')
+    .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></div></div>')
+    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col"><span><em>')
+    .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col">')
+    .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col">')
+    .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col">')
     // wrap anchor around URL
     .replace(/http(.*).test/g, function (localURL) {
       return '<a href="' + localURL + '">' + localURL + '</a>'
     })
 
-  // build new table
+  // build new hosts container
   newValetLinks.innerHTML = valetLinks
 
   // hide imported links table
   document.getElementById('links-table').style.display = 'none'
 
+  // add class to header row
+  document.querySelector('.valetlinks-container .row:first-child').remove()
+
   // show local path on hover
   // --------------------------------------------------------------------------
-  const localPathSpan = document.querySelectorAll('.valetlinks-container td span')
+  const localPathSpan = document.querySelectorAll('.valetlinks-container .col span')
 
   function changeOnOver () {
     this.classList.add('show-path')
@@ -60,6 +63,14 @@ function ready () {
 
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
+
+  // Sortable
+  //
+  Sortable.create(valetSort, {
+    filter: '.row.header',
+    animation: 150,
+    ghostClass: 'blue-background-class'
+  })
 
   // light or dark mode
   // --------------------------------------------------------------------------

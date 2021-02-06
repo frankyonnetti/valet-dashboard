@@ -1,88 +1,103 @@
-// ! table
-.valetlinks-container {
+.valetlinks-wrap {
   @include container-box();
   color: #333;
   font-size: rem(14);
   text-align: center;
-  display: block;
-  margin: 0 auto;
   width: 100%;
 
-  tbody {
-    display: block;
-    width: 100%;
-  }
-
-  tr {
-    border-radius: 4px;
+  .header {
     display: flex;
-    width: 100%;
 
-    &:hover {
-      background-color: #f9f9f9;
+    .col {
+      color: #656565;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+      padding: 0.6rem 10px 0 0;
     }
   }
 
-  td {
-    text-align: left;
-    padding: 0.65rem 0.5rem;
+  .valetlinks-container {
 
-    // Site column
-    &:nth-child(1) {
-      flex: 0 1 40%;
-      order: 3;
-      min-width: 40%;
-    }
+    .row {
+      border-radius: 4px;
+      display: flex;
 
-    // SSL column
-    &:nth-child(2) {
-      text-align: right;
-      flex: 0 1 10%;
-      order: 2;
-      padding-right: 10px;
-      min-width: 10%;
-
-      .fas {
-        color: #999;
-        font-size: 14px;
-        margin-top: 2px;
-        margin-right: 6px;
+      &:hover {
+        background-color: #f9f9f9;
       }
     }
+  }
 
-    // URL column
-    &:nth-child(3) {
-      flex: 0 1 40%;
-      order: 1;
-      min-width: 40%;
+  .header,
+  .valetlinks-container {
 
-      a {
-        font-weight: 500;
-        display: block;
+    .col {
+      text-align: left;
+      padding: 0.65rem 0.5rem;
+
+      // Site column
+      &:nth-child(1) {
+        flex: 0 1 40%;
+        order: 3;
+        min-width: 40%;
       }
-    }
 
-    // PATH column
-    &:nth-child(4) {
-      text-align: right;
-      flex: 0 1 10%;
-      order: 4;
-      position: relative;
-      padding: 0;
-      min-width: 10%;
-      cursor: default;
+      // SSL column
+      &:nth-child(2) {
+        text-align: right;
+        flex: 0 1 10%;
+        order: 2;
+        padding-right: 10px;
+        min-width: 10%;
+
+        .fas {
+          color: #999;
+          font-size: 14px;
+          margin-top: 2px;
+          margin-right: 6px;
+        }
+      }
+
+      // URL column
+      &:nth-child(3) {
+        flex: 0 1 40%;
+        order: 1;
+        min-width: 40%;
+
+        a {
+          font-weight: 500;
+          display: block;
+        }
+      }
+
+      // PATH column
+      &:nth-child(4) {
+        text-align: right;
+        flex: 0 1 10%;
+        order: 4;
+        position: relative;
+        padding: 0;
+        min-width: 10%;
+        cursor: default;
+      }
     }
   }
 }
 
-.dark-mode {
+.dark-mode .valetlinks-wrap {
+  @include container-box(dark);
+
+  .header .col {
+    color: #999;
+    border-color: var(--border-color-dark);
+  }
 
   .valetlinks-container {
-    @include container-box(dark);
     color: #ccc;
-    margin: 0 auto;
 
-    tr:hover {
+    .row:hover {
       background-color: #333;
     }
   }
@@ -156,7 +171,7 @@
 }
 
 // dev
-// .valetlinks-container tr:nth-child(2) td em {
+// .valetlinks-container .row:nth-child(2) .col em {
 //   opacity: 1;
 //   top: -28px;
 // }
@@ -180,51 +195,12 @@
   }
 }
 
-// ! table head
-.valetlinks-container tr:nth-child(1) {
-  font-weight: 600;
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: transparent;
-  }
-
-  td {
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
-  }
-}
-
-.valetlinks-container tr:nth-child(1) td {
-  color: #656565;
-
-  span {
-    width: 100%;
-  }
-
-  span em,
-  span.show-path em {
-    color: #656565;
-    background-color: transparent;
-    box-shadow: none;
-    opacity: 1;
-    position: static;
-    margin-right: 0;
-    padding: 0.6rem 10px 0 0;
-  }
-
-  span::before,
-  em::after {
-    content: none;
-  }
-}
-
 .dark-mode {
 
-  tr:nth-child(1) {
+  .row:nth-child(1) {
     font-weight: 500;
 
-    td {
+    .col {
       color: #999;
       border-bottom-color: var(--border-color-dark);
 
