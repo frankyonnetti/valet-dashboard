@@ -1,6 +1,7 @@
 function ready () {
   // Add class when JS is loaded.
   const htmlTag = document.querySelector('html')
+  const localStorage = window.localStorage
   htmlTag.classList.add('js-loaded')
 
   // server version
@@ -65,16 +66,37 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
   // Sortable
-  //
-  Sortable.create(valetSort, {
-    filter: '.row.header',
+  // --------------------------------------------------------------------------
+  const valetSortEl = document.getElementById('valetSort')
+  const sortable = Sortable.create(valetSortEl, {
+    store: {
+      /**
+       * Get the order of elements. Called once during initialization.
+       * @param   {Sortable}  sortable
+       * @returns {Array}
+       */
+      get: function (sortable) {
+        const order = localStorage.getItem(sortable.options.group.name)
+        return order ? order.split('|') : []
+      },
+
+      /**
+       * Save the order of elements. Called onEnd (when the item is dropped).
+       * @param {Sortable}  sortable
+       */
+      set: function (sortable) {
+        const order = sortable.toArray()
+        localStorage.setItem(sortable.options.group.name, order.join('|'))
+      }
+    },
+    group: 'hostslist',
+    forceFallback: true,
     animation: 150,
     ghostClass: 'blue-background-class'
   })
 
   // light or dark mode
   // --------------------------------------------------------------------------
-  const localStorage = window.localStorage
   const conatiners = document.querySelectorAll('.color-mode')
   const modeSwitch = document.getElementById('mode-switch')
 
