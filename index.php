@@ -22,10 +22,11 @@
     <div class="content color-mode">
       <div class="valetlinks-wrap">
         <div class="header">
-          <div class="col">Site</div>
-          <div class="col">SSL</div>
-          <div class="col">URL</div>
-          <div class="col">Path</div>
+          <div class="col grip"></div>
+          <div class="col site">Site</div>
+          <div class="col ssl">SSL</div>
+          <div class="col url">URL</div>
+          <div class="col path">Path</div>
         </div>
         <div id="valetSort" class="valetlinks-container"></div>
       </div>
@@ -76,6 +77,12 @@
           <div class="color-label">Active Color</div>
           <div class="color-wrap">
             <input type="color" name="active-color" id="color-picker" value="">
+          </div>
+        </div>
+        <div class="sortable-container">
+          <div class="sortable-label">Host-list Sort</div>
+          <div class="sortable-wrap">
+            <button class="clearsort" onclick="clearSortStorage()">Reset</button>
           </div>
         </div>
       </div>

@@ -15,6 +15,11 @@
       border-bottom: 1px solid var(--border-color);
       margin-bottom: 1rem;
       padding: 0.6rem 10px 0 0;
+
+      &.grip {
+        background-image: none !important;
+        opacity: 1 !important;
+      }
     }
   }
 
@@ -25,6 +30,14 @@
       display: flex;
 
       &:hover {
+        background-color: #f9f9f9;
+
+        .col.grip {
+          opacity: 0.5;
+        }
+      }
+
+      &.ghost-class {
         background-color: #f9f9f9;
       }
     }
@@ -37,18 +50,28 @@
       text-align: left;
       padding: 0.65rem 0.5rem;
 
+      &.grip {
+        background: transparent url("../img/grip-light.svg") no-repeat center center;
+        flex: 0 1 32px;
+        order: 1;
+        opacity: 0;
+        position: relative;
+        min-width: 32px;
+        cursor: move;
+      }
+
       // Site column
-      &:nth-child(1) {
+      &.site {
         flex: 0 1 40%;
-        order: 3;
+        order: 4;
         min-width: 40%;
       }
 
       // SSL column
-      &:nth-child(2) {
+      &.ssl {
         text-align: right;
         flex: 0 1 10%;
-        order: 2;
+        order: 3;
         padding-right: 10px;
         min-width: 10%;
 
@@ -61,10 +84,10 @@
       }
 
       // URL column
-      &:nth-child(3) {
-        flex: 0 1 40%;
-        order: 1;
-        min-width: 40%;
+      &.url {
+        flex: 0 1 calc(40% - 32px);
+        order: 2;
+        min-width: calc(40% - 32px);
 
         a {
           font-weight: 500;
@@ -73,10 +96,10 @@
       }
 
       // PATH column
-      &:nth-child(4) {
+      &.path {
         text-align: right;
         flex: 0 1 10%;
-        order: 4;
+        order: 5;
         position: relative;
         padding: 0;
         min-width: 10%;
@@ -97,8 +120,13 @@
   .valetlinks-container {
     color: #ccc;
 
-    .row:hover {
+    .row:hover,
+    .row.ghost-class {
       background-color: #333;
+    }
+
+    .col.grip {
+      background-image: url("../img/grip-dark.svg");
     }
   }
 }
@@ -192,22 +220,5 @@
     opacity: 0;
     top: -28px;
     transition: opacity 0.2s ease-out;
-  }
-}
-
-.dark-mode {
-
-  .row:nth-child(1) {
-    font-weight: 500;
-
-    .col {
-      color: #999;
-      border-bottom-color: var(--border-color-dark);
-
-      span em,
-      span.show-path em {
-        color: #999;
-      }
-    }
   }
 }

@@ -144,13 +144,14 @@
   }
 }
 
+// ! Settings panel
+
 // ! theme switch
 .settings {
   @include container-box;
 
   .mode-switch-container {
     display: flex;
-    // justify-content: center;
     align-items: center;
     cursor: default;
     padding-bottom: 1rem;
@@ -217,7 +218,6 @@
 .color-picker-container {
   border-top: 1px solid var(--border-color);
   display: flex;
-  // justify-content: center;
   align-items: center;
   padding-top: 1rem;
 
@@ -250,9 +250,71 @@
 }
 
 .dark-mode .color-picker-container {
-  border-top-color: var(--border-color-dark);
+  border-top-color: var(--border-color-darker);
 
   .color-label {
     color: #ccc;
+  }
+}
+
+// ! sortable
+.sortable-container {
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+
+  .sortable-label {
+    color: #656565;
+    font-size: rem(14);
+    padding-right: 0.5rem;
+  }
+
+  .sortable-wrap {
+    text-align: right;
+    flex-grow: 2;
+
+    button {
+      color: #333;
+      font-size: rem(13);
+      border-style: none;
+      border-radius: 3px;
+      background-color: #eee;
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover:enabled {
+        color: #fff;
+        background-color: var(--active-color) !important;
+        transition: all 0.15s ease;
+      }
+    }
+  }
+
+  &.disabled {
+
+    .sortable-label,
+    button {
+      opacity: 0.4;
+    }
+
+    button {
+      cursor: default;
+    }
+  }
+}
+
+.dark-mode .sortable-container {
+  border-top-color: var(--border-color-darker);
+
+  .sortable-label {
+    color: #ccc;
+  }
+
+  .sortable-wrap button {
+    color: #fff;
+    background-color: var(--border-color-dark);
   }
 }

@@ -27,10 +27,10 @@ function ready () {
     .replace(/\+(.+)\+/g, '')
     // replace pipes "|" starting from column 5
     .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></div></div>')
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col"><span><em>')
-    .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col">')
-    .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col">')
-    .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col">')
+    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col path"><span><em>')
+    .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col url">')
+    .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col ssl">')
+    .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
     // wrap anchor around URL
     .replace(/http(.*).test/g, function (localURL) {
       return '<a href="' + localURL + '">' + localURL + '</a>'
@@ -39,11 +39,14 @@ function ready () {
   // build new hosts container
   newValetLinks.innerHTML = valetLinks
 
+  // remove header row
+  function removeHeaderRow () {
+    document.querySelector('.valetlinks-container .row:first-child').remove()
+  }
+  removeHeaderRow()
+
   // hide imported links table
   document.getElementById('links-table').style.display = 'none'
-
-  // add class to header row
-  document.querySelector('.valetlinks-container .row:first-child').remove()
 
   // show local path on hover
   // --------------------------------------------------------------------------
@@ -68,32 +71,51 @@ function ready () {
   // Sortable
   // --------------------------------------------------------------------------
   const valetSortEl = document.getElementById('valetSort')
-  const sortable = Sortable.create(valetSortEl, {
+  const clearSortBtnContainer = document.querySelector('.sortable-container')
+  const clearSortBtn = document.querySelector('.clearsort')
+
+  const sortable = Sortable.create(valetSortEl, { // eslint-disable-line no-unused-vars
     store: {
-      /**
-       * Get the order of elements. Called once during initialization.
-       * @param   {Sortable}  sortable
-       * @returns {Array}
-       */
+      // Get the order of elements. Called once during initialization.
       get: function (sortable) {
         const order = localStorage.getItem(sortable.options.group.name)
         return order ? order.split('|') : []
       },
 
-      /**
-       * Save the order of elements. Called onEnd (when the item is dropped).
-       * @param {Sortable}  sortable
-       */
+      // Save the order of elements. Called onEnd (when the item is dropped).
       set: function (sortable) {
         const order = sortable.toArray()
         localStorage.setItem(sortable.options.group.name, order.join('|'))
+        clearSortBtnContainer.classList.remove('disabled')
+        clearSortBtn.removeAttribute('disabled')
       }
     },
     group: 'hostslist',
     forceFallback: true,
+    handle: '.grip',
     animation: 150,
-    ghostClass: 'blue-background-class'
+    ghostClass: 'ghost-class'
   })
+
+  // Set button disabled if no sort
+  function disableSortButton () {
+    if (localStorage.getItem('hostslist') === null) {
+      clearSortBtnContainer.classList.add('disabled')
+      clearSortBtn.setAttribute('disabled', 'disabled')
+    }
+  }
+  disableSortButton()
+
+  // Clear sortable localStorage
+  function clearSortStorage () {
+    delete localStorage.hostslist
+    newValetLinks.innerHTML = valetLinks // reload host list
+    removeHeaderRow()
+    disableSortButton()
+  }
+
+  // Clear list localStorage button
+  clearSortBtn.onclick = clearSortStorage
 
   // light or dark mode
   // --------------------------------------------------------------------------

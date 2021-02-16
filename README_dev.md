@@ -41,3 +41,10 @@ Workspace setting should be located in the root of this project's repo: `/.vscod
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+
+---
+
+Additional libraries used in this project:
+
+- [Font Awesome](https://fontawesome.com)
+- [SortableJS](https://github.com/SortableJS/Sortable)
