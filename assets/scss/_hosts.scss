@@ -29,6 +29,10 @@
       border-radius: 4px;
       display: flex;
 
+      &.activated {
+        border-top: 10px solid var(--bg-color-dark);
+      }
+
       &:hover {
         background-color: #f9f9f9;
 
@@ -85,9 +89,9 @@
 
       // URL column
       &.url {
-        flex: 0 1 calc(40% - 32px);
+        flex: 0 1 calc(40% - 48px);
         order: 2;
-        min-width: calc(40% - 32px);
+        min-width: calc(40% - 48px);
 
         a {
           font-weight: 500;
@@ -95,11 +99,19 @@
         }
       }
 
+      // Tools column
+      &.tools {
+        background-color: #111;
+        flex: 0 1 16px;
+        order: 5;
+        min-width: 16px;
+      }
+
       // PATH column
       &.path {
         text-align: right;
         flex: 0 1 10%;
-        order: 5;
+        order: 6;
         position: relative;
         padding: 0;
         min-width: 10%;

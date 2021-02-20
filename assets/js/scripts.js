@@ -1,7 +1,7 @@
 function ready () {
+  const localStorage = window.localStorage
   // Add class when JS is loaded.
   const htmlTag = document.querySelector('html')
-  const localStorage = window.localStorage
   htmlTag.classList.add('js-loaded')
 
   // server version
@@ -27,7 +27,7 @@ function ready () {
     .replace(/\+(.+)\+/g, '')
     // replace pipes "|" starting from column 5
     .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></div></div>')
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col path"><span><em>')
+    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col tools"></div><div class="col path"><span><em>')
     .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col url">')
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col ssl">')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
@@ -68,13 +68,56 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
+  //
+  // --------------------------------------------------------------------------
+  const hostRow = newValetLinks.children
+  const selectedRow = document.querySelectorAll('.valetlinks-container .tools')
+  const dirField = document.querySelector('.create-dir-input')
+  const dirButton = document.querySelector('.create-dir-button')
+
+  for (let hostCount = 0; hostCount < hostRow.length; hostCount++) {
+    // add a unique "data" attribute to each row
+    const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
+    hostRow[hostCount].setAttribute('data-host', hostSite)
+
+    // toggle "activaed" class when clicking on row directory icon.
+    const partentData = selectedRow[hostCount].parentNode.getAttribute('data-host')
+    selectedRow[hostCount].addEventListener('click', event => {
+      localStorage.setItem(partentData, 'active')
+      const activeData = document.querySelector('[data-host="' + partentData + '"')
+      if (activeData.classList.contains('activated')) {
+        activeData.classList.remove('activated')
+        localStorage.removeItem(partentData)
+      } else {
+        activeData.classList.add('activated', 'hold')
+        dirField.focus()
+      }
+    })
+
+    // Load "activaed" class if in loaclStrage
+    if (localStorage.getItem(partentData) !== null) {
+      const activeData = document.querySelector('[data-host="' + partentData + '"')
+      activeData.classList.add('activated')
+    }
+  }
+
+  dirButton.addEventListener('click', event => {
+    const holdClass = document.querySelector('.hold')
+    const dirFieldValue = dirField.value
+    const selectedHost = holdClass.getAttribute('data-host')
+    holdClass.setAttribute('data-dir', dirFieldValue)
+    localStorage.setItem(selectedHost + '_host', selectedHost)
+    const enteredDirName = holdClass.getAttribute('data-dir')
+    localStorage.setItem(selectedHost + '_dir', enteredDirName)
+  })
+
   // Sortable
   // --------------------------------------------------------------------------
   const valetSortEl = document.getElementById('valetSort')
   const clearSortBtnContainer = document.querySelector('.sortable-container')
   const clearSortBtn = document.querySelector('.clearsort')
 
-  const sortable = Sortable.create(valetSortEl, { // eslint-disable-line no-unused-vars
+  const sortable = Sortable.create(valetSortEl, { // eslint-disable-line
     store: {
       // Get the order of elements. Called once during initialization.
       get: function (sortable) {
@@ -109,6 +152,7 @@ function ready () {
   // Clear sortable localStorage
   function clearSortStorage () {
     delete localStorage.hostslist
+    // location.reload()
     newValetLinks.innerHTML = valetLinks // reload host list
     removeHeaderRow()
     disableSortButton()

@@ -318,3 +318,11 @@
     background-color: var(--border-color-dark);
   }
 }
+
+.directory-name {
+  border-top: 1px solid var(--border-color-darker);
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
