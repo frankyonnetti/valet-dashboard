@@ -26,7 +26,6 @@
           <div class="col site">Site</div>
           <div class="col ssl">SSL</div>
           <div class="col url">URL</div>
-          <div class="col tools"></div>
           <div class="col path">Path</div>
         </div>
         <div id="valetSort" class="valetlinks-container"></div>
@@ -86,9 +85,9 @@
             <button class="clearsort" onclick="clearSortStorage()">Reset</button>
           </div>
         </div>
-        <div class="directory-name-container">
-          <input type="text" class="create-dir-input" aria-label="Enter a new directory item" placeholder="Enter Name">
-          <button class="create-dir-button" onclick="">Set</button>
+        <div class="grouping-name-container">
+          <input type="text" class="create-group-input" aria-label="Enter a new grouping header" placeholder="Enter Name">
+          <button class="create-group-button" onclick="">Set</button>
         </div>
       </div>
 

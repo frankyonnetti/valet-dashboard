@@ -52,6 +52,10 @@
       }
     ],
     "order/properties-order": [
+      "flex",
+      "flex-grow",
+      "flex-shrink",
+      "flex-basis",
       "color",
       "content",
       "font",
@@ -100,10 +104,6 @@
       "background-position",
       "background-size",
       "box-shadow",
-      "flex",
-      "flex-grow",
-      "flex-shrink",
-      "flex-basis",
       "order",
       "align-self",
       "display",

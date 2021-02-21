@@ -31,16 +31,40 @@
       flex-wrap: wrap;
 
       &.group {
-        border-top: 1px solid var(--bg-color-dark);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+        border-radius: 0;
+        // background-color: rgba(0, 0, 0, 0.1);
+        // box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.25); // bottom border
 
-        .directory {
-          display: block;
+        div {
+          padding: 0.65rem 0.5rem;
+        }
+
+        .grip {
+          flex: 0 1 32px;
+          background: transparent url("../img/grip-light.svg") no-repeat center center;
+          opacity: 0;
+          min-width: 32px;
+          cursor: move;
+        }
+
+        .label {
+          flex: 1 1 auto;
+          font-size: rem(18);
+          text-align: left;
+        }
+
+        .remove {
+          flex: 0 1 24px;
+          // padding-right: 2.4rem;
+          min-width: 24px;
         }
       }
 
       &:hover {
         background-color: #f9f9f9;
 
+        &.group .grip,
         .col.grip {
           opacity: 0.5;
         }
@@ -55,18 +79,13 @@
   .header,
   .valetlinks-container {
 
-    .directory {
-      flex: 0 1 100%;
-      display: none;
-    }
-
     .col {
       text-align: left;
       padding: 0.65rem 0.5rem;
 
       &.grip {
-        background: transparent url("../img/grip-light.svg") no-repeat center center;
         flex: 0 1 32px;
+        background: transparent url("../img/grip-light.svg") no-repeat center center;
         order: 1;
         opacity: 0;
         position: relative;
@@ -83,8 +102,8 @@
 
       // SSL column
       &.ssl {
-        text-align: right;
         flex: 0 1 10%;
+        text-align: right;
         order: 3;
         padding-right: 10px;
         min-width: 10%;
@@ -111,16 +130,16 @@
 
       // Tools column
       &.tools {
-        background-color: #111;
         flex: 0 1 16px;
+        background-color: #111;
         order: 5;
         min-width: 16px;
       }
 
       // PATH column
       &.path {
-        text-align: right;
         flex: 0 1 10%;
+        text-align: right;
         order: 6;
         position: relative;
         padding: 0;
@@ -147,6 +166,7 @@
       background-color: #333;
     }
 
+    .row.group .grip,
     .col.grip {
       background-image: url("../img/grip-dark.svg");
     }

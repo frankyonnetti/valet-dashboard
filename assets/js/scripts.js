@@ -27,7 +27,7 @@ function ready () {
     .replace(/\+(.+)\+/g, '')
     // replace pipes "|" starting from column 5
     .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></div></div>')
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col tools"></div><div class="col path"><span><em>')
+    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col path"><span><em>')
     .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col url">')
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col ssl">')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
@@ -68,72 +68,51 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
-  //
+  // Grouping headers
   // --------------------------------------------------------------------------
+  const groupField = document.querySelector('.create-group-input')
+  const groupButton = document.querySelector('.create-group-button')
+
+  // create grouping headers
+  groupButton.addEventListener('click', event => {
+    event.preventDefault()
+    const groupFieldValue = groupField.value
+    if (groupFieldValue.length < 1) return
+    const groupDiv = document.createElement('div')
+    groupDiv.setAttribute('data-group', 'GROUP_' + groupFieldValue)
+    groupDiv.innerHTML = `
+      <div class="grip"></div>
+      <div class="label">${groupFieldValue}</div>
+      <div class="remove"><i class="fas fa-times"></i></div>`
+    groupDiv.classList.add('row', 'group')
+    localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
+    newValetLinks.prepend(groupDiv)
+    groupField.value = ''
+  })
+
+  // load grouping headers on load.
+  const search = 'GROUP_'
+  const groupValues = Object.keys(localStorage)
+                            .filter((key) => key.startsWith(search))
+                            .map((key) => localStorage[key])
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+  newValetLinks.insertAdjacentHTML('afterbegin', groupValues.join(''))
+
+  // delete gruoping header
   const hostRow = newValetLinks.children
-  const selectedRow = document.querySelectorAll('.valetlinks-container .tools')
-  const dirFieldContainer = document.querySelector('.directory-name-container')
-  const dirField = document.querySelector('.create-dir-input')
-  const dirButton = document.querySelector('.create-dir-button')
+  const groupClose = document.querySelectorAll('.group .remove')
 
-  for (let hostCount = 0; hostCount < hostRow.length; hostCount++) {
-    // add a unique "data" attribute to each row
-    const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
-    hostRow[hostCount].setAttribute('data-host', hostSite)
-
-    // toggle "group" class when clicking on row directory icon.
-    const partentData = selectedRow[hostCount].parentNode.getAttribute('data-host')
-    selectedRow[hostCount].addEventListener('click', event => {
-      localStorage.setItem(partentData, 'activeGroup')
-      const activeData = document.querySelector('[data-host="' + partentData + '"')
-
-      if (activeData.classList.contains('group')) {
-        activeData.classList.remove('group')
+  for (let i = 0; i < hostRow.length; i++) {
+    if (groupClose[i] != null) {
+      const partentData = groupClose[i].parentNode.getAttribute('data-group')
+      groupClose[i].addEventListener('click', event => {
         localStorage.removeItem(partentData)
-        localStorage.removeItem(partentData + '_host')
-        localStorage.removeItem(partentData + '_dir')
-      } else {
-        activeData.classList.add('group', 'hold')
-        dirFieldContainer.classList.add('focused')
-        dirField.focus()
-      }
-    })
-
-    // Load "group" class if in localStorage
-    if (localStorage.getItem(partentData) !== null) {
-      const activeData = document.querySelector('[data-host="' + partentData + '"')
-      activeData.classList.add('group')
-    }
-
-    //
-    if (hostRow[hostCount].getAttribute('data-host') === localStorage.getItem(partentData + '_host')) {
-      const getDirName = localStorage.getItem(partentData + '_dir')
-      hostRow[hostCount].setAttribute('data-dir', getDirName)
-      //
-      const dirDiv = document.createElement('div')
-      dirDiv.textContent = getDirName
-      dirDiv.classList.add('directory')
-      hostRow[hostCount].appendChild(dirDiv)
+        groupDiv = document.querySelector('[data-group="' + partentData + '"]')
+        groupDiv.remove()
+      })
     }
   }
-
-  dirButton.addEventListener('click', event => {
-    const holdClass = document.querySelector('.hold')
-    const dirFieldValue = dirField.value
-    holdClass.setAttribute('data-dir', dirFieldValue)
-    //
-    const selectedHost = holdClass.getAttribute('data-host')
-    localStorage.setItem(selectedHost + '_host', selectedHost)
-    //
-    const enteredDirName = holdClass.getAttribute('data-dir')
-    localStorage.setItem(selectedHost + '_dir', enteredDirName)
-    //
-    dirFieldContainer.classList.remove('focused')
-    const dirDiv = document.createElement('div')
-    dirDiv.textContent = dirFieldValue
-    dirDiv.classList.add('directory')
-    holdClass.appendChild(dirDiv)
-  })
 
   // Sortable
   // --------------------------------------------------------------------------

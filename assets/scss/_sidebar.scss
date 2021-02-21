@@ -319,15 +319,15 @@
   }
 }
 
-.directory-name-container {
+.grouping-name-container {
   border-top: 1px solid var(--border-color-darker);
   display: flex;
   align-items: center;
-  opacity: 0;
+  // opacity: 0;
   margin-top: 1rem;
   padding-top: 1rem;
 
   &.focused {
-    opacity: 1;
+    // opacity: 1;
   }
 }
