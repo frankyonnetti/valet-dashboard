@@ -72,6 +72,7 @@ function ready () {
   // --------------------------------------------------------------------------
   const hostRow = newValetLinks.children
   const selectedRow = document.querySelectorAll('.valetlinks-container .tools')
+  const dirFieldContainer = document.querySelector('.directory-name-container')
   const dirField = document.querySelector('.create-dir-input')
   const dirButton = document.querySelector('.create-dir-button')
 
@@ -80,35 +81,58 @@ function ready () {
     const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
     hostRow[hostCount].setAttribute('data-host', hostSite)
 
-    // toggle "activaed" class when clicking on row directory icon.
+    // toggle "group" class when clicking on row directory icon.
     const partentData = selectedRow[hostCount].parentNode.getAttribute('data-host')
     selectedRow[hostCount].addEventListener('click', event => {
-      localStorage.setItem(partentData, 'active')
+      localStorage.setItem(partentData, 'activeGroup')
       const activeData = document.querySelector('[data-host="' + partentData + '"')
-      if (activeData.classList.contains('activated')) {
-        activeData.classList.remove('activated')
+
+      if (activeData.classList.contains('group')) {
+        activeData.classList.remove('group')
         localStorage.removeItem(partentData)
+        localStorage.removeItem(partentData + '_host')
+        localStorage.removeItem(partentData + '_dir')
       } else {
-        activeData.classList.add('activated', 'hold')
+        activeData.classList.add('group', 'hold')
+        dirFieldContainer.classList.add('focused')
         dirField.focus()
       }
     })
 
-    // Load "activaed" class if in loaclStrage
+    // Load "group" class if in localStorage
     if (localStorage.getItem(partentData) !== null) {
       const activeData = document.querySelector('[data-host="' + partentData + '"')
-      activeData.classList.add('activated')
+      activeData.classList.add('group')
+    }
+
+    //
+    if (hostRow[hostCount].getAttribute('data-host') === localStorage.getItem(partentData + '_host')) {
+      const getDirName = localStorage.getItem(partentData + '_dir')
+      hostRow[hostCount].setAttribute('data-dir', getDirName)
+      //
+      const dirDiv = document.createElement('div')
+      dirDiv.textContent = getDirName
+      dirDiv.classList.add('directory')
+      hostRow[hostCount].appendChild(dirDiv)
     }
   }
 
   dirButton.addEventListener('click', event => {
     const holdClass = document.querySelector('.hold')
     const dirFieldValue = dirField.value
-    const selectedHost = holdClass.getAttribute('data-host')
     holdClass.setAttribute('data-dir', dirFieldValue)
+    //
+    const selectedHost = holdClass.getAttribute('data-host')
     localStorage.setItem(selectedHost + '_host', selectedHost)
+    //
     const enteredDirName = holdClass.getAttribute('data-dir')
     localStorage.setItem(selectedHost + '_dir', enteredDirName)
+    //
+    dirFieldContainer.classList.remove('focused')
+    const dirDiv = document.createElement('div')
+    dirDiv.textContent = dirFieldValue
+    dirDiv.classList.add('directory')
+    holdClass.appendChild(dirDiv)
   })
 
   // Sortable

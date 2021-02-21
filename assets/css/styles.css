@@ -400,12 +400,16 @@ pre#links-table {
   background-color: var(--border-color-dark);
 }
 
-.directory-name {
+.directory-name-container {
   border-top: 1px solid var(--border-color-darker);
   display: flex;
   align-items: center;
+  opacity: 0;
   margin-top: 1rem;
   padding-top: 1rem;
+}
+.directory-name-container.focused {
+  opacity: 1;
 }
 
 .valetlinks-wrap {
@@ -437,9 +441,13 @@ pre#links-table {
 .valetlinks-wrap .valetlinks-container .row {
   border-radius: 4px;
   display: flex;
+  flex-wrap: wrap;
 }
-.valetlinks-wrap .valetlinks-container .row.activated {
-  border-top: 10px solid var(--bg-color-dark);
+.valetlinks-wrap .valetlinks-container .row.group {
+  border-top: 1px solid var(--bg-color-dark);
+}
+.valetlinks-wrap .valetlinks-container .row.group .directory {
+  display: block;
 }
 .valetlinks-wrap .valetlinks-container .row:hover {
   background-color: #f9f9f9;
@@ -449,6 +457,11 @@ pre#links-table {
 }
 .valetlinks-wrap .valetlinks-container .row.ghost-class {
   background-color: #f9f9f9;
+}
+.valetlinks-wrap .header .directory,
+.valetlinks-wrap .valetlinks-container .directory {
+  flex: 0 1 100%;
+  display: none;
 }
 .valetlinks-wrap .header .col,
 .valetlinks-wrap .valetlinks-container .col {

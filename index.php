@@ -86,7 +86,7 @@
             <button class="clearsort" onclick="clearSortStorage()">Reset</button>
           </div>
         </div>
-        <div class="directory-name">
+        <div class="directory-name-container">
           <input type="text" class="create-dir-input" aria-label="Enter a new directory item" placeholder="Enter Name">
           <button class="create-dir-button" onclick="">Set</button>
         </div>

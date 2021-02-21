@@ -28,9 +28,14 @@
     .row {
       border-radius: 4px;
       display: flex;
+      flex-wrap: wrap;
 
-      &.activated {
-        border-top: 10px solid var(--bg-color-dark);
+      &.group {
+        border-top: 1px solid var(--bg-color-dark);
+
+        .directory {
+          display: block;
+        }
       }
 
       &:hover {
@@ -49,6 +54,11 @@
 
   .header,
   .valetlinks-container {
+
+    .directory {
+      flex: 0 1 100%;
+      display: none;
+    }
 
     .col {
       text-align: left;
