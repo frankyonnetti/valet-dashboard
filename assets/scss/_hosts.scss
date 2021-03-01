@@ -3,22 +3,30 @@
   color: #333;
   font-size: rem(14);
   text-align: center;
+  padding: 1.5rem 1px;
   width: 100%;
 
   .header {
     display: flex;
+    // padding: 0 1rem;
 
     .col {
       color: #656565;
       font-weight: 600;
       text-transform: uppercase;
-      border-bottom: 1px solid var(--border-color);
+      // border-bottom: 1px solid var(--border-color);
       margin-bottom: 1rem;
       padding: 0.6rem 10px 0 0;
 
-      &.grip {
+      &.gripcol {
+        flex: 0 1 48px;
         background-image: none !important;
         opacity: 1 !important;
+        max-width: 48px;
+      }
+
+      &.path {
+        padding: 0.65rem 32px 0.65rem 0.5rem !important;
       }
     }
   }
@@ -26,38 +34,66 @@
   .valetlinks-container {
 
     .row {
-      border-radius: 4px;
+      // border-radius: 4px;
       display: flex;
       flex-wrap: wrap;
+      padding: 0;
 
       &.group {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.35);
-        border-radius: 0;
-        // background-color: rgba(0, 0, 0, 0.1);
-        // box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.25); // bottom border
+        background-color: darken(#252525, 2%);
+        box-shadow: inset 0 -1px 0 0 rgba(#fff, 0.05); // bottom border
+        // @include gradient(darken(#252525, 0), darken(#252525, 1.5%), vertical);
+        // box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.25); // bottom border
+        position: relative;
+
+        &:hover {
+          // box-shadow: inset 0 0 0 1px rgba(#fff, 0.06);
+        }
 
         div {
           padding: 0.65rem 0.5rem;
         }
 
         .grip {
-          flex: 0 1 32px;
+          flex: 0 1 48px;
           background: transparent url("../img/grip-light.svg") no-repeat center center;
           opacity: 0;
-          min-width: 32px;
+          min-width: 48px;
           cursor: move;
         }
 
         .label {
           flex: 1 1 auto;
-          font-size: rem(18);
+          font-size: rem(14);
           text-align: left;
+          text-transform: uppercase;
+
+          em {
+            // @include gradient(lighten(#252525, 2.5%), darken(#252525, 0%), vertical);
+            font-style: normal;
+            // text-align: center;
+            // border-radius: 5px 5px 0 0;
+            // background-color: #252525;
+            // box-shadow: inset 0 1px 0 0 rgba(#fff, 0.05);
+            // box-shadow: inset 0 1px 0 0 rgba(#fff, 0.05), inset -1px 0 0 0 rgba(#fff, 0.05), inset 1px 0 0 0 rgba(#fff, 0.05);
+            // display: inline-block;
+            // margin-top: 0.75rem;
+            // padding: 0.75rem 1rem;
+            // min-width: 180px;
+          }
         }
 
         .remove {
-          flex: 0 1 24px;
-          // padding-right: 2.4rem;
-          min-width: 24px;
+          flex: 0 1 36px;
+          text-align: right;
+          opacity: 0;
+          // padding-top: rem(14);
+          padding-right: rem(46);
+          min-width: 36px;
+
+          .fas {
+            cursor: pointer;
+          }
         }
       }
 
@@ -65,7 +101,9 @@
         background-color: #f9f9f9;
 
         &.group .grip,
-        .col.grip {
+        &.group .remove,
+        .col.grip,
+        .col.remove {
           opacity: 0.5;
         }
       }
@@ -84,12 +122,12 @@
       padding: 0.65rem 0.5rem;
 
       &.grip {
-        flex: 0 1 32px;
+        flex: 0 1 48px;
         background: transparent url("../img/grip-light.svg") no-repeat center center;
         order: 1;
         opacity: 0;
         position: relative;
-        min-width: 32px;
+        min-width: 48px;
         cursor: move;
       }
 
@@ -128,21 +166,13 @@
         }
       }
 
-      // Tools column
-      &.tools {
-        flex: 0 1 16px;
-        background-color: #111;
-        order: 5;
-        min-width: 16px;
-      }
-
       // PATH column
       &.path {
         flex: 0 1 10%;
         text-align: right;
         order: 6;
         position: relative;
-        padding: 0;
+        padding: 0 24px 0 0;
         min-width: 10%;
         cursor: default;
       }
@@ -152,6 +182,7 @@
 
 .dark-mode .valetlinks-wrap {
   @include container-box(dark);
+  padding: 1.5rem 1px;
 
   .header .col {
     color: #999;

@@ -1,6 +1,27 @@
 /* stylelint-disable value-no-vendor-prefix */
 /* stylelint-disable declaration-block-no-duplicate-properties */
 
+:root {
+  --active-color: #ba68c8;
+  // light
+  --border-color: #e0e0e0;
+  --bg-color: #f6f6f6;
+  // dark
+  --border-color-dark: #444;
+  --border-color-darker: #353535;
+  --bg-color-dark: #171717;
+}
+
+// breakpoints
+$breakpoint-xs-only: "(max-width: 480px)";
+$breakpoint-sm-up: "(min-width: 481px)";
+$breakpoint-sm-only: "(min-width: 481px) and (max-width: 768px)";
+$breakpoint-md-up: "(min-width: 769px)";
+$breakpoint-md-only: "(min-width: 769px) and (max-width: 992px)";
+$breakpoint-lg-up: "(min-width: 993px)";
+$breakpoint-lg-only: "(min-width: 993px) and (max-width: 1200px)";
+$breakpoint-xl-up: "(min-width: 1201px)";
+
 // Convert px to rem
 // https://css-tricks.com/snippets/sass/px-to-em-functions
 @function rem($pixels, $context: 16) {

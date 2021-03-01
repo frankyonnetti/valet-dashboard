@@ -22,7 +22,7 @@
     <div class="content color-mode">
       <div class="valetlinks-wrap">
         <div class="header">
-          <div class="col grip"></div>
+          <div class="col gripcol"></div>
           <div class="col site">Site</div>
           <div class="col ssl">SSL</div>
           <div class="col url">URL</div>
@@ -103,8 +103,8 @@
     <?php include('valet_links.html'); ?>
   </pre>
 
-  <script src="assets/js/Sortable.min.js"></script>
-  <script src="assets/js/scripts.js"></script>
+  <script src="assets/contib/SortableJS/Sortable.min.js"></script>
+  <script src="assets/js/min/scripts.js"></script>
 
 </body>
 </html>

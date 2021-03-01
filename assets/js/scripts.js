@@ -4,7 +4,7 @@ function ready () {
   const htmlTag = document.querySelector('html')
   htmlTag.classList.add('js-loaded')
 
-  // server version
+  // ! server version
   // --------------------------------------------------------------------------
   const valetVersion = document.querySelector('.server-version')
   // remove "Laravel Valet" from server version output
@@ -12,7 +12,7 @@ function ready () {
   // set new ouput
   valetVersion.innerHTML = version
 
-  // terminal output table
+  // ! terminal output / table
   // --------------------------------------------------------------------------
   // select terminal output table
   const selectValetLinks = document.querySelector('#links-table')
@@ -48,7 +48,7 @@ function ready () {
   // hide imported links table
   document.getElementById('links-table').style.display = 'none'
 
-  // show local path on hover
+  // ! show local path on hover
   // --------------------------------------------------------------------------
   const localPathSpan = document.querySelectorAll('.valetlinks-container .col span')
 
@@ -68,7 +68,7 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
-  // Grouping headers
+  // ! Grouping headers
   // --------------------------------------------------------------------------
   const groupField = document.querySelector('.create-group-input')
   const groupButton = document.querySelector('.create-group-button')
@@ -82,7 +82,7 @@ function ready () {
     groupDiv.setAttribute('data-group', 'GROUP_' + groupFieldValue)
     groupDiv.innerHTML = `
       <div class="grip"></div>
-      <div class="label">${groupFieldValue}</div>
+      <div class="label"><em>${groupFieldValue}</em></div>
       <div class="remove"><i class="fas fa-times"></i></div>`
     groupDiv.classList.add('row', 'group')
     localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
@@ -114,7 +114,7 @@ function ready () {
     }
   }
 
-  // Sortable
+  // ! sortable
   // --------------------------------------------------------------------------
   const valetSortEl = document.getElementById('valetSort')
   const clearSortBtnContainer = document.querySelector('.sortable-container')
@@ -164,7 +164,7 @@ function ready () {
   // Clear list localStorage button
   clearSortBtn.onclick = clearSortStorage
 
-  // light or dark mode
+  // ! light or dark mode
   // --------------------------------------------------------------------------
   const conatiners = document.querySelectorAll('.color-mode')
   const modeSwitch = document.getElementById('mode-switch')
@@ -196,7 +196,7 @@ function ready () {
     }
   })
 
-  // color picker
+  // ! color picker
   // --------------------------------------------------------------------------
   // "active-color" is set on color input 'name' attribute
   const colorInput = document.getElementById('color-picker')
