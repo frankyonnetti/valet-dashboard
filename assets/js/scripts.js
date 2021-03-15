@@ -75,31 +75,32 @@ function ready () {
 
   // create grouping headers
   groupButton.addEventListener('click', event => {
-    event.preventDefault()
     const groupFieldValue = groupField.value
     if (groupFieldValue.length < 1) return
     const groupDiv = document.createElement('div')
     groupDiv.setAttribute('data-group', 'GROUP_' + groupFieldValue)
     groupDiv.innerHTML = `
-      <div class="grip"></div>
-      <div class="label"><em>${groupFieldValue}</em></div>
-      <div class="remove"><i class="fas fa-times"></i></div>`
+    <div class="grip"></div>
+    <div class="label"><em>${groupFieldValue}</em></div>
+    <div class="remove"><i class="fas fa-times"></i></div>`
     groupDiv.classList.add('row', 'group')
     localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
     newValetLinks.prepend(groupDiv)
     groupField.value = ''
+
+    event.preventDefault()
   })
 
   // load grouping headers on load.
   const search = 'GROUP_'
-  const groupValues = Object.keys(localStorage)
-                            .filter((key) => key.startsWith(search))
-                            .map((key) => localStorage[key])
-
+  const groupValues = Object
+    .keys(localStorage)
+    .filter((key) => key.startsWith(search))
+    .map((key) => localStorage[key])
   // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
   newValetLinks.insertAdjacentHTML('afterbegin', groupValues.join(''))
 
-  // delete gruoping header
+  // delete grouping header button
   const hostRow = newValetLinks.children
   const groupClose = document.querySelectorAll('.group .remove')
 
@@ -108,7 +109,7 @@ function ready () {
       const partentData = groupClose[i].parentNode.getAttribute('data-group')
       groupClose[i].addEventListener('click', event => {
         localStorage.removeItem(partentData)
-        groupDiv = document.querySelector('[data-group="' + partentData + '"]')
+        const groupDiv = document.querySelector('[data-group="' + partentData + '"]')
         groupDiv.remove()
       })
     }
@@ -143,7 +144,7 @@ function ready () {
     ghostClass: 'ghost-class'
   })
 
-  // Set button disabled if no sort
+  // Set button to disabled if no sort is set in localStorage
   function disableSortButton () {
     if (localStorage.getItem('hostslist') === null) {
       clearSortBtnContainer.classList.add('disabled')
@@ -152,17 +153,57 @@ function ready () {
   }
   disableSortButton()
 
-  // Clear sortable localStorage
+  // Clear sortable and grouping localStorage
+  function clearGroupingStorage () {
+    const search = 'GROUP_'
+    Object
+      .keys(localStorage)
+      .filter((key) => key.startsWith(search))
+      .map((key) => delete localStorage[key])
+  }
+
   function clearSortStorage () {
     delete localStorage.hostslist
-    // location.reload()
+    clearGroupingStorage()
     newValetLinks.innerHTML = valetLinks // reload host list
     removeHeaderRow()
     disableSortButton()
+    closeModal()
   }
-
   // Clear list localStorage button
   clearSortBtn.onclick = clearSortStorage
+
+  // modal
+  const openModalBtn = document.querySelector('.clearmodal')
+  const closeModalBtn = document.querySelector('.cancel')
+  const modal = document.querySelector('.modal')
+  const modalBg = document.querySelector('.modal-bg')
+  // Open modal
+  function openModal () {
+    modal.classList.add('open')
+    modalBg.classList.add('open')
+  }
+  openModalBtn.onclick = openModal
+
+  // CLose modal
+  function closeModal () {
+    modal.classList.add('closing')
+    modalBg.classList.add('closing')
+    setTimeout(function () {
+      modal.classList.remove('open', 'closing')
+      modalBg.classList.remove('open', 'closing')
+    }, 1000)
+  }
+  closeModalBtn.onclick = closeModal
+  modalBg.onclick = closeModal
+
+  document.addEventListener('keyup', event => {
+    if (event.key === 'Escape') {
+      if (modal.classList.contains('open')) {
+        closeModal()
+      }
+    }
+  })
 
   // ! light or dark mode
   // --------------------------------------------------------------------------
