@@ -526,6 +526,7 @@ pre#links-table {
   border-radius: 3px;
   background-color: #eee;
   padding: 0.4rem 0.7rem;
+  min-width: 27px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -555,40 +556,106 @@ pre#links-table {
 
 .grouping-name-container {
   border-top: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
   margin-top: 1rem;
   padding-top: 1rem;
-}
-.grouping-name-container .grouping-label {
-  flex: 0 1 100%;
-  color: #656565;
-  font-size: 0.875rem;
-  padding-bottom: 0.5rem;
 }
 .grouping-name-container .grouping-wrap {
   display: flex;
   align-items: center;
+  opacity: 1;
+  transition: opacity 0.25s ease 0.15s;
 }
-.grouping-name-container .grouping-wrap input {
+.grouping-name-container .grouping-wrap.fadeout {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.grouping-name-container .grouping-wrap .grouping-label {
+  flex: 0 1 100%;
+  color: #656565;
+  font-size: 0.875rem;
+}
+.grouping-name-container .grouping-wrap .expand-group-field {
+  border-radius: 3px !important;
+}
+.grouping-name-container .grouping-form {
+  background-color: #252525;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1rem 0 4px;
+  width: 100%;
+  transition: all 0.35s ease;
+  clip-path: inset(0 0 0 100%);
+}
+.grouping-name-container .grouping-form.expand {
+  clip-path: inset(0 0 0 0);
+}
+.grouping-name-container .grouping-form.expand .close-group-button {
+  top: 16px;
+}
+.grouping-name-container .grouping-form input {
   flex: 1 1 auto;
   color: #333;
   font-size: 0.8125rem;
   border-style: none;
+  border-radius: 3px 0 0 3px;
   background-color: var(--bg-color);
-  margin-right: 0.5rem;
-  padding: 0.43rem 0.7rem;
+  padding: 6px 0 6px 6px;
+  height: 28px;
 }
-.grouping-name-container .grouping-wrap button {
-  flex: 0 1 auto;
+.grouping-name-container .grouping-form input:focus {
+  outline: none;
+}
+.grouping-name-container .grouping-form .close-group-button {
+  font-size: 14px;
+  background-color: var(--bg-color);
+  position: absolute;
+  top: -9999px;
+  right: 47px;
+  z-index: 1;
+  width: 24px;
+  height: 28px;
+  cursor: pointer;
+}
+.grouping-name-container .grouping-form .close-group-button::before {
+  content: "";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  opacity: 0.3;
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  transition: opacity 0.25s ease;
+}
+.grouping-name-container .grouping-form .close-group-button:hover::before {
+  opacity: 0.7;
+}
+.grouping-name-container .grouping-wrap .expand-group-field,
+.grouping-name-container .grouping-wrap .create-group-button,
+.grouping-name-container .grouping-form .expand-group-field,
+.grouping-name-container .grouping-form .create-group-button {
+  flex: 0 1 28px;
   color: #333;
   font-size: 0.8125rem;
   border-style: none;
-  border-radius: 3px;
+  border-radius: 0 3px 3px 0;
   background-color: #eee;
   padding: 0.4rem 1.1rem;
+  height: 28px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.grouping-name-container .grouping-wrap button:hover {
+.grouping-name-container .grouping-wrap .expand-group-field:hover,
+.grouping-name-container .grouping-wrap .create-group-button:hover,
+.grouping-name-container .grouping-form .expand-group-field:hover,
+.grouping-name-container .grouping-form .create-group-button:hover {
   color: #fff;
   background-color: var(--active-color) !important;
   transition: all 0.15s ease;
@@ -600,13 +667,21 @@ pre#links-table {
 .dark-mode .grouping-name-container .grouping-label {
   color: #ccc;
 }
-.dark-mode .grouping-name-container .grouping-wrap input {
+.dark-mode .grouping-name-container .grouping-wrap input,
+.dark-mode .grouping-name-container .grouping-form input {
   color: #fff;
   background-color: #1a1a1a;
 }
-.dark-mode .grouping-name-container .grouping-wrap button {
+.dark-mode .grouping-name-container .grouping-wrap .expand-group-field,
+.dark-mode .grouping-name-container .grouping-wrap .create-group-button,
+.dark-mode .grouping-name-container .grouping-form .expand-group-field,
+.dark-mode .grouping-name-container .grouping-form .create-group-button {
   color: #fff;
   background-color: var(--border-color-dark);
+}
+.dark-mode .grouping-name-container .grouping-wrap .close-group-button,
+.dark-mode .grouping-name-container .grouping-form .close-group-button {
+  background-color: #1a1a1a;
 }
 
 .valetlinks-wrap {
@@ -646,8 +721,9 @@ pre#links-table {
   padding: 0;
 }
 .valetlinks-wrap .valetlinks-container .row.group {
-  background-color: #202020;
-  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  background-color: #f7f7f7;
+  box-shadow: inset 0 1px 0 0 rgba(17, 17, 17, 0.035), inset 0 -1px 0 0 rgba(17, 17, 17, 0.035);
   position: relative;
 }
 .valetlinks-wrap .valetlinks-container .row.group div {
@@ -680,7 +756,7 @@ pre#links-table {
   cursor: pointer;
 }
 .valetlinks-wrap .valetlinks-container .row:hover {
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
 }
 .valetlinks-wrap .valetlinks-container .row:hover.group .grip, .valetlinks-wrap .valetlinks-container .row:hover.group .remove,
 .valetlinks-wrap .valetlinks-container .row:hover .col.grip,
@@ -772,6 +848,10 @@ pre#links-table {
 }
 .dark-mode .valetlinks-wrap .valetlinks-container {
   color: #ccc;
+}
+.dark-mode .valetlinks-wrap .valetlinks-container .row.group {
+  background-color: #202020;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
 }
 .dark-mode .valetlinks-wrap .valetlinks-container .row:hover,
 .dark-mode .valetlinks-wrap .valetlinks-container .row.ghost-class {

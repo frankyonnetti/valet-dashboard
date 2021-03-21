@@ -70,25 +70,55 @@ function ready () {
 
   // ! Grouping headers
   // --------------------------------------------------------------------------
+  const groupLabelContainer = document.querySelector('.grouping-wrap')
+  const expandGroupFieldButton = document.querySelector('.expand-group-field')
+  const groupFormContainer = document.querySelector('.grouping-form')
   const groupField = document.querySelector('.create-group-input')
   const groupButton = document.querySelector('.create-group-button')
+  const closeGroupButton = document.querySelector('.close-group-button')
+
+  // expand / collapse create grouping header field
+  function expandGroupField () {
+    groupFormContainer.classList.add('expand')
+    groupLabelContainer.classList.add('fadeout')
+  }
+  expandGroupFieldButton.onclick = expandGroupField
+
+  function collapseGroupField () {
+    groupFormContainer.classList.remove('expand')
+    groupLabelContainer.classList.remove('fadeout')
+  }
+  closeGroupButton.onclick = collapseGroupField
 
   // create grouping headers
-  groupButton.addEventListener('click', event => {
-    const groupFieldValue = groupField.value
-    if (groupFieldValue.length < 1) return
+  function creatGroupHeader () {
+    const timeStamp = Date.now()
+    const groupFieldValue = groupField.value.replace(/\s+/g, '_') + '_' + timeStamp
+    const groupFieldValueLabel = groupField.value
+    if (groupFieldValueLabel.length < 1) { return }
     const groupDiv = document.createElement('div')
     groupDiv.setAttribute('data-group', 'GROUP_' + groupFieldValue)
     groupDiv.innerHTML = `
     <div class="grip"></div>
-    <div class="label"><em>${groupFieldValue}</em></div>
+    <div class="label"><em>${groupFieldValueLabel}</em></div>
     <div class="remove"><i class="fas fa-times"></i></div>`
     groupDiv.classList.add('row', 'group')
     localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
     newValetLinks.prepend(groupDiv)
     groupField.value = ''
+  }
 
+  groupButton.addEventListener('click', event => {
+    creatGroupHeader()
     event.preventDefault()
+  })
+
+  document.addEventListener('keyup', event => {
+    if (event.key === 'Enter') {
+      if (groupFormContainer.classList.contains('expand')) {
+        creatGroupHeader()
+      }
+    }
   })
 
   // load grouping headers on load.
@@ -114,6 +144,12 @@ function ready () {
       })
     }
   }
+
+  // const groupClose = document.querySelector('.remove')
+  // groupClose.addEventListener('click', event => {
+  //   const partentData = groupClose.parentNode.getAttribute('data-group')
+  //   console.log(partentData)
+  // })
 
   // ! sortable
   // --------------------------------------------------------------------------
@@ -201,6 +237,10 @@ function ready () {
     if (event.key === 'Escape') {
       if (modal.classList.contains('open')) {
         closeModal()
+      }
+      if (groupFormContainer.classList.contains('expand')) {
+        groupFormContainer.classList.remove('expand')
+        groupLabelContainer.classList.remove('fadeout')
       }
     }
   })

@@ -86,16 +86,20 @@
           </div>
         </div>
         <div class="sortable-container">
-          <div class="sortable-label">Reset Host List</div>
+          <div class="sortable-label">Host List</div>
           <div class="sortable-wrap">
-            <button class="clearmodal" onclick="clearSortStorage()">Reset</button>
+            <button class="clearmodal">Reset</button>
           </div>
         </div>
         <div class="grouping-name-container">
-          <div class="grouping-label">New Host Header</div>
           <div class="grouping-wrap">
+            <div class="grouping-label">New Host Header</div>
+            <div class="expand-group-field">Add</div>
+          </div>
+          <div class="grouping-form">
             <input type="text" class="create-group-input" aria-label="Enter a new header" placeholder="Enter Header">
-            <button class="create-group-button">Set</button>
+            <button class="create-group-button"><i class="fas fa-plus"></i></button>
+            <div class="close-group-button"></div>
           </div>
         </div>
       </div>
@@ -114,10 +118,10 @@
 
   <div class="modal">
     <h3>Reset Host List Sort</h3>
-    <p>Resetting the host list sort removes all headers and reverts the list back to the default sort. This cannot be undone.</p>
+    <p>Resetting the host list removes all headers and reverts the list back to the default sort. This cannot be undone.</p>
     <div class="modal-action">
-      <button class="cancel" onclick="">Cancel</button>
-      <button class="clearsort" onclick="clearSortStorage()">Reset</button>
+      <button class="cancel">Cancel</button>
+      <button class="clearsort">Reset</button>
     </div>
   </div>
   <div class="modal-bg"></div>
