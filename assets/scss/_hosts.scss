@@ -1,0 +1,293 @@
+.valetlinks-wrap {
+  @include container-box();
+  color: #333;
+  font-size: rem(14);
+  text-align: center;
+  padding: 1.5rem 1px;
+  width: 100%;
+
+  .header {
+    display: flex;
+
+    .col {
+      color: #656565;
+      font-weight: 600;
+      text-transform: uppercase;
+      // border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+      padding: 0.6rem 10px 0 0;
+
+      &.gripcol {
+        flex: 0 1 48px;
+        background-image: none !important;
+        opacity: 1 !important;
+        max-width: 48px;
+      }
+
+      &.path {
+        padding: 0.65rem 32px 0.65rem 0.5rem !important;
+      }
+    }
+  }
+
+  .valetlinks-container {
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+
+      &.group {
+        font-weight: 600;
+        background-color: #f7f7f7;
+        box-shadow: inset 0 1px 0 0 rgba(#111, 0.035), inset 0 -1px 0 0 rgba(#111, 0.035); // top bottom border
+        position: relative;
+
+        div {
+          padding: 0.65rem 0.5rem;
+        }
+
+        .grip {
+          flex: 0 1 48px;
+          background: transparent url("../img/grip-light.svg") no-repeat center center;
+          opacity: 0;
+          min-width: 48px;
+          cursor: move;
+        }
+
+        .label {
+          flex: 1 1 auto;
+          font-size: rem(14);
+          text-align: left;
+          text-transform: uppercase;
+
+          em {
+            font-style: normal;
+          }
+        }
+
+        .remove {
+          flex: 0 1 36px;
+          text-align: right;
+          opacity: 0;
+          padding-right: rem(46);
+          min-width: 36px;
+
+          .fas {
+            cursor: pointer;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: #f0f0f0;
+
+        &.group .grip,
+        &.group .remove,
+        .col.grip,
+        .col.remove {
+          opacity: 0.5;
+        }
+      }
+
+      &.ghost-class {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+
+  .header,
+  .valetlinks-container {
+
+    .col {
+      text-align: left;
+      padding: 0.65rem 0.5rem;
+
+      &.grip {
+        flex: 0 1 48px;
+        background: transparent url("../img/grip-light.svg") no-repeat center center;
+        order: 1;
+        opacity: 0;
+        position: relative;
+        min-width: 48px;
+        cursor: move;
+      }
+
+      // Site column
+      &.site {
+        flex: 0 1 40%;
+        order: 4;
+        min-width: 40%;
+      }
+
+      // SSL column
+      &.ssl {
+        flex: 0 1 10%;
+        text-align: right;
+        order: 3;
+        padding-right: 10px;
+        min-width: 10%;
+
+        .fas {
+          color: #999;
+          font-size: 14px;
+          margin-top: 2px;
+          margin-right: 6px;
+        }
+      }
+
+      // URL column
+      &.url {
+        flex: 0 1 calc(40% - 48px);
+        order: 2;
+        min-width: calc(40% - 48px);
+
+        a {
+          font-weight: 500;
+          display: block;
+        }
+
+        span {
+          color: #444;
+          padding-right: 0.15rem;
+        }
+      }
+
+      // PATH column
+      &.path {
+        flex: 0 1 10%;
+        text-align: right;
+        order: 6;
+        position: relative;
+        padding: 0 24px 0 0;
+        min-width: 10%;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.dark-mode .valetlinks-wrap {
+  @include container-box(dark);
+  padding: 1.5rem 1px;
+
+  .header .col {
+    color: #999;
+    border-color: var(--border-color-dark);
+
+    &.url span {
+      color: #656565;
+    }
+  }
+
+  .valetlinks-container {
+    color: #ccc;
+
+    .row.group {
+      background-color: darken(#252525, 2%);
+      box-shadow: inset 0 -1px 0 0 rgba(#fff, 0.05); // bottom border
+    }
+
+    .row:hover,
+    .row.ghost-class {
+      background-color: #333;
+    }
+
+    .row.group .grip,
+    .col.grip {
+      background-image: url("../img/grip-dark.svg");
+    }
+  }
+}
+
+// ! path tooltip
+.valetlinks-container {
+
+  span {
+    display: block;
+    position: relative;
+    margin: 0 0 0 auto;
+    width: 32px;
+    height: 100%;
+
+    &::before {
+      color: #999;
+      content: "\f07b";
+      font-weight: 900;
+      font-family: "Font Awesome 5 Free";
+      position: absolute;
+      top: 0.7rem;
+      right: 10px;
+      cursor: default;
+    }
+
+    &:hover::before {
+      color: #222;
+    }
+
+    em {
+      color: #fff;
+      font-style: normal;
+      white-space: nowrap;
+      border-radius: 3px;
+      background-color: var(--active-color);
+      display: block;
+      opacity: 0;
+      position: absolute;
+      top: -9999px;
+      right: -5px;
+      z-index: 1;
+      padding: 5px 12px;
+      cursor: default;
+      pointer-events: none;
+
+      &::after {
+        content: "";
+        border-top: 8px solid var(--active-color);
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+        position: absolute;
+        right: 12px;
+        bottom: -6px;
+        z-index: 2;
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+}
+
+.dark-mode {
+
+  .valetlinks-container {
+
+    span:hover::before {
+      color: #fff;
+    }
+  }
+}
+
+// dev
+// .valetlinks-container .row:nth-child(2) .col em {
+//   opacity: 1;
+//   top: -28px;
+// }
+
+// ! path tooltip - show/fade
+.valetlinks-container {
+
+  // show tooltip
+  span.show-path em {
+    box-shadow: 0 1px 7px 3px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    top: -28px;
+    transition: opacity 0.3s ease-out 0.15s;
+  }
+
+  // fade tooltip
+  span.fade em {
+    opacity: 0;
+    top: -28px;
+    transition: opacity 0.2s ease-out;
+  }
+}

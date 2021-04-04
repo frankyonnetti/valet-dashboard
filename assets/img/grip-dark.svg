@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="17px" viewBox="0 0 9 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>grip-dark</title>
+    <g id="grip-dark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#FFFFFF" cx="6.5" cy="2.5" r="1.5"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="6.5" cy="7.5" r="1.5"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="6.5" cy="12.5" r="1.5"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="2.5" cy="4.5" r="1.5"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="2.5" cy="9.5" r="1.5"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="2.5" cy="14.5" r="1.5"></circle>
+    </g>
+</svg>

@@ -1,6 +1,6 @@
 # Valet Dashboard
 
-![screenshot](assets/img/screenshot.png)
+![screenshot](assets/img/screenshot_02.png)
 
 **Installing the dashboard**
 
@@ -23,4 +23,4 @@ See readme in fonts directory `assets/fonts/README.md` or see step 2 above.
 
 ---
 
-Thanks to the folks over at [Laravel](https://laravel.com/) for creating [Valet](https://laravel.com/docs/valet)!
+🎉 Special thanks to the folks over at **[Laravel](https://laravel.com/)** for creating **[Valet](https://laravel.com/docs/valet)!**

@@ -9,7 +9,7 @@ Install the following node mdules (npm) for compiling the SCSS.
 
 **Install node modules in the same directory this readme file resides in:**
 
-`yarn add browser-sync fibers gulp gulp-notify gulp-dart-sass gulp-sourcemaps --dev`
+`yarn add browser-sync fibers gulp gulp-notify gulp-dart-sass gulp-sourcemaps  gulp-uglify --dev`
 
 
 ## Linting
@@ -41,3 +41,10 @@ Workspace setting should be located in the root of this project's repo: `/.vscod
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+
+---
+
+Additional libraries used in this project:
+
+- [Font Awesome](https://fontawesome.com)
+- [SortableJS](https://github.com/SortableJS/Sortable)

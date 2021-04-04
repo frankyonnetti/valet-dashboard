@@ -20,7 +20,16 @@
   <div class="container color-mode">
 
     <div class="content color-mode">
-      <table class="valetlinks-container"></table>
+      <div class="valetlinks-wrap">
+        <div class="header">
+          <div class="col gripcol"></div>
+          <div class="col site">Site</div>
+          <div class="col ssl">SSL</div>
+          <div class="col url"><span><i class="fas fa-home"></i> Hosts /</span> URL</div>
+          <div class="col path">Path</div>
+        </div>
+        <div id="valetSort" class="valetlinks-container"></div>
+      </div>
     </div>
 
     <aside class="sidebar color-mode">
@@ -43,18 +52,24 @@
       </div>
 
       <ul class="menu color-mode">
-        <li class="sidebar-label"><i class="fas fa-book"></i> Docs</li>
-        <li>
+        <li class="sidebar-label">
+          <i class="fas fa-book"></i> Docs
+        </li>
+        <li class="valet-docs">
           <a href="https://laravel.com/docs/valet">Valet Docs <i class="fas fa-external-link-square-alt"></i></a>
         </li>
-        <li>
+        <li class="valet-github">
           <a href="https://github.com/laravel/valet">Valet GitHub <i class="fas fa-external-link-square-alt"></i></a>
         </li>
-        <li>
+        <li class="php-info">
           <a href="info.php">PHP info <span>v<?php echo phpversion(); ?></span></a>
         </li>
-        <li>
+        <li class="phpmyadmin">
           <a href="https://phpmyadmin.test">phpMyAdmin</a>
+          <span>
+            <i class="fas fa-info-circle"></i>
+            <em>Brew install path: <code>/usr/local/Cellar/phpmyadmin/5.x/share/phpmyadmin</code></em>
+          </span>
         </li>
       </ul>
 
@@ -70,6 +85,18 @@
             <input type="color" name="active-color" id="color-picker" value="">
           </div>
         </div>
+        <div class="sortable-container">
+          <div class="sortable-label">Host List</div>
+          <div class="sortable-wrap">
+            <button class="openmodal-reset">Reset</button>
+          </div>
+        </div>
+        <div class="grouping-name-container">
+          <div class="grouping-label">New Host Header</div>
+          <div class="grouping-wrap">
+            <button class="openmodal-add">Add</button>
+          </div>
+        </div>
       </div>
 
     </aside>
@@ -77,14 +104,35 @@
   </div>
 
   <footer class="footer color-mode">
-    <p>Valet Dashoard v0.1.1 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
+    <p>Valet Dashoard v0.2.0 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
   </footer>
 
   <pre id="links-table">
     <?php include('valet_links.html'); ?>
   </pre>
 
-  <script src="assets/js/scripts.js"></script>
+  <div class="modal">
+    <div class="reset-sort-list">
+      <h3>Reset Host List Sort</h3>
+      <p>Resetting the host list removes all headers and reverts the list back to the default sort. This cannot be undone.</p>
+      <div class="modal-action">
+        <button class="cancelsort">Cancel</button>
+        <button class="clearsort">Reset</button>
+      </div>
+    </div>
+    <div class="add-group-header">
+      <h3>Add New Host Header</h3>
+      <input type="text" class="create-group-input" aria-label="Enter a new header" placeholder="Enter Header">
+      <div class="modal-action">
+        <button class="cancel-group">Cancel</button>
+        <button class="create-group">Add</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-bg"></div>
+
+  <script src="assets/contib/SortableJS/Sortable.min.js"></script>
+  <script src="assets/js/min/scripts.js"></script>
 
 </body>
 </html>
