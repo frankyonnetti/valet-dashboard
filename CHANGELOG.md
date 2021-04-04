@@ -1,13 +1,14 @@
 ## Version 0.2.0
 
+You can now sort the host list and add header labels.
+
 - NEW: header labels.
 - ADDED: [SortableJS](https://github.com/SortableJS/Sortable)
 
-You can now sort the host list and add header labels.
-
 ## Version 0.1.1
 
-Fixed a few typos
+- FIX: color picker in Safari to use active color on load.
+- FIX: top spacing above footer in light mode.
 
 ## Version 0.1.0
 
