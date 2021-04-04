@@ -70,25 +70,8 @@ function ready () {
 
   // ! Grouping headers
   // --------------------------------------------------------------------------
-  const groupLabelContainer = document.querySelector('.grouping-wrap')
-  const expandGroupFieldButton = document.querySelector('.expand-group-field')
-  const groupFormContainer = document.querySelector('.grouping-form')
   const groupField = document.querySelector('.create-group-input')
-  const groupButton = document.querySelector('.create-group-button')
-  const closeGroupButton = document.querySelector('.close-group-button')
-
-  // expand / collapse create grouping header field
-  function expandGroupField () {
-    groupFormContainer.classList.add('expand')
-    groupLabelContainer.classList.add('fadeout')
-  }
-  expandGroupFieldButton.onclick = expandGroupField
-
-  function collapseGroupField () {
-    groupFormContainer.classList.remove('expand')
-    groupLabelContainer.classList.remove('fadeout')
-  }
-  closeGroupButton.onclick = collapseGroupField
+  const groupButton = document.querySelector('.create-group')
 
   // create grouping headers
   function creatGroupHeader () {
@@ -106,19 +89,13 @@ function ready () {
     localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
     newValetLinks.prepend(groupDiv)
     groupField.value = ''
+    // reload "delete group header" function
+    deleteGroupHeader()
   }
 
   groupButton.addEventListener('click', event => {
     creatGroupHeader()
     event.preventDefault()
-  })
-
-  document.addEventListener('keyup', event => {
-    if (event.key === 'Enter') {
-      if (groupFormContainer.classList.contains('expand')) {
-        creatGroupHeader()
-      }
-    }
   })
 
   // load grouping headers on load.
@@ -131,25 +108,22 @@ function ready () {
   newValetLinks.insertAdjacentHTML('afterbegin', groupValues.join(''))
 
   // delete grouping header button
-  const hostRow = newValetLinks.children
-  const groupClose = document.querySelectorAll('.group .remove')
+  function deleteGroupHeader () {
+    const hostRow = newValetLinks.children
+    const groupClose = document.querySelectorAll('.group .remove')
 
-  for (let i = 0; i < hostRow.length; i++) {
-    if (groupClose[i] != null) {
-      const partentData = groupClose[i].parentNode.getAttribute('data-group')
-      groupClose[i].addEventListener('click', event => {
-        localStorage.removeItem(partentData)
-        const groupDiv = document.querySelector('[data-group="' + partentData + '"]')
-        groupDiv.remove()
-      })
+    for (let i = 0; i < hostRow.length; i++) {
+      if (groupClose[i] != null) {
+        const partentData = groupClose[i].parentNode.getAttribute('data-group')
+        groupClose[i].addEventListener('click', event => {
+          localStorage.removeItem(partentData)
+          const groupDiv = document.querySelector('[data-group="' + partentData + '"]')
+          groupDiv.remove()
+        })
+      }
     }
   }
-
-  // const groupClose = document.querySelector('.remove')
-  // groupClose.addEventListener('click', event => {
-  //   const partentData = groupClose.parentNode.getAttribute('data-group')
-  //   console.log(partentData)
-  // })
+  deleteGroupHeader()
 
   // ! sortable
   // --------------------------------------------------------------------------
@@ -209,28 +183,45 @@ function ready () {
   // Clear list localStorage button
   clearSortBtn.onclick = clearSortStorage
 
-  // modal
-  const openModalBtn = document.querySelector('.clearmodal')
-  const closeModalBtn = document.querySelector('.cancel')
+  // ! modal
+  // --------------------------------------------------------------------------
+  // buttons to open "modal" from sidebar
+  const openModalResetBtn = document.querySelector('.openmodal-reset')
+  const openModalAddBtn = document.querySelector('.openmodal-add')
+  // modal container
   const modal = document.querySelector('.modal')
   const modalBg = document.querySelector('.modal-bg')
-  // Open modal
-  function openModal () {
-    modal.classList.add('open')
+  const modalInput = document.querySelector('.create-group-input')
+  const closeSortModalBtn = document.querySelector('.cancelsort')
+  const closeCreateModalBtn = document.querySelector('.cancel-group')
+
+  // Open modal(s)
+  function openModalReset () {
+    modal.classList.add('open', 'reset-list')
     modalBg.classList.add('open')
   }
-  openModalBtn.onclick = openModal
+  openModalResetBtn.onclick = openModalReset
 
-  // CLose modal
+  function openModalAdd () {
+    modal.classList.add('open', 'add-group')
+    modalBg.classList.add('open')
+    setTimeout(function () {
+      modalInput.focus()
+    }, 750)
+  }
+  openModalAddBtn.onclick = openModalAdd
+
+  // CLose modal(s)
   function closeModal () {
     modal.classList.add('closing')
     modalBg.classList.add('closing')
     setTimeout(function () {
-      modal.classList.remove('open', 'closing')
+      modal.classList.remove('open', 'closing', 'reset-list', 'add-group')
       modalBg.classList.remove('open', 'closing')
     }, 1000)
   }
-  closeModalBtn.onclick = closeModal
+  closeSortModalBtn.onclick = closeModal
+  closeCreateModalBtn.onclick = closeModal
   modalBg.onclick = closeModal
 
   document.addEventListener('keyup', event => {
@@ -238,9 +229,15 @@ function ready () {
       if (modal.classList.contains('open')) {
         closeModal()
       }
-      if (groupFormContainer.classList.contains('expand')) {
-        groupFormContainer.classList.remove('expand')
-        groupLabelContainer.classList.remove('fadeout')
+    }
+  })
+
+  // add new group header with key
+  document.addEventListener('keyup', event => {
+    if (event.key === 'Enter') {
+      if (modal.classList.contains('open', 'add-group')) {
+        creatGroupHeader()
+        closeModal()
       }
     }
   })
@@ -297,7 +294,6 @@ function ready () {
 
   // change active-color
   function handleColorUpdate () {
-    // console.log(this.value)
     document.documentElement.style.setProperty(`--${this.name}`, this.value)
     localStorage.setItem('activeColor', colorInput.value)
   }

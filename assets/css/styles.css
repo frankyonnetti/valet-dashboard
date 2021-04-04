@@ -137,11 +137,11 @@ pre#links-table {
   opacity: 0.75;
   right: 0;
   bottom: 0;
-  transition: opacity 0.4s ease 0.2s;
+  transition: opacity 0.25s ease 0.1s;
 }
 .modal-bg.closing {
   opacity: 0;
-  transition: opacity 0.5s ease 0.2s;
+  transition: opacity 0.5s ease 0.1s;
 }
 
 .modal {
@@ -150,7 +150,7 @@ pre#links-table {
   box-shadow: 0 2px 28px 7px rgba(0, 0, 0, 0.25), inset 0 0 0 1px #000;
   opacity: 0;
   position: fixed;
-  top: -199px;
+  top: 48%;
   left: 50%;
   z-index: 2;
   margin: 0 auto;
@@ -158,21 +158,17 @@ pre#links-table {
   width: 100%;
   max-width: 480px;
   cursor: pointer;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%) scale(0);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .modal.open {
   opacity: 1;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
 }
 .modal.closing {
   opacity: 0;
-  top: -199px;
-  transform: translate(-50%, 0);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .modal::after {
   content: "";
@@ -185,12 +181,22 @@ pre#links-table {
   left: 1px;
   pointer-events: none;
 }
+.modal.reset-list .add-group-header, .modal.add-group .reset-sort-list {
+  display: none;
+}
 .modal h3 {
   font-size: 0.9375rem;
   margin: 0;
 }
 .modal p {
   font-size: 0.875rem;
+}
+.modal .create-group-input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  width: 100%;
 }
 .modal .modal-action {
   display: flex;
@@ -503,185 +509,77 @@ pre#links-table {
   color: #ccc;
 }
 
-.sortable-container {
+.sortable-container,
+.grouping-name-container {
   border-top: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   margin-top: 1rem;
   padding-top: 1rem;
 }
-.sortable-container .sortable-label {
+.sortable-container .sortable-label,
+.sortable-container .grouping-label,
+.grouping-name-container .sortable-label,
+.grouping-name-container .grouping-label {
   color: #656565;
   font-size: 0.875rem;
   padding-right: 0.5rem;
 }
-.sortable-container .sortable-wrap {
+.sortable-container .sortable-wrap,
+.sortable-container .grouping-wrap,
+.grouping-name-container .sortable-wrap,
+.grouping-name-container .grouping-wrap {
   flex-grow: 2;
   text-align: right;
 }
-.sortable-container .sortable-wrap button {
+.sortable-container .sortable-wrap button,
+.sortable-container .grouping-wrap button,
+.grouping-name-container .sortable-wrap button,
+.grouping-name-container .grouping-wrap button {
   color: #333;
   font-size: 0.8125rem;
   border-style: none;
   border-radius: 3px;
   background-color: #eee;
   padding: 0.4rem 0.7rem;
-  min-width: 27px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.sortable-container .sortable-wrap button:hover:enabled {
+.sortable-container .sortable-wrap button:hover:enabled,
+.sortable-container .grouping-wrap button:hover:enabled,
+.grouping-name-container .sortable-wrap button:hover:enabled,
+.grouping-name-container .grouping-wrap button:hover:enabled {
   color: #fff;
   background-color: var(--active-color) !important;
   transition: all 0.15s ease;
 }
 .sortable-container.disabled .sortable-label,
-.sortable-container.disabled button {
+.sortable-container.disabled button,
+.grouping-name-container.disabled .sortable-label,
+.grouping-name-container.disabled button {
   opacity: 0.4;
 }
-.sortable-container.disabled button {
+.sortable-container.disabled button,
+.grouping-name-container.disabled button {
   cursor: default;
 }
 
-.dark-mode .sortable-container {
-  border-top-color: var(--border-color-darker);
-}
-.dark-mode .sortable-container .sortable-label {
-  color: #ccc;
-}
-.dark-mode .sortable-container .sortable-wrap button {
-  color: #fff;
-  background-color: var(--border-color-dark);
-}
-
-.grouping-name-container {
-  border-top: 1px solid var(--border-color);
-  position: relative;
-  z-index: 1;
-  margin-top: 1rem;
-  padding-top: 1rem;
-}
-.grouping-name-container .grouping-wrap {
-  display: flex;
-  align-items: center;
-  opacity: 1;
-  transition: opacity 0.25s ease 0.15s;
-}
-.grouping-name-container .grouping-wrap.fadeout {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.grouping-name-container .grouping-wrap .grouping-label {
-  flex: 0 1 100%;
-  color: #656565;
-  font-size: 0.875rem;
-}
-.grouping-name-container .grouping-wrap .expand-group-field {
-  border-radius: 3px !important;
-}
-.grouping-name-container .grouping-form {
-  background-color: #252525;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  padding: 1rem 0 4px;
-  width: 100%;
-  transition: all 0.35s ease;
-  clip-path: inset(0 0 0 100%);
-}
-.grouping-name-container .grouping-form.expand {
-  clip-path: inset(0 0 0 0);
-}
-.grouping-name-container .grouping-form.expand .close-group-button {
-  top: 16px;
-}
-.grouping-name-container .grouping-form input {
-  flex: 1 1 auto;
-  color: #333;
-  font-size: 0.8125rem;
-  border-style: none;
-  border-radius: 3px 0 0 3px;
-  background-color: var(--bg-color);
-  padding: 6px 0 6px 6px;
-  height: 28px;
-}
-.grouping-name-container .grouping-form input:focus {
-  outline: none;
-}
-.grouping-name-container .grouping-form .close-group-button {
-  font-size: 14px;
-  background-color: var(--bg-color);
-  position: absolute;
-  top: -9999px;
-  right: 47px;
-  z-index: 1;
-  width: 24px;
-  height: 28px;
-  cursor: pointer;
-}
-.grouping-name-container .grouping-form .close-group-button::before {
-  content: "";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  opacity: 0.3;
-  position: absolute;
-  top: 6px;
-  left: 5px;
-  transition: opacity 0.25s ease;
-}
-.grouping-name-container .grouping-form .close-group-button:hover::before {
-  opacity: 0.7;
-}
-.grouping-name-container .grouping-wrap .expand-group-field,
-.grouping-name-container .grouping-wrap .create-group-button,
-.grouping-name-container .grouping-form .expand-group-field,
-.grouping-name-container .grouping-form .create-group-button {
-  flex: 0 1 28px;
-  color: #333;
-  font-size: 0.8125rem;
-  border-style: none;
-  border-radius: 0 3px 3px 0;
-  background-color: #eee;
-  padding: 0.4rem 1.1rem;
-  height: 28px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.grouping-name-container .grouping-wrap .expand-group-field:hover,
-.grouping-name-container .grouping-wrap .create-group-button:hover,
-.grouping-name-container .grouping-form .expand-group-field:hover,
-.grouping-name-container .grouping-form .create-group-button:hover {
-  color: #fff;
-  background-color: var(--active-color) !important;
-  transition: all 0.15s ease;
-}
-
+.dark-mode .sortable-container,
 .dark-mode .grouping-name-container {
   border-top-color: var(--border-color-darker);
 }
+.dark-mode .sortable-container .sortable-label,
+.dark-mode .sortable-container .grouping-label,
+.dark-mode .grouping-name-container .sortable-label,
 .dark-mode .grouping-name-container .grouping-label {
   color: #ccc;
 }
-.dark-mode .grouping-name-container .grouping-wrap input,
-.dark-mode .grouping-name-container .grouping-form input {
-  color: #fff;
-  background-color: #1a1a1a;
-}
-.dark-mode .grouping-name-container .grouping-wrap .expand-group-field,
-.dark-mode .grouping-name-container .grouping-wrap .create-group-button,
-.dark-mode .grouping-name-container .grouping-form .expand-group-field,
-.dark-mode .grouping-name-container .grouping-form .create-group-button {
+.dark-mode .sortable-container .grouping-wrap button,
+.dark-mode .sortable-container .sortable-wrap button,
+.dark-mode .grouping-name-container .grouping-wrap button,
+.dark-mode .grouping-name-container .sortable-wrap button {
   color: #fff;
   background-color: var(--border-color-dark);
-}
-.dark-mode .grouping-name-container .grouping-wrap .close-group-button,
-.dark-mode .grouping-name-container .grouping-form .close-group-button {
-  background-color: #1a1a1a;
 }
 
 .valetlinks-wrap {
