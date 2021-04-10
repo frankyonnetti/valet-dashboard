@@ -2,7 +2,6 @@
 const gulp = require('gulp')
 const browserSync = require('browser-sync').create()
 const Fiber = require('fibers')
-const notify = require('gulp-notify')
 const sass = require('gulp-dart-sass')
 const sourceMaps = require('gulp-sourcemaps')
 const uglify = require('gulp-uglify')
@@ -54,7 +53,6 @@ function styles (done) {
     .pipe(sourceMaps.write('./'))
     .pipe(gulp.dest(path.styles.dest))
     .pipe(browserSync.stream())
-    .pipe(notify({ message: 'Dart sass compiled', onLast: true }))
 
   done()
 }
@@ -70,7 +68,6 @@ function scripts (done) {
     .pipe(sourceMaps.write('./'))
     .pipe(gulp.dest(path.scripts.dest))
     .pipe(browserSync.stream())
-    .pipe(notify({ message: 'JS uglified', onLast: true }))
 
   done()
 }

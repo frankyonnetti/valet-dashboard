@@ -9,7 +9,7 @@ Install the following node mdules (npm) for compiling the SCSS.
 
 **Install node modules in the same directory this readme file resides in:**
 
-`yarn add browser-sync fibers gulp gulp-notify gulp-dart-sass gulp-sourcemaps  gulp-uglify --dev`
+`yarn add browser-sync fibers gulp gulp-notify gulp-dart-sass gulp-sourcemaps --dev`
 
 
 ## Linting

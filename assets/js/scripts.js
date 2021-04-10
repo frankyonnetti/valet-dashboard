@@ -74,7 +74,7 @@ function ready () {
   const groupButton = document.querySelector('.create-group')
 
   // create grouping headers
-  function creatGroupHeader () {
+  function createGroupHeader () {
     const timeStamp = Date.now()
     const groupFieldValue = groupField.value.replace(/\s+/g, '_') + '_' + timeStamp
     const groupFieldValueLabel = groupField.value
@@ -94,7 +94,8 @@ function ready () {
   }
 
   groupButton.addEventListener('click', event => {
-    creatGroupHeader()
+    createGroupHeader()
+    closeModal()
     event.preventDefault()
   })
 
@@ -236,7 +237,7 @@ function ready () {
   document.addEventListener('keyup', event => {
     if (event.key === 'Enter') {
       if (modal.classList.contains('open', 'add-group')) {
-        creatGroupHeader()
+        createGroupHeader()
         closeModal()
       }
     }
