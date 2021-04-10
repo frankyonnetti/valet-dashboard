@@ -1,3 +1,8 @@
+## Version 0.2.2
+
+- Fix: variable typo in JS.
+- Fix: clicking "Add" in the header modal closes the modal now.
+
 ## Version 0.2.1
 
 Release tag fix.
