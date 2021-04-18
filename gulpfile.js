@@ -20,11 +20,6 @@ const path = {
   }
 }
 
-// function reload (done) {
-//   browserSync.reload()
-//   done()
-// }
-
 // browserSync watch
 function browsersync () {
   browserSync.init({
@@ -39,13 +34,18 @@ function browsersync () {
   })
 }
 
+function reload (done) {
+  browserSync.reload()
+  done()
+}
+
 // Scss : expanded or compressed
 function styles (done) {
   gulp.src(path.styles.src)
     .pipe(sourceMaps.init())
     .pipe(sass({
       fiber: Fiber,
-      outputStyle: 'expanded'
+      outputStyle: 'compressed'
     }).on('error', function (err) {
       console.log(err.toString())
       this.emit('end')
@@ -74,8 +74,7 @@ function scripts (done) {
 
 function watchfiles () {
   gulp.watch(path.styles.watch, gulp.series(styles))
-  // gulp.watch(path.scripts.watch, gulp.series(scripts, reload))
-  gulp.watch(path.scripts.watch, gulp.series(scripts))
+  gulp.watch(path.scripts.watch, gulp.series(scripts, reload))
 }
 
 gulp.task('styles', styles)

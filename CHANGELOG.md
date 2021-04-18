@@ -1,3 +1,7 @@
+## Version 0.2.3
+
+- Fix: Host list reset buttom is actually disabled now if no sorting has been applied.
+
 ## Version 0.2.2
 
 - Fix: variable typo in JS.

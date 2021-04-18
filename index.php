@@ -68,7 +68,7 @@
           <a href="https://phpmyadmin.test">phpMyAdmin</a>
           <span>
             <i class="fas fa-info-circle"></i>
-            <em>Brew install path: <code>/usr/local/Cellar/phpmyadmin/5.x/share/phpmyadmin</code></em>
+            <em>Brew install path: /usr/local/Cellar/phpmyadmin/5.x/share/phpmyadmin</em>
           </span>
         </li>
       </ul>

@@ -68,7 +68,7 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
-  // ! Grouping headers
+  // ! grouping headers
   // --------------------------------------------------------------------------
   const groupField = document.querySelector('.create-group-input')
   const groupButton = document.querySelector('.create-group')
@@ -129,7 +129,8 @@ function ready () {
   // ! sortable
   // --------------------------------------------------------------------------
   const valetSortEl = document.getElementById('valetSort')
-  const clearSortBtnContainer = document.querySelector('.sortable-container')
+  const clearSortModalBtnContainer = document.querySelector('.sortable-container')
+  const clearSortModalBtn = document.querySelector('.openmodal-reset')
   const clearSortBtn = document.querySelector('.clearsort')
 
   const sortable = Sortable.create(valetSortEl, { // eslint-disable-line
@@ -144,8 +145,8 @@ function ready () {
       set: function (sortable) {
         const order = sortable.toArray()
         localStorage.setItem(sortable.options.group.name, order.join('|'))
-        clearSortBtnContainer.classList.remove('disabled')
-        clearSortBtn.removeAttribute('disabled')
+        clearSortModalBtnContainer.classList.remove('disabled')
+        clearSortModalBtn.removeAttribute('disabled')
       }
     },
     group: 'hostslist',
@@ -158,8 +159,8 @@ function ready () {
   // Set button to disabled if no sort is set in localStorage
   function disableSortButton () {
     if (localStorage.getItem('hostslist') === null) {
-      clearSortBtnContainer.classList.add('disabled')
-      clearSortBtn.setAttribute('disabled', 'disabled')
+      clearSortModalBtnContainer.classList.add('disabled')
+      clearSortModalBtn.setAttribute('disabled', true)
     }
   }
   disableSortButton()
