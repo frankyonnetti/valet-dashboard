@@ -1,6 +1,6 @@
 ## Version 0.2.3
 
-- Fix: Host list reset buttom is actually disabled now if no sorting has been applied.
+- Fix: Host list reset button is actually disabled now if no sorting has been applied.
 
 ## Version 0.2.2
 
