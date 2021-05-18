@@ -9,18 +9,38 @@
   "license": "GPL-2.0 AND MIT",
   "homepage": "https://yonnetti.net",
   "scripts": {
-    "watch": "gulp watch"
+    "browsersync": "browser-sync start reload --config './browsersync.js' -f './assets/css/styles.css, ./assets/js/min/scripts.js'",
+    "scss": "sass --stop-on-error --style=compressed ./assets/scss:/tmp",
+    "autoprefixer": "postcss /tmp/styles.css --use autoprefixer --map -d ./assets/css",
+    "uglify": "mkdirp ./assets/js/min -p && uglifyjs ./assets/js/scripts.js -m -c -o ./assets/js/min/scripts.js --source-map",
+    "build:css": "run-s scss autoprefixer",
+    "build:js": "run-s uglify",
+    "build": "run-s build:*",
+    "watch:css": "onchange './assets/scss/*.scss' -- run-s build:css",
+    "watch:js": "onchange './assets/js/*.js' -- run-s build:js",
+    "watch": "run-p browsersync watch:*"
   },
+  "keywords": [
+    "css",
+    "dart-sass",
+    "sass",
+    "javascript",
+    "minify",
+    "lint"
+  ],
   "devDependencies": {
+    "autoprefixer": "^10.2.5",
     "browser-sync": "^2.26.14",
-    "fibers": "^5.0.0",
-    "gulp": "^4.0.2",
-    "gulp-dart-sass": "^1.0.2",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
+    "dart-sass": "^1.25.0",
+    "mkdirp": "^1.0.4",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "postcss": "^8.2.15",
+    "postcss-cli": "^8.3.1",
     "standard": "^16.0.3",
-    "stylelint": "^13.11.0",
+    "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^22.0.0",
+    "uglify-js": "^3.13.6"
   }
 }
