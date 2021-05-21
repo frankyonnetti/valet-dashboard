@@ -12,11 +12,7 @@ We use [NPM](https://www.npmjs.com) for compiling SCSS to CSS and minifing Javas
 
 **Building**
 
-To hot-reload your browser on SCSS and Javascript changes, setup Browsersync.
-
-- Duplicate file `browsersync-sample.js` and rename it `browsersync.js`.
-- Change or add vaules as needed with [Browsersync options](http://www.browsersync.io/docs/options/).
-- Then. from the theme directory, run:
+To hot-reload your browser on SCSS and Javascript changes:
 
 `yarn watch`
 

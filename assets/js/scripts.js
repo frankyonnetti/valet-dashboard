@@ -33,7 +33,7 @@ function ready () {
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
     // wrap anchor around URL
     .replace(/http(.*).test/g, function (localURL) {
-      return '<a href="' + localURL + '">' + localURL + '</a>'
+      return '<a href="' + localURL + '" tabindex="2">' + localURL + '</a>'
     })
 
   // build new hosts container
@@ -68,63 +68,15 @@ function ready () {
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
 
-  // ! grouping headers
+  // ! Unique "data" attribute
   // --------------------------------------------------------------------------
-  const groupField = document.querySelector('.create-group-input')
-  const groupButton = document.querySelector('.create-group')
+  const hostRow = newValetLinks.children
 
-  // create grouping headers
-  function createGroupHeader () {
-    const timeStamp = Date.now()
-    const groupFieldValue = groupField.value.replace(/\s+/g, '_') + '_' + timeStamp
-    const groupFieldValueLabel = groupField.value
-    if (groupFieldValueLabel.length < 1) { return }
-    const groupDiv = document.createElement('div')
-    groupDiv.setAttribute('data-group', 'GROUP_' + groupFieldValue)
-    groupDiv.innerHTML = `
-    <div class="grip"></div>
-    <div class="label"><em>${groupFieldValueLabel}</em></div>
-    <div class="remove"><i class="fas fa-times"></i></div>`
-    groupDiv.classList.add('row', 'group')
-    localStorage.setItem('GROUP_' + groupFieldValue, groupDiv.outerHTML)
-    newValetLinks.prepend(groupDiv)
-    groupField.value = ''
-    // reload "delete group header" function
-    deleteGroupHeader()
+  for (let hostCount = 0; hostCount < hostRow.length; hostCount++) {
+    // add a unique "data" attribute to each row
+    const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
+    hostRow[hostCount].setAttribute('data-host', hostSite)
   }
-
-  groupButton.addEventListener('click', event => {
-    createGroupHeader()
-    closeModal()
-    event.preventDefault()
-  })
-
-  // load grouping headers on load.
-  const search = 'GROUP_'
-  const groupValues = Object
-    .keys(localStorage)
-    .filter((key) => key.startsWith(search))
-    .map((key) => localStorage[key])
-  // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
-  newValetLinks.insertAdjacentHTML('afterbegin', groupValues.join(''))
-
-  // delete grouping header button
-  function deleteGroupHeader () {
-    const hostRow = newValetLinks.children
-    const groupClose = document.querySelectorAll('.group .remove')
-
-    for (let i = 0; i < hostRow.length; i++) {
-      if (groupClose[i] != null) {
-        const partentData = groupClose[i].parentNode.getAttribute('data-group')
-        groupClose[i].addEventListener('click', event => {
-          localStorage.removeItem(partentData)
-          const groupDiv = document.querySelector('[data-group="' + partentData + '"]')
-          groupDiv.remove()
-        })
-      }
-    }
-  }
-  deleteGroupHeader()
 
   // ! sortable
   // --------------------------------------------------------------------------
@@ -165,18 +117,8 @@ function ready () {
   }
   disableSortButton()
 
-  // Clear sortable and grouping localStorage
-  function clearGroupingStorage () {
-    const search = 'GROUP_'
-    Object
-      .keys(localStorage)
-      .filter((key) => key.startsWith(search))
-      .map((key) => delete localStorage[key])
-  }
-
   function clearSortStorage () {
     delete localStorage.hostslist
-    clearGroupingStorage()
     newValetLinks.innerHTML = valetLinks // reload host list
     removeHeaderRow()
     disableSortButton()
@@ -189,13 +131,10 @@ function ready () {
   // --------------------------------------------------------------------------
   // buttons to open "modal" from sidebar
   const openModalResetBtn = document.querySelector('.openmodal-reset')
-  const openModalAddBtn = document.querySelector('.openmodal-add')
   // modal container
   const modal = document.querySelector('.modal')
   const modalBg = document.querySelector('.modal-bg')
-  const modalInput = document.querySelector('.create-group-input')
   const closeSortModalBtn = document.querySelector('.cancelsort')
-  const closeCreateModalBtn = document.querySelector('.cancel-group')
 
   // Open modal(s)
   function openModalReset () {
@@ -204,26 +143,16 @@ function ready () {
   }
   openModalResetBtn.onclick = openModalReset
 
-  function openModalAdd () {
-    modal.classList.add('open', 'add-group')
-    modalBg.classList.add('open')
-    setTimeout(function () {
-      modalInput.focus()
-    }, 750)
-  }
-  openModalAddBtn.onclick = openModalAdd
-
-  // CLose modal(s)
+  // Close modal(s)
   function closeModal () {
     modal.classList.add('closing')
     modalBg.classList.add('closing')
     setTimeout(function () {
-      modal.classList.remove('open', 'closing', 'reset-list', 'add-group')
+      modal.classList.remove('open', 'closing', 'reset-list')
       modalBg.classList.remove('open', 'closing')
     }, 1000)
   }
   closeSortModalBtn.onclick = closeModal
-  closeCreateModalBtn.onclick = closeModal
   modalBg.onclick = closeModal
 
   document.addEventListener('keyup', event => {
@@ -234,15 +163,24 @@ function ready () {
     }
   })
 
-  // add new group header with key
-  document.addEventListener('keyup', event => {
-    if (event.key === 'Enter') {
-      if (modal.classList.contains('open', 'add-group')) {
-        createGroupHeader()
-        closeModal()
+  // Filter
+  // --------------------------------------------------------------------------
+  document.getElementById('filter-input').addEventListener('keyup', function () {
+    const searchFilter = this.value.toLowerCase()
+    const row = document.querySelectorAll('.valetlinks-container .row')
+
+    for (const host of row) {
+      const item = host.getAttribute('data-host').toLowerCase()
+      if (item.indexOf(searchFilter) === -1) {
+        host.classList.add('hide')
+      } else {
+        host.classList.remove('hide')
       }
     }
   })
+
+  // Bring search filed to focus on page load
+  document.querySelector('#filter-input').focus()
 
   // ! light or dark mode
   // --------------------------------------------------------------------------

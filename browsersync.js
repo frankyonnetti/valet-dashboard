@@ -12,6 +12,5 @@ module.exports = {
   port: 3510,
   ghostMode: false,
   open: false,
-  browser: 'google chrome',
   notify: true
 }
