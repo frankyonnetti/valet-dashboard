@@ -1,3 +1,8 @@
+## Version 0.3.0
+
+- NEW: Ripped out the grouping header. It wasn't that useful with the localStorage constraint.
+- NEW: Added new fuzzy filter to quickly find a host URL.
+
 ## Version 0.2.3
 
 - Fix: Host list reset button is actually disabled now if no sorting has been applied.

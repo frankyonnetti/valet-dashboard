@@ -25,6 +25,13 @@ body {
   background-color: var(--active-color);
 }
 
+:focus {
+  outline-color: var(--active-color);
+  outline-style: solid;
+  outline-width: 1px;
+  outline-offset: 2px;
+}
+
 a {
   color: var(--active-color);
   text-decoration: none;
@@ -183,11 +190,6 @@ pre#links-table {
     pointer-events: none;
   }
 
-  &.reset-list .add-group-header,
-  &.add-group .reset-sort-list {
-    display: none;
-  }
-
   h3 {
     font-size: rem(15);
     margin: 0;
@@ -195,15 +197,6 @@ pre#links-table {
 
   p {
     font-size: rem(14);
-  }
-
-  .create-group-input {
-    border: 1px solid rgba(#fff, 0.2);
-    border-radius: 3px;
-    // box-shadow: inset 0 -1px 7px 3px rgba(#000, 0.2);
-    margin: 1rem 0;
-    padding: 0.5rem;
-    width: 100%;
   }
 
   .modal-action {

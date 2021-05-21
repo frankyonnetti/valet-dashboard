@@ -86,26 +86,26 @@
           </div>
         </div>
         <div class="sortable-container">
-          <div class="sortable-label">Host List</div>
+          <div class="sortable-label">Host List Sort</div>
           <div class="sortable-wrap">
             <button class="openmodal-reset">Reset</button>
           </div>
         </div>
-        <div class="grouping-name-container">
-          <div class="grouping-label">New Host Header</div>
-          <div class="grouping-wrap">
-            <button class="openmodal-add">Add</button>
+        <div class="quick-find-container">
+          <div class="quick-find-label">Quick Find</div>
+          <div class="quick-find-wrap">
+            <input id="filter-input" type="text" placeholder="Quick Find" tabindex="1">
           </div>
         </div>
       </div>
 
+      <footer class="footer color-mode">
+        <p>Valet Dashoard v0.3.0 / <a href="https://github.com/frankyonnetti/valet-dashboard" tabindex="-1">Github</a></p>
+      </footer>
+
     </aside>
 
   </div>
-
-  <footer class="footer color-mode">
-    <p>Valet Dashoard v0.2.3 / <a href="https://github.com/frankyonnetti/valet-dashboard">Github</a></p>
-  </footer>
 
   <pre id="links-table">
     <?php include('valet_links.html'); ?>
@@ -116,16 +116,8 @@
       <h3>Reset Host List Sort</h3>
       <p>Resetting the host list removes all headers and reverts the list back to the default sort. This cannot be undone.</p>
       <div class="modal-action">
-        <button class="cancelsort">Cancel</button>
-        <button class="clearsort">Reset</button>
-      </div>
-    </div>
-    <div class="add-group-header">
-      <h3>Add New Host Header</h3>
-      <input type="text" class="create-group-input" aria-label="Enter a new header" placeholder="Enter Header">
-      <div class="modal-action">
-        <button class="cancel-group">Cancel</button>
-        <button class="create-group">Add</button>
+        <button class="cancelsort" tabindex="-1">Cancel</button>
+        <button class="clearsort" tabindex="-1">Reset</button>
       </div>
     </div>
   </div>

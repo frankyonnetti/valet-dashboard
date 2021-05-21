@@ -1,6 +1,6 @@
 # Valet Dashboard
 
-![screenshot](assets/img/screenshot_02.png)
+![screenshot](assets/img/screenshot-03.png)
 
 **Installing the dashboard**
 
