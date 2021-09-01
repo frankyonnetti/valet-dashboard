@@ -5,9 +5,11 @@
 
 We use [NPM](https://www.npmjs.com) for compiling SCSS to CSS and minifing Javascript.
 
-**Install node modules in the same directory as this readme file.**
+1. **Install node modules globally:** `npm install -g gulp-cli`
 
-`yarn add autoprefixer browser-sync dart-sass mkdirp npm-run-all onchange postcss postcss-cli uglify-js --dev`
+2. **Install node modules in the same directory as this readme file.**
+
+`yarn add autoprefixer browser-sync gulp gulp-dart-sass gulp-notify gulp-postcss gulp-sourcemaps gulp-uglify postcss --dev`
 
 
 **Building**
@@ -16,30 +18,30 @@ To hot-reload your browser on SCSS and Javascript changes:
 
 `yarn watch`
 
-To watch SCSS changes without hot-reload:
+To compile SCSS changes without hot-reload:
 
-`yarn watch:css`
+`yarn styles`
 
-To watch Javascript changes without hot-reload:
+To uglify Javascript changes without hot-reload:
 
-`yarn watch:js`
+`yarn scripts`
 
 
 ## Linting 🧼
 
 We'll also be linting our SCSS and Javascript in order to produce well written and consistent code.
 
-**Install node modules in the same directory as this readme file.**
+1. **Install node modules in the same directory as this readme file.**
 
 `yarn add standard stylelint stylelint-config-sass-guidelines stylelint-config-standard --dev`
 
-Required lint files (should be added during initial theme setup):
+Required lint files (should be added during initial setup):
 
 - .eslintrc.json
 - .stylelint.json
 - .stylelintignore
 
-To do a global lint on the SCSS files run: `npx stylelint "scss/**/*.scss"`. To fix found errors add the `--fix` flag.
+To do a global lint on the SCSS files run: `npx stylelint "assets/scss/**/*.scss"`. To fix found errors add the `--fix` flag.
 
 **Sublime:** install the following packages using package control:
 
