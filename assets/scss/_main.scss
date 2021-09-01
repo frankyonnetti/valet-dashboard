@@ -80,7 +80,7 @@ img {
 .sidebar {
   flex: 0 1 100%;
   @media #{$breakpoint-lg-up} {
-    flex: 0 1 275px;
+    flex: 0 1 280px;
   }
 }
 
@@ -88,7 +88,7 @@ img {
 .content {
   flex: 0 1 100%;
   @media #{$breakpoint-lg-up} {
-    flex: 0 1 calc(100% - 275px);
+    flex: 0 1 calc(100% - 280px);
     padding-right: 2.5rem;
   }
 }

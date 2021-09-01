@@ -1,7 +1,6 @@
 *.DS_Store
 /assets/fonts/fontawesome-free-5
+/inc
 /node_modules
 /valet.sh
-/valet_links.html
-/valet_version.html
 /vendor

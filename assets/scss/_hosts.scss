@@ -35,10 +35,6 @@
     .row {
       display: flex;
       flex-wrap: wrap;
-      // opacity: 1;
-      // padding: 0;
-      // max-height: 3rem;
-      // transition: all 0.1s ease;
 
       &:hover {
         background-color: #f0f0f0;
@@ -50,10 +46,6 @@
       }
 
       &.hide {
-        // opacity: 0;
-        // overflow: hidden;
-        // max-height: 0;
-        // transition: all 0.1s ease;
         display: none;
       }
 

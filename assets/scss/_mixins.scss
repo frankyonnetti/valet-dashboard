@@ -23,9 +23,8 @@ $breakpoint-lg-only: "(min-width: 993px) and (max-width: 1200px)";
 $breakpoint-xl-up: "(min-width: 1201px)";
 
 // Convert px to rem
-// https://css-tricks.com/snippets/sass/px-to-em-functions
 @function rem($pixels, $context: 16) {
-  @return #{$pixels/$context}rem;
+  @return math.div($pixels, $context) * 1rem;
 }
 
 // container box
