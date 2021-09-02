@@ -4,14 +4,6 @@ function ready () {
   const htmlTag = document.querySelector('html')
   htmlTag.classList.add('js-loaded')
 
-  // ! server version
-  // --------------------------------------------------------------------------
-  const valetVersion = document.querySelector('.server-version')
-  // remove "Laravel Valet" from server version output
-  const version = valetVersion.innerHTML.replace('Laravel Valet ', 'v')
-  // set new ouput
-  valetVersion.innerHTML = version
-
   // ! terminal output / table
   // --------------------------------------------------------------------------
   // select terminal output table
@@ -32,7 +24,7 @@ function ready () {
     .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col ssl">')
     .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
     // wrap anchor around URL
-    .replace(/http(.*).test/g, function (localURL) {
+    .replace(/http(.*)\.test/g, function (localURL) {
       return '<a href="' + localURL + '" tabindex="2">' + localURL + '</a>'
     })
 
@@ -47,6 +39,56 @@ function ready () {
 
   // hide imported links table
   document.getElementById('links-table').style.display = 'none'
+
+  // ! Unique "data" attribute
+  // --------------------------------------------------------------------------
+  const hostRow = newValetLinks.children
+
+  for (let hostCount = 0; hostCount < hostRow.length; hostCount++) {
+    // add a unique "data" attribute to each row
+    const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
+    hostRow[hostCount].setAttribute('data-host', hostSite)
+  }
+
+  // ! trim down technology version output to get just the version number.
+  // --------------------------------------------------------------------------
+  // valet
+  const valetVersion = document.querySelector('.valet-version')
+  // remove "Laravel Valet" from server version output
+  const getValetVersion = valetVersion.innerHTML.replace('Laravel Valet ', '')
+  valetVersion.innerHTML = getValetVersion
+  // dnsmasq
+  const dnsmasqVersion = document.querySelector('.dnsmasq .tech-info')
+  if (dnsmasqVersion !== null) {
+    // get substring between two words
+    const getDnsmasqVersion = dnsmasqVersion.innerHTML.split('Dnsmasq version ').pop().split('  Copyright')[0]
+    dnsmasqVersion.innerHTML = getDnsmasqVersion
+  }
+  // mariadb
+  const mariadbVersion = document.querySelector('.mariadb .tech-info')
+  if (mariadbVersion !== null) {
+    // get substring between two words
+    const getMariadbVersion = mariadbVersion.innerHTML.split('Distrib ').pop().split('-MariaDB')[0]
+    mariadbVersion.innerHTML = getMariadbVersion
+  }
+  // nginx
+  const nginxVersion = document.querySelector('.nginx .tech-info')
+  if (nginxVersion !== null) {
+    // get the first set of floating numbers
+    const getNginxVersion = nginxVersion.innerHTML.replace('nginx version: nginx/', '')
+    nginxVersion.innerHTML = getNginxVersion
+  }
+  // phpmyadmin
+  const phpmyadminPath = document.querySelector('[data-host="phpmyadmin"] .path em')
+  if (phpmyadminPath !== null) {
+    const phpmyadminURL = document.querySelector('[data-host="phpmyadmin"] .url a')
+    const phpmyadminLink = document.querySelector('.phpmyadmin .tech-label a')
+    const phpmyadminVersion = document.querySelector('.phpmyadmin .tech-info')
+    const getPHPmyadminPath = phpmyadminPath.innerHTML.split('/')
+    document.querySelector('.phpmyadmin').removeAttribute('style')
+    phpmyadminLink.setAttribute('href', phpmyadminURL)
+    phpmyadminVersion.innerHTML = getPHPmyadminPath[getPHPmyadminPath.length - 3]
+  }
 
   // ! show local path on hover
   // --------------------------------------------------------------------------
@@ -67,16 +109,6 @@ function ready () {
 
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
-
-  // ! Unique "data" attribute
-  // --------------------------------------------------------------------------
-  const hostRow = newValetLinks.children
-
-  for (let hostCount = 0; hostCount < hostRow.length; hostCount++) {
-    // add a unique "data" attribute to each row
-    const hostSite = hostRow[hostCount].children.item(1).innerText.replace(/\./g, '_')
-    hostRow[hostCount].setAttribute('data-host', hostSite)
-  }
 
   // ! sortable
   // --------------------------------------------------------------------------
