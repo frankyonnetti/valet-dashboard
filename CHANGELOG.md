@@ -1,3 +1,7 @@
+## Version 0.4.0
+
+- NEW: Added "server versions" panel to sidebar.
+
 ## Version 0.3.0
 
 - NEW: Ripped out the grouping header. It wasn't that useful with the localStorage constraint.

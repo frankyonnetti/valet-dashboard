@@ -1,6 +1,7 @@
 *.DS_Store
 /assets/fonts/fontawesome-free-5
-/inc
+/inc/*
+!/inc/.gitkeep
 /node_modules
 /valet.sh
 /vendor
