@@ -8,7 +8,7 @@
 E.g. `https://github.com/frankyonnetti/valet-dashboard dashboard`
 2. Change the directory to the newly downloaded `dashboard`.
 3. Add this directory to Valet or run the `valet link` command in it.
-4. Download Font Awesome Free, unzip it in the `assets/fonts` directory and rename the Font Awesome Icons directory to `fontawesome-free-5`.
+4. Download [Font Awesome Free](https://fontawesome.com/how-to-use/on-the-web/setup/hosting-font-awesome-yourself), unzip it in the `assets/fonts` directory and rename the Font Awesome Icons directory to `fontawesome-free-5`.
 Instead of the above method, you can also use the following command, execute it in the root directory where the index.php file is located.
 `git clone https://github.com/FortAwesome/Font-Awesome assets/fonts/fontawesome-free-5`
 3. Duplicate file `valet.sample.sh` and rename it `valet.sh`. We'll be using this file to easily output the `valet links` table and version number for the dashboard.
