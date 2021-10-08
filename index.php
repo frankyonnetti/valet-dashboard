@@ -64,6 +64,12 @@
             <a href="https://github.com/laravel/valet">Valet GitHub <i class="fas fa-external-link-square-alt"></i></a>
           </span>
         </li>
+        <div class="quick-find-container">
+          <div class="settings-label">Quick Find</div>
+          <div class="quick-find-wrap">
+            <input id="filter-input" type="text" placeholder="Quick Find" tabindex="1">
+          </div>
+        </div>
       </ul>
 
       <ul class="sidebar-container server-list color-mode">
@@ -145,12 +151,6 @@
           <div class="settings-label">Host List Sort</div>
           <div class="sortable-wrap">
             <button class="openmodal-reset">Reset</button>
-          </div>
-        </div>
-        <div class="quick-find-container">
-          <div class="settings-label">Quick Find</div>
-          <div class="quick-find-wrap">
-            <input id="filter-input" type="text" placeholder="Quick Find" tabindex="1">
           </div>
         </div>
       </div>

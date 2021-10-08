@@ -227,11 +227,6 @@
     padding-bottom: 1rem;
   }
 
-  .quick-find-container {
-    border-top: 1px solid var(--border-color);
-    padding-top: 1rem;
-  }
-
   &.dark-mode {
     @include container-box(dark);
 
@@ -402,9 +397,12 @@
 }
 
 // ! quick-find
-.settings.sidebar-container {
+.valet-brand.sidebar-container {
 
   .quick-find-container {
+    border-top: 1px solid var(--border-color);
+    margin-top: .5rem;
+    padding-top: 1.5rem;
 
     .settings-label {
       display: none;
