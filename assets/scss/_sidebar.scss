@@ -216,7 +216,7 @@
     padding-right: 0.5rem;
   }
 
-  .mode-switch-container,
+  .dark-mode-switch-container,
   .color-picker-container,
   .sortable-container {
     border-top: 1px solid var(--border-color);
@@ -238,7 +238,7 @@
       color: #ccc;
     }
 
-    .mode-switch-container,
+    .dark-mode-switch-container,
     .color-picker-container,
     .sortable-container,
     .quick-find-container {
@@ -250,11 +250,11 @@
 // ! theme switch
 .settings.sidebar-container {
 
-  .mode-switch-container {
+  .dark-mode-switch-container {
     border-top-style: none;
     cursor: default;
 
-    #mode-switch {
+    #dark-mode-switch {
       border-radius: 20px;
       display: inline-block;
       position: relative;
@@ -277,7 +277,7 @@
 
   &.light-mode {
 
-    #mode-switch {
+    #dark-mode-switch {
       background-color: #999;
 
       &::after {
@@ -288,10 +288,10 @@
 
   &.dark-mode {
 
-    .mode-switch-container {
+    .dark-mode-switch-container {
       border-top-style: none;
 
-      #mode-switch {
+      #dark-mode-switch {
         background-color: var(--active-color);
 
         &::after {

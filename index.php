@@ -127,9 +127,9 @@
         <div class="sidebar-label">
           <i class="fas fa-cog"></i> Settings
         </div>
-        <div class="mode-switch-container">
-          <div class="settings-label">Color Mode</div>
-          <div id="mode-switch"></div>
+        <div class="dark-mode-switch-container">
+          <div class="settings-label">Dark Mode</div>
+          <div id="dark-mode-switch"></div>
         </div>
         <div class="color-picker-container">
           <div class="settings-label">Active Color</div>

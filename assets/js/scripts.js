@@ -217,7 +217,7 @@ function ready () {
   // ! light or dark mode
   // --------------------------------------------------------------------------
   const conatiners = document.querySelectorAll('.color-mode')
-  const modeSwitch = document.getElementById('mode-switch')
+  const darkModeSwitch = document.getElementById('dark-mode-switch')
 
   // set initial localStorage and body class if none found,
   // or load class if found in localStorage
@@ -232,7 +232,7 @@ function ready () {
   }
 
   // switch between light and dark mode
-  modeSwitch.addEventListener('click', event => {
+  darkModeSwitch.addEventListener('click', event => {
     if (localStorage.getItem('themeMode') !== null) {
       if (localStorage.getItem('themeMode') === 'light') {
         localStorage.setItem('themeMode', 'dark')
