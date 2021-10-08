@@ -131,6 +131,10 @@
           <div class="settings-label">Dark Mode</div>
           <div id="dark-mode-switch"></div>
         </div>
+        <div class="focus-quick-find-switch-container">
+          <div class="settings-label">Focus Quick Find</div>
+          <div id="focus-quick-find-switch"></div>
+        </div>
         <div class="color-picker-container">
           <div class="settings-label">Active Color</div>
           <div class="color-wrap">

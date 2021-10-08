@@ -217,6 +217,7 @@
   }
 
   .dark-mode-switch-container,
+  .focus-quick-find-switch-container,
   .color-picker-container,
   .sortable-container {
     border-top: 1px solid var(--border-color);
@@ -239,6 +240,7 @@
     }
 
     .dark-mode-switch-container,
+    .focus-quick-find-switch-container,
     .color-picker-container,
     .sortable-container,
     .quick-find-container {
@@ -250,11 +252,11 @@
 // ! theme switch
 .settings.sidebar-container {
 
-  .dark-mode-switch-container {
+  .dark-mode-switch-container, .focus-quick-find-switch-container {
     border-top-style: none;
     cursor: default;
 
-    #dark-mode-switch {
+    #dark-mode-switch, #focus-quick-find-switch {
       border-radius: 20px;
       display: inline-block;
       position: relative;
@@ -277,25 +279,45 @@
 
   &.light-mode {
 
-    #dark-mode-switch {
-      background-color: #999;
+    #dark-mode-switch, #focus-quick-find-switch {
+        &.on {
+          background-color: var(--active-color);
 
-      &::after {
-        left: 2px;
-      }
+          &::after {
+            left: 30px;
+          }
+        }
+
+        &.off {
+          background-color: #999;
+
+          &::after {
+            left: 2px;
+          }
+        }
     }
   }
 
   &.dark-mode {
 
-    .dark-mode-switch-container {
+    .dark-mode-switch-container, .focus-quick-find-switch-container {
       border-top-style: none;
 
-      #dark-mode-switch {
-        background-color: var(--active-color);
+      #dark-mode-switch, #focus-quick-find-switch {
+        &.on {
+          background-color: var(--active-color);
 
-        &::after {
-          left: 30px;
+          &::after {
+            left: 30px;
+          }
+        }
+
+        &.off {
+          background-color: #999;
+
+          &::after {
+            left: 2px;
+          }
         }
       }
     }
