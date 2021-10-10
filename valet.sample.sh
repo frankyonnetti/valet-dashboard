@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Duplicate this file and rename it 'valet.sh'.
-# Change the output paths below to match your local environment. Be sure to keep the HTML file name the same.
+# Change the output paths below to match your local environment. Be sure to keep the HTML file names the same.
 # Set permissions on this file: `chmod u+x valet.sh`
 
 # Get the links table output from "valet links" and create an HTML file from it.
@@ -23,5 +23,5 @@ mysql_version="mysql --version 2>&1 | tee /local/path/to/valet/dashboard/inc/mar
 eval $mysql_version
 
 # Nginx
-nginx_version="nginx -v  2>&1 | tee /local/path/to/valet/dashboard/inc/nginx_version.html"
+nginx_version="nginx -v 2>&1 | tee /local/path/to/valet/dashboard/inc/nginx_version.html"
 eval $nginx_version
