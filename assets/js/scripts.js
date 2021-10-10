@@ -212,33 +212,66 @@ function ready () {
   })
 
   // Bring search filed to focus on page load
-  document.querySelector('#filter-input').focus()
+  const focusSwitch = document.getElementById('focus-quick-find-switch')
+
+  if (localStorage.getItem('focusToggle') === null) {
+    localStorage.setItem('focusToggle', 'false')
+    focusSwitch.classList.add('off')
+  } else
+  if (localStorage.getItem('focusToggle') === 'false') {
+    focusSwitch.classList.add('off')
+  } else {
+    focusSwitch.classList.add('on')
+    document.querySelector('#filter-input').focus()
+  }
+
+  focusSwitch.addEventListener('click', event => {
+    if (localStorage.getItem('focusToggle') !== null) {
+      if (localStorage.getItem('focusToggle') === 'false') {
+        focusSwitch.classList.remove('off')
+        focusSwitch.classList.add('on')
+        localStorage.setItem('focusToggle', 'true')
+        document.querySelector('#filter-input').focus()
+      } else {
+        focusSwitch.classList.remove('on')
+        focusSwitch.classList.add('off')
+        localStorage.setItem('focusToggle', 'false')
+      }
+    }
+  })
 
   // ! light or dark mode
   // --------------------------------------------------------------------------
   const conatiners = document.querySelectorAll('.color-mode')
-  const modeSwitch = document.getElementById('mode-switch')
+  const darkModeSwitch = document.getElementById('dark-mode-switch')
 
   // set initial localStorage and body class if none found,
   // or load class if found in localStorage
   if (localStorage.getItem('themeMode') === null) {
     localStorage.setItem('themeMode', 'light')
+    darkModeSwitch.classList.add('off')
     conatiners.forEach(mode => mode.classList.add('light-mode'))
   } else
   if (localStorage.getItem('themeMode') === 'light') {
+    darkModeSwitch.classList.add('off')
     conatiners.forEach(mode => mode.classList.add('light-mode'))
   } else {
+    darkModeSwitch.classList.add('on')
     conatiners.forEach(mode => mode.classList.add('dark-mode'))
   }
 
   // switch between light and dark mode
-  modeSwitch.addEventListener('click', event => {
+  darkModeSwitch.addEventListener('click', event => {
     if (localStorage.getItem('themeMode') !== null) {
       if (localStorage.getItem('themeMode') === 'light') {
+        darkModeSwitch.classList.remove('off')
+        darkModeSwitch.classList.add('on')
         localStorage.setItem('themeMode', 'dark')
         conatiners.forEach(mode => mode.classList.remove('light-mode'))
         conatiners.forEach(mode => mode.classList.add('dark-mode'))
       } else {
+        darkModeSwitch.classList.remove('on')
+        darkModeSwitch.classList.add('off')
         localStorage.setItem('themeMode', 'light')
         conatiners.forEach(mode => mode.classList.remove('dark-mode'))
         conatiners.forEach(mode => mode.classList.add('light-mode'))

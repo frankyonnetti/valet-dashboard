@@ -216,7 +216,8 @@
     padding-right: 0.5rem;
   }
 
-  .mode-switch-container,
+  .dark-mode-switch-container,
+  .focus-quick-find-switch-container,
   .color-picker-container,
   .sortable-container {
     border-top: 1px solid var(--border-color);
@@ -226,11 +227,6 @@
     padding-bottom: 1rem;
   }
 
-  .quick-find-container {
-    border-top: 1px solid var(--border-color);
-    padding-top: 1rem;
-  }
-
   &.dark-mode {
     @include container-box(dark);
 
@@ -238,7 +234,8 @@
       color: #ccc;
     }
 
-    .mode-switch-container,
+    .dark-mode-switch-container,
+    .focus-quick-find-switch-container,
     .color-picker-container,
     .sortable-container,
     .quick-find-container {
@@ -250,11 +247,11 @@
 // ! theme switch
 .settings.sidebar-container {
 
-  .mode-switch-container {
+  .dark-mode-switch-container, .focus-quick-find-switch-container {
     border-top-style: none;
     cursor: default;
 
-    #mode-switch {
+    #dark-mode-switch, #focus-quick-find-switch {
       border-radius: 20px;
       display: inline-block;
       position: relative;
@@ -277,25 +274,45 @@
 
   &.light-mode {
 
-    #mode-switch {
-      background-color: #999;
+    #dark-mode-switch, #focus-quick-find-switch {
+        &.on {
+          background-color: var(--active-color);
 
-      &::after {
-        left: 2px;
-      }
+          &::after {
+            left: 30px;
+          }
+        }
+
+        &.off {
+          background-color: #999;
+
+          &::after {
+            left: 2px;
+          }
+        }
     }
   }
 
   &.dark-mode {
 
-    .mode-switch-container {
+    .dark-mode-switch-container, .focus-quick-find-switch-container {
       border-top-style: none;
 
-      #mode-switch {
-        background-color: var(--active-color);
+      #dark-mode-switch, #focus-quick-find-switch {
+        &.on {
+          background-color: var(--active-color);
 
-        &::after {
-          left: 30px;
+          &::after {
+            left: 30px;
+          }
+        }
+
+        &.off {
+          background-color: #999;
+
+          &::after {
+            left: 2px;
+          }
         }
       }
     }
@@ -380,9 +397,12 @@
 }
 
 // ! quick-find
-.settings.sidebar-container {
+.valet-brand.sidebar-container {
 
   .quick-find-container {
+    border-top: 1px solid var(--border-color);
+    margin-top: .5rem;
+    padding-top: 1.5rem;
 
     .settings-label {
       display: none;
