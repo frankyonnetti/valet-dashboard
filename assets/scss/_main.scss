@@ -1,5 +1,11 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   color: #fff;
+  font-weight: normal;
   background-repeat: no-repeat;
   background-position: center;
   margin: 3rem;

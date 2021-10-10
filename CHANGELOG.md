@@ -1,3 +1,12 @@
+## Version 0.4.1
+
+Following changes/updates were contributed by [Artur Kociszewski](https://github.com/xartuu). Thanks Artur!
+
+- NEW: Added a switch to enable / disable Quick Find.
+- UPDATE: Reposition Quick Find so it's higher up and in a more intuitive place.
+- UPDATE: Added a command to the installation instructions in README.md to download Font Awesome icons from the official repository.
+- FIX: Renamed the Color Mode switch to Dark Mode to make it more readable.
+
 ## Version 0.4.0
 
 - NEW: Added "server versions" panel to sidebar.

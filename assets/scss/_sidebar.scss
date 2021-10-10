@@ -209,6 +209,7 @@
 // ! settings
 .settings.sidebar-container {
   @include container-box;
+  padding-bottom: 0.5rem;
 
   .settings-label {
     color: #333;
@@ -229,6 +230,7 @@
 
   &.dark-mode {
     @include container-box(dark);
+    padding-bottom: 0.5rem;
 
     .settings-label {
       color: #ccc;
@@ -247,11 +249,13 @@
 // ! theme switch
 .settings.sidebar-container {
 
-  .dark-mode-switch-container, .focus-quick-find-switch-container {
+  .dark-mode-switch-container,
+  .focus-quick-find-switch-container {
     border-top-style: none;
     cursor: default;
 
-    #dark-mode-switch, #focus-quick-find-switch {
+    #dark-mode-switch,
+    #focus-quick-find-switch {
       border-radius: 20px;
       display: inline-block;
       position: relative;
@@ -274,31 +278,36 @@
 
   &.light-mode {
 
-    #dark-mode-switch, #focus-quick-find-switch {
-        &.on {
-          background-color: var(--active-color);
+    #dark-mode-switch,
+    #focus-quick-find-switch {
 
-          &::after {
-            left: 30px;
-          }
+      &.on {
+        background-color: var(--active-color);
+
+        &::after {
+          left: 30px;
         }
+      }
 
-        &.off {
-          background-color: #999;
+      &.off {
+        background-color: #999;
 
-          &::after {
-            left: 2px;
-          }
+        &::after {
+          left: 2px;
         }
+      }
     }
   }
 
   &.dark-mode {
 
-    .dark-mode-switch-container, .focus-quick-find-switch-container {
+    .dark-mode-switch-container,
+    .focus-quick-find-switch-container {
       border-top-style: none;
 
-      #dark-mode-switch, #focus-quick-find-switch {
+      #dark-mode-switch,
+      #focus-quick-find-switch {
+
         &.on {
           background-color: var(--active-color);
 
@@ -429,6 +438,7 @@
   }
 
   &.dark-mode .quick-find-container {
+    border-top-color: var(--border-color-darker);
 
     .quick-find-wrap {
 

@@ -156,7 +156,7 @@
       </div>
 
       <footer class="footer color-mode">
-        <p>Valet Dashoard v0.4.0 / <a href="https://github.com/frankyonnetti/valet-dashboard" tabindex="-1">Github</a></p>
+        <p>Valet Dashoard v0.4.1 / <a href="https://github.com/frankyonnetti/valet-dashboard" tabindex="-1">Github</a></p>
       </footer>
 
     </aside>
