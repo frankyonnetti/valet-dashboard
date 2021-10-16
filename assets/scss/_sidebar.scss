@@ -221,27 +221,17 @@
   .focus-quick-find-switch-container,
   .color-picker-container,
   .sortable-container {
-    border-top: 1px solid var(--border-color);
     display: flex;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 
   &.dark-mode {
     @include container-box(dark);
-    padding-bottom: 0.5rem;
 
     .settings-label {
       color: #ccc;
-    }
-
-    .dark-mode-switch-container,
-    .focus-quick-find-switch-container,
-    .color-picker-container,
-    .sortable-container,
-    .quick-find-container {
-      border-top: 1px solid var(--border-color-darker);
     }
   }
 }
@@ -409,9 +399,8 @@
 .valet-brand.sidebar-container {
 
   .quick-find-container {
-    border-top: 1px solid var(--border-color);
-    margin-top: .5rem;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 0.25rem;
 
     .settings-label {
       display: none;
