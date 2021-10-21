@@ -79,7 +79,7 @@ endforeach;
             </svg>
           </span>
           <div class="valet-version">
-            <?php include('inc/valet_version.html'); ?>
+            <?php echo shell_exec('valet -V 2>&1'); ?>
           </div>
         </li>
         <li class="sidebar-label">
@@ -108,15 +108,15 @@ endforeach;
           <i class="fas fa-server"></i> Server
           <small>Brew install path: <code>/usr/local/Cellar/</code></small>
         </li>
-        <?php if (file_exists('inc/dnsmasq_version.html')) : ?>
+<?php if (strpos(($dnsmasq_version = shell_exec('dnsmasq -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version dnsmasq">
           <span class="tech-label">Dnsmasq</span>
           <span class="tech-info">
-            <?php include('inc/dnsmasq_version.html'); ?>
+            <?php echo $dnsmasq_version; ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/mailhog_version.html')) : ?>
+<?php endif; ?>
+<?php if (file_exists('inc/mailhog_version.html')) : ?>
         <li class="server-version mailhog">
           <span class="tech-label">
             <a href="http://localhost:8025">MailHog</a>
@@ -126,23 +126,23 @@ endforeach;
             <?php include('inc/mailhog_version.html'); ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/mariadb_version.html')) : ?>
+<?php endif; ?>
+<?php if (strpos(($mariadb_version = shell_exec('mysql --version 2>&1')), 'not found') === false) : ?>
         <li class="server-version mariadb">
           <span class="tech-label">MariaDB</span>
           <span class="tech-info">
-            <?php include('inc/mariadb_version.html'); ?>
+            <?php echo $mariadb_version ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/nginx_version.html')) : ?>
+<?php endif; ?>
+<?php if (strpos(($nginx_version = shell_exec('nginx -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version nginx">
           <span class="tech-label">Nginx</span>
           <span class="tech-info">
-            <?php include('inc/nginx_version.html'); ?>
+            <?php echo $nginx_version; ?>
           </span>
         </li>
-        <?php endif; ?>
+<?php endif; ?>
         <li class="server-version php-info">
           <span class="tech-label"><a href="info.php">PHP info</a></span>
           <span class="tech-info">
