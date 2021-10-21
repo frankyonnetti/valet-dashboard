@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="assets/css/modern-normalize.css">
-  <link rel="stylesheet" href="assets/fonts/fontawesome-free-5/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/modern-normalize.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 
 </head>
 <body id="valet-server" class="color-mode">
@@ -179,8 +179,8 @@
   </div>
   <div class="modal-bg"></div>
 
-  <script src="assets/contib/SortableJS/Sortable.min.js"></script>
-  <script src="assets/js/min/scripts.js"></script>
+  <script src="/assets/contib/SortableJS/Sortable.min.js"></script>
+  <script src="/assets/js/min/scripts.js"></script>
 
 </body>
 </html>
