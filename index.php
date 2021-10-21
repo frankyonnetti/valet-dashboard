@@ -28,7 +28,38 @@
           <div class="col url"><span><i class="fas fa-home"></i> Hosts /</span> URL</div>
           <div class="col path">Path</div>
         </div>
-        <div id="valetSort" class="valetlinks-container"></div>
+        <div id="valetSort" class="valetlinks-container">
+<?php
+$valet_home = getenv('HOME') . '/.config/valet';
+$valet_old_home = getenv('HOME') . '/.valet';
+
+$valet_path = is_dir($valet_home) ? $valet_home : $valet_old_home;
+
+$valet_config  = json_decode(file_get_contents("$valet_path/config.json"));
+$tld = isset($valet_config->tld) ? $valet_config->tld : $valet_config->domain;
+
+$sites = [];
+
+foreach ($valet_config->paths as $parked_path):
+  foreach (scandir($parked_path) as $site):
+    if ($site[0] == '.') { continue; }
+?>
+          <div class="row">
+            <div class="col grip"></div>
+            <div class="col site"><?php echo $site; ?></div>
+<?php if($ssl = file_exists("$valet_path/Certificates/$site.$tld.key")): ?>
+            <div class="col ssl"><span><em><?php echo realpath("$valet_path/Certificates/$site.$tld.crt"); ?></em></span></div>
+<?php else: ?>
+            <div class="col ssl"></div>
+<?php endif; ?>
+            <div class="col url"><a href="<?php echo $url = ($ssl ? "https" : "http") . "://$site.$tld"; ?>" tabindex="2"><?php echo $url; ?></a></div>
+            <div class="col path"><span><em><?php echo realpath("$parked_path/$site"); ?></em></span></div>
+          </div>
+<?php
+  endforeach;
+endforeach;
+?>
+        </div>
       </div>
     </div>
 
@@ -162,10 +193,6 @@
     </aside>
 
   </div>
-
-  <pre id="links-table">
-    <?php include('inc/valet_links.html'); ?>
-  </pre>
 
   <div class="modal">
     <div class="reset-sort-list">

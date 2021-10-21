@@ -4,41 +4,8 @@ function ready () {
   const htmlTag = document.querySelector('html')
   htmlTag.classList.add('js-loaded')
 
-  // ! terminal output / table
-  // --------------------------------------------------------------------------
-  // select terminal output table
-  const selectValetLinks = document.querySelector('#links-table')
-  // select container element
   const newValetLinks = document.querySelector('.valetlinks-container')
-
-  // https://javascript.info/regexp-quantifiers
-  const valetLinks = selectValetLinks.innerHTML
-    // replace SSL column "X" with icon
-    .replace(/X/g, '<i class="fas fa-lock"></i>')
-    // replace pluses "+" and dashes "-"
-    .replace(/\+(.+)\+/g, '')
-    // replace pipes "|" starting from column 5
-    .replace(/((?:[^|]*\|){4}[^|]*)\|/g, '$1</em></span></div></div>')
-    .replace(/((?:[^|]*\|){3}[^|]*)\|/g, '$1</div><div class="col path"><span><em>')
-    .replace(/((?:[^|]*\|){2}[^|]*)\|/g, '$1</div><div class="col url">')
-    .replace(/((?:[^|]*\|){1}[^|]*)\|/g, '$1</div><div class="col ssl">')
-    .replace(/((?:[^|]*\|){0}[^|]*)\|/g, '$1<div class="row"><div class="col grip"></div><div class="col site">')
-    // wrap anchor around URL
-    .replace(/http(.*)\.test/g, function (localURL) {
-      return '<a href="' + localURL + '" tabindex="2">' + localURL + '</a>'
-    })
-
-  // build new hosts container
-  newValetLinks.innerHTML = valetLinks
-
-  // remove header row
-  function removeHeaderRow () {
-    document.querySelector('.valetlinks-container .row:first-child').remove()
-  }
-  removeHeaderRow()
-
-  // hide imported links table
-  document.getElementById('links-table').style.display = 'none'
+  const valetLinks = newValetLinks.innerHTML
 
   // ! Unique "data" attribute
   // --------------------------------------------------------------------------
@@ -107,8 +74,19 @@ function ready () {
     }, 300)
   }
 
+  function copyPath () {
+    const element = this
+    const path = element.innerText
+    navigator.clipboard.writeText(path)
+    element.innerHTML = '<em>Copied!</em>'
+    setTimeout(function () {
+      element.innerHTML = '<em>' + path + '</em>'
+    }, 5e2)
+  }
+
   localPathSpan.forEach(path => path.addEventListener('mouseover', changeOnOver))
   localPathSpan.forEach(path => path.addEventListener('mouseout', changeOnOut))
+  localPathSpan.forEach(path => path.addEventListener('click', copyPath))
 
   // ! sortable
   // --------------------------------------------------------------------------
@@ -152,7 +130,6 @@ function ready () {
   function clearSortStorage () {
     delete localStorage.hostslist
     newValetLinks.innerHTML = valetLinks // reload host list
-    removeHeaderRow()
     disableSortButton()
     closeModal()
   }

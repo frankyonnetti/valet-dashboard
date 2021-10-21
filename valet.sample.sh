@@ -4,10 +4,6 @@
 # Change the output paths below to match your local environment. Be sure to keep the HTML file names the same.
 # Set permissions on this file: `chmod u+x valet.sh`
 
-# Get the links table output from "valet links" and create an HTML file from it.
-valet_links="valet links 2>&1 | tee /local/path/to/valet/dashboard/inc/valet_links.html"
-eval $valet_links
-
 # Get the version number of each server technology we're using and create an HTML file from it.
 
 # Valet
