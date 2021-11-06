@@ -24,6 +24,10 @@
         max-width: 48px;
       }
 
+      &.ssl {
+        padding: 0.65rem 32px 0.65rem 0.5rem !important;
+      }
+
       &.path {
         padding: 0.65rem 32px 0.65rem 0.5rem !important;
       }
@@ -84,8 +88,10 @@
         flex: 0 1 10%;
         text-align: right;
         order: 3;
-        padding-right: 10px;
+        padding: 0 24px 0 0;
         min-width: 10%;
+        position: relative;
+        cursor: default;
 
         .fas {
           color: #999;
@@ -162,13 +168,20 @@
 // ! path tooltip
 .valetlinks-container {
 
-  span {
-    display: block;
-    position: relative;
-    margin: 0 0 0 auto;
-    width: 32px;
-    height: 100%;
+  .ssl > span {
+    &::before {
+      color: #999;
+      content: "\f023";
+      font-weight: 900;
+      font-family: "Font Awesome 5 Free";
+      position: absolute;
+      top: 0.7rem;
+      right: 10px;
+      cursor: default;
+    }
+  }
 
+  .path > span {
     &::before {
       color: #999;
       content: "\f07b";
@@ -179,6 +192,14 @@
       right: 10px;
       cursor: default;
     }
+  }
+
+  .path > span, .ssl > span {
+    display: block;
+    position: relative;
+    margin: 0 0 0 auto;
+    width: 32px;
+    height: 100%;
 
     &:hover::before {
       color: #222;

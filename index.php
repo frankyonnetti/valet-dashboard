@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="assets/css/modern-normalize.css">
-  <link rel="stylesheet" href="assets/fonts/fontawesome-free-5/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/modern-normalize.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 
 </head>
 <body id="valet-server" class="color-mode">
@@ -28,7 +28,38 @@
           <div class="col url"><span><i class="fas fa-home"></i> Hosts /</span> URL</div>
           <div class="col path">Path</div>
         </div>
-        <div id="valetSort" class="valetlinks-container"></div>
+        <div id="valetSort" class="valetlinks-container">
+<?php
+$valet_home = getenv('HOME') . '/.config/valet';
+$valet_old_home = getenv('HOME') . '/.valet';
+
+$valet_path = is_dir($valet_home) ? $valet_home : $valet_old_home;
+
+$valet_config  = json_decode(file_get_contents("$valet_path/config.json"));
+$tld = isset($valet_config->tld) ? $valet_config->tld : $valet_config->domain;
+
+$sites = [];
+
+foreach ($valet_config->paths as $parked_path):
+  foreach (scandir($parked_path) as $site):
+    if ($site[0] == '.') { continue; }
+?>
+          <div class="row">
+            <div class="col grip"></div>
+            <div class="col site"><?php echo $site; ?></div>
+<?php if($ssl = file_exists("$valet_path/Certificates/$site.$tld.key")): ?>
+            <div class="col ssl"><span><em><?php echo realpath("$valet_path/Certificates/$site.$tld.crt"); ?></em></span></div>
+<?php else: ?>
+            <div class="col ssl"></div>
+<?php endif; ?>
+            <div class="col url"><a href="<?php echo $url = ($ssl ? "https" : "http") . "://$site.$tld"; ?>" tabindex="2"><?php echo $url; ?></a></div>
+            <div class="col path"><span><em><?php echo realpath("$parked_path/$site"); ?></em></span></div>
+          </div>
+<?php
+  endforeach;
+endforeach;
+?>
+        </div>
       </div>
     </div>
 
@@ -48,7 +79,7 @@
             </svg>
           </span>
           <div class="valet-version">
-            <?php include('inc/valet_version.html'); ?>
+            <?php echo shell_exec('valet -V 2>&1'); ?>
           </div>
         </li>
         <li class="sidebar-label">
@@ -77,15 +108,15 @@
           <i class="fas fa-server"></i> Server
           <small>Brew install path: <code>/usr/local/Cellar/</code></small>
         </li>
-        <?php if (file_exists('inc/dnsmasq_version.html')) : ?>
+<?php if (strpos(($dnsmasq_version = shell_exec('dnsmasq -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version dnsmasq">
           <span class="tech-label">Dnsmasq</span>
           <span class="tech-info">
-            <?php include('inc/dnsmasq_version.html'); ?>
+            <?php echo $dnsmasq_version; ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/mailhog_version.html')) : ?>
+<?php endif; ?>
+<?php if (file_exists('inc/mailhog_version.html')) : ?>
         <li class="server-version mailhog">
           <span class="tech-label">
             <a href="http://localhost:8025">MailHog</a>
@@ -95,23 +126,23 @@
             <?php include('inc/mailhog_version.html'); ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/mariadb_version.html')) : ?>
+<?php endif; ?>
+<?php if (strpos(($mariadb_version = shell_exec('mysql --version 2>&1')), 'not found') === false) : ?>
         <li class="server-version mariadb">
           <span class="tech-label">MariaDB</span>
           <span class="tech-info">
-            <?php include('inc/mariadb_version.html'); ?>
+            <?php echo $mariadb_version ?>
           </span>
         </li>
-        <?php endif; ?>
-        <?php if (file_exists('inc/nginx_version.html')) : ?>
+<?php endif; ?>
+<?php if (strpos(($nginx_version = shell_exec('nginx -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version nginx">
           <span class="tech-label">Nginx</span>
           <span class="tech-info">
-            <?php include('inc/nginx_version.html'); ?>
+            <?php echo $nginx_version; ?>
           </span>
         </li>
-        <?php endif; ?>
+<?php endif; ?>
         <li class="server-version php-info">
           <span class="tech-label"><a href="info.php">PHP info</a></span>
           <span class="tech-info">
@@ -163,10 +194,6 @@
 
   </div>
 
-  <pre id="links-table">
-    <?php include('inc/valet_links.html'); ?>
-  </pre>
-
   <div class="modal">
     <div class="reset-sort-list">
       <h3>Reset Host List Sort</h3>
@@ -179,8 +206,8 @@
   </div>
   <div class="modal-bg"></div>
 
-  <script src="assets/contib/SortableJS/Sortable.min.js"></script>
-  <script src="assets/js/min/scripts.js"></script>
+  <script src="/assets/contib/SortableJS/Sortable.min.js"></script>
+  <script src="/assets/js/min/scripts.js"></script>
 
 </body>
 </html>
