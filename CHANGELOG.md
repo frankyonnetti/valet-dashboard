@@ -1,3 +1,12 @@
+## Version 0.5.0
+
+[Artur](https://github.com/xartuu) contributed once again with some great improvements.
+
+- NEW: You no longer have to execute the shell script to display the list of sites and software versions!
+
+    The page list is scanned using the scandir() function. The script takes the contents of the Valet configuration file, looks through all the paths, looks for pages, and displays them. This is better than the valet links command, because it only displayed linked pages, but now you can see in the dashboard linked pages and pages in Valet paths.
+- NEW: Added the ability to copy the path to the site folder and the path to the ssl cetificate, if the site has one.
+
 ## Version 0.4.3
 
 - UPDATE: Adjusted column widths.

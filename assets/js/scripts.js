@@ -19,11 +19,6 @@ function ready () {
 
   // ! trim down technology version output to get just the version number.
   // --------------------------------------------------------------------------
-  // valet
-  const valetVersion = document.querySelector('.valet-version')
-  // remove "Laravel Valet" from server version output
-  const getValetVersion = valetVersion.innerHTML.replace('Laravel Valet ', '')
-  valetVersion.innerHTML = getValetVersion
   // dnsmasq
   const dnsmasqVersion = document.querySelector('.dnsmasq .tech-info')
   if (dnsmasqVersion !== null) {

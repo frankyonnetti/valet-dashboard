@@ -29,42 +29,45 @@
           <div class="col path">Path</div>
         </div>
         <div id="valetSort" class="valetlinks-container">
-<?php
-$valet_home = getenv('HOME') . '/.config/valet';
-$valet_old_home = getenv('HOME') . '/.valet';
 
-$valet_path = is_dir($valet_home) ? $valet_home : $valet_old_home;
+        <?php
+          $valet_home = getenv('HOME') . '/.config/valet';
+          $valet_old_home = getenv('HOME') . '/.valet';
 
-$valet_config  = json_decode(file_get_contents("$valet_path/config.json"));
-$tld = isset($valet_config->tld) ? $valet_config->tld : $valet_config->domain;
+          $valet_path = is_dir($valet_home) ? $valet_home : $valet_old_home;
 
-$sites = [];
+          $valet_config  = json_decode(file_get_contents("$valet_path/config.json"));
+          $tld = isset($valet_config->tld) ? $valet_config->tld : $valet_config->domain;
 
-foreach ($valet_config->paths as $parked_path):
-  foreach (scandir($parked_path) as $site):
-    if ($site[0] == '.') { continue; }
-?>
+          $sites = [];
+
+          foreach ($valet_config->paths as $parked_path):
+            foreach (scandir($parked_path) as $site):
+              if ($site[0] == '.') { continue; }
+          ?>
+
           <div class="row">
             <div class="col grip"></div>
             <div class="col site"><?php echo $site; ?></div>
-<?php if($ssl = file_exists("$valet_path/Certificates/$site.$tld.key")): ?>
+          <?php if($ssl = file_exists("$valet_path/Certificates/$site.$tld.key")): ?>
             <div class="col ssl"><span><em><?php echo realpath("$valet_path/Certificates/$site.$tld.crt"); ?></em></span></div>
-<?php else: ?>
+          <?php else: ?>
             <div class="col ssl"></div>
-<?php endif; ?>
+          <?php endif; ?>
             <div class="col url"><a href="<?php echo $url = ($ssl ? "https" : "http") . "://$site.$tld"; ?>" tabindex="2"><?php echo $url; ?></a></div>
             <div class="col path"><span><em><?php echo realpath("$parked_path/$site"); ?></em></span></div>
           </div>
-<?php
-  endforeach;
-endforeach;
-?>
+
+          <?php
+            endforeach;
+          endforeach;
+          ?>
+
         </div>
       </div>
     </div>
 
     <aside class="sidebar color-mode">
-
       <ul class="sidebar-container valet-brand color-mode">
         <li class="logo">
           <span class="logo-img">
@@ -79,7 +82,16 @@ endforeach;
             </svg>
           </span>
           <div class="valet-version">
-            <?php echo shell_exec('valet -V 2>&1'); ?>
+            <?php
+              if (strpos(($valet_version = shell_exec('valet -V 2>&1')), 'not found') === false) {
+                echo shell_exec('valet -V 2>&1');
+              } else if (file_exists('./inc/path.php')) {
+                include('./inc/path.php');
+                echo shell_exec('valet -V 2>&1');
+              } else {
+                echo 'Valet Server';
+              }
+            ?>
           </div>
         </li>
         <li class="sidebar-label">
@@ -108,41 +120,45 @@ endforeach;
           <i class="fas fa-server"></i> Server
           <small>Brew install path: <code>/usr/local/Cellar/</code></small>
         </li>
-<?php if (strpos(($dnsmasq_version = shell_exec('dnsmasq -v 2>&1')), 'not found') === false) : ?>
+        <?php if (strpos(($dnsmasq_version = shell_exec('dnsmasq -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version dnsmasq">
           <span class="tech-label">Dnsmasq</span>
           <span class="tech-info">
             <?php echo $dnsmasq_version; ?>
           </span>
         </li>
-<?php endif; ?>
-<?php if (file_exists('inc/mailhog_version.html')) : ?>
+        <?php endif; ?>
+        <?php
+          /**
+           * To display MailHog version, refer to file 'inc/mailhog_version.sample.php'.
+           */
+          if (file_exists('inc/mailhog_version.php')) :
+        ?>
         <li class="server-version mailhog">
           <span class="tech-label">
             <a href="http://localhost:8025">MailHog</a>
           </span>
           <span class="tech-info">
-            <!-- MailHog plans to add command line version in the future. So until then... -->
-            <?php include('inc/mailhog_version.html'); ?>
+            <?php include('inc/mailhog_version.php'); ?>
           </span>
         </li>
-<?php endif; ?>
-<?php if (strpos(($mariadb_version = shell_exec('mysql --version 2>&1')), 'not found') === false) : ?>
+        <?php endif; ?>
+        <?php if (strpos(($mariadb_version = shell_exec('mysql --version 2>&1')), 'not found') === false) : ?>
         <li class="server-version mariadb">
           <span class="tech-label">MariaDB</span>
           <span class="tech-info">
             <?php echo $mariadb_version ?>
           </span>
         </li>
-<?php endif; ?>
-<?php if (strpos(($nginx_version = shell_exec('nginx -v 2>&1')), 'not found') === false) : ?>
+        <?php endif; ?>
+        <?php if (strpos(($nginx_version = shell_exec('nginx -v 2>&1')), 'not found') === false) : ?>
         <li class="server-version nginx">
           <span class="tech-label">Nginx</span>
           <span class="tech-info">
             <?php echo $nginx_version; ?>
           </span>
         </li>
-<?php endif; ?>
+        <?php endif; ?>
         <li class="server-version php-info">
           <span class="tech-label"><a href="info.php">PHP info</a></span>
           <span class="tech-info">
@@ -187,7 +203,7 @@ endforeach;
       </div>
 
       <footer class="footer color-mode">
-        <p>Valet Dashoard v0.4.3 / <a href="https://github.com/frankyonnetti/valet-dashboard" tabindex="-1">Github</a></p>
+        <p>Valet Dashoard v0.5.0 / <a href="https://github.com/frankyonnetti/valet-dashboard" tabindex="-1">Github</a></p>
       </footer>
 
     </aside>

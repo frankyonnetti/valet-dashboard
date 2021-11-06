@@ -1,7 +1,7 @@
 *.DS_Store
 /assets/fonts/fontawesome-free-5
 /inc/*
-!/inc/.gitkeep
+!/inc/path.sample.php
+!/inc/mailhog_version.sample.php
 /node_modules
-/valet.sh
 /vendor

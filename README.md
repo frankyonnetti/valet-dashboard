@@ -1,6 +1,6 @@
 # Valet Dashboard
 
-![screenshot](assets/img/screenshot-04.png)
+![screenshot](assets/img/screenshot-05.png)
 
 ## Installing the dashboard
 
@@ -14,6 +14,11 @@ E.g. `https://github.com/frankyonnetti/valet-dashboard dashboard`
 Instead of the above method, you can also use the following command, execute it in the root directory where the index.php file is located.  
 `git clone https://github.com/FortAwesome/Font-Awesome assets/fonts/fontawesome-free-5`
 5. All that is left is to open the panel, do this using `valet open`. You can also go to http://dashboard.test.
+
+
+### macOS Environments
+
+We use PHP shell_exec() to display version numbers in the sidebar. Follow the directions in file `inc/mailhog_version.sample.php` to be sure all will display correctly.
 
 
 ### phpMyAdmin
